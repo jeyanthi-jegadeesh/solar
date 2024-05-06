@@ -1,0 +1,138 @@
+[
+  {
+    "name": "Mercury",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Mercury"
+      },
+      {
+        "date": "1974",
+        "event": "First exploration by Mariner 10"
+      },
+      {
+        "date": "2011",
+        "event": "MESSENGER spacecraft enters Mercury's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Venus",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Venus"
+      },
+      {
+        "date": "1961",
+        "event": "First exploration by Venera 1"
+      },
+      {
+        "date": "1975",
+        "event": "Venera 9 lands on Venus surface"
+      }
+    ]
+  },
+  {
+    "name": "Earth",
+    "timeline": [
+      {
+        "date": "4.54 billion years ago",
+        "event": "Formation of Earth"
+      },
+      {
+        "date": "1961",
+        "event": "First human spaceflight by Yuri Gagarin"
+      },
+      {
+        "date": "1969",
+        "event": "Apollo 11 lands on the Moon"
+      }
+    ]
+  },
+  {
+    "name": "Mars",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Mars"
+      },
+      {
+        "date": "1965",
+        "event": "First flyby by Mariner 4"
+      },
+      {
+        "date": "1976",
+        "event": "Viking 1 and 2 land on Mars surface"
+      },
+      {
+        "date": "2012",
+        "event": "Curiosity rover lands on Mars"
+      }
+    ]
+  },
+  {
+    "name": "Jupiter",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Jupiter"
+      },
+      {
+        "date": "1973",
+        "event": "First flyby by Pioneer 10"
+      },
+      {
+        "date": "1995",
+        "event": "Galileo spacecraft orbits Jupiter"
+      },
+      {
+        "date": "2016",
+        "event": "Juno spacecraft enters Jupiter's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Saturn",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Saturn"
+      },
+      {
+        "date": "1979",
+        "event": "Pioneer 11 flies by Saturn"
+      },
+      {
+        "date": "2004",
+        "event": "Cassini-Huygens spacecraft enters Saturn's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Uranus",
+    "timeline": [
+      {
+        "date": "1781",
+        "event": "Discovery of Uranus by William Herschel"
+      },
+      {
+        "date": "1986",
+        "event": "Voyager 2 flies by Uranus"
+      }
+    ]
+  },
+  {
+    "name": "Neptune",
+    "timeline": [
+      {
+        "date": "1846",
+        "event": "Discovery of Neptune by Urbain Le Verrier"
+      },
+      {
+        "date": "1989",
+        "event": "Voyager 2 flies by Neptune"
+      }
+    ]
+  }
+]
