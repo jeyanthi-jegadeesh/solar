@@ -1,6 +1,7 @@
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture } from "@react-three/drei";
 import { Vector3, useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useControls } from "leva";
+import { Reference, useRef, useState } from "react";
 import * as THREE from 'three';
 
 
@@ -20,7 +21,37 @@ interface PlanetProps {
 // TODO get textures from https://planetpixelemporium.com/earth.html OR https://www.solarsystemscope.com/textures/ and make planets look like planets :)
 // TODO create earth: https://matiasgf.dev/experiments/earth
 // TODO https://github.com/matiasngf/portfolio/tree/main/packages/experiments/earth
+// TODO use Detailed from drei to render according to distance
 
+// --------------------------------
+// RENDER PLANET LABEL
+// --------------------------------
+interface PlanetLabelProps {
+  planetRef: Reference;
+  labelText: string;
+  position: Vector3;
+  fontSize?: number;
+}
+
+const PlanetLabel = ({planetRef, 
+                      labelText, 
+                      fontSize = 0.8,
+                      position}:PlanetLabelProps) => {  
+return (
+    <mesh>
+      <Billboard>
+        <Text 
+          position={position} // show the label below the planet
+          color="darkgrey" 
+          fontSize={fontSize}  
+          anchorX="center"
+        >
+          {labelText}
+        </Text> 
+      </Billboard>
+    </mesh>
+  )
+}
 
 // --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
@@ -43,6 +74,15 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     
+    // LEVA CONTROL FOR LABEL RENDERING
+    const { showLabels } = useControls({ showLabels: true })
+    const { labelFontSize } = useControls({ labelFontSize: {
+                                                            value: 0.8,
+                                                            min:  0.2,
+                                                            max: 10,
+                                                            step: 0.2,
+                                                           }});
+
   
     let angle = 0; // -> angle between the last frame and the current frame, initialize as 0
     
@@ -143,42 +183,32 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
           </EffectComposer> */}
   
           {/*------------------------------------------------ 
-             PLANET LABEL with conditional rendering
+             PLANET LABEL with conditional rendering (when the Leva control is clicked)
           ------------------------------------------------ */}
-          {
-             !isClicked || !isHovered  ? 
-              <mesh>
-                <Billboard>
-                  <Text 
-                    ref={textRef} // have a reference so the text can always face the camera
-                    position={[0, -(scaledDiameter / 2) - 0.5, 0]} // show the label below the planet
-                    color="darkgrey" 
-                    fontSize={0.6} 
-                    anchorX="center"
-                  >
-                    {name}
-                  </Text> 
-                </Billboard>
-              </mesh>
-            : 
-              null // do nothing
-          };
+          {showLabels ? <PlanetLabel
+                          planetRef={planetRef}
+                          labelText={name} 
+                          fontSize={labelFontSize}
+                          position={position.add(new THREE.Vector3(0,-(scaledDiameter / 2) - 0.5,0))} // new position of the label
+                        /> 
+                      : null}
   
         {/*------------------------------------------------ 
           A RING THAT ACTS AS A BOUNDING BOX 
           TODO give it a transparent material and make it the clickable bounding box 
           TODO {give it the DREI Outline effect} 
           ------------------------------------------------*/}
-        { name.toLowerCase() !== 'sun' ? 
+        {
+        name.toLowerCase() !== 'sun' ? 
             <mesh>
-            <Billboard> {/* MAKE IT FACE THE CAM ALWAYS*/}
-              <Ring
-                ref={boundingRingRef}
-                args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
-              /> 
-              {/* <Outlines thickness={0.1} color="white" /> */}
-            </Billboard>
-            <meshStandardMaterial opacity={0} color={'black'}/>
+              <Billboard> {/* MAKE IT FACE THE CAM ALWAYS*/}
+                <Ring
+                  ref={boundingRingRef}
+                  args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
+                /> 
+                {/* <Outlines thickness={0.1} color="white" /> */}
+              </Billboard>
+              <meshStandardMaterial opacity={0} color={'black'}/>
             </mesh>
           : 
             <Outlines thickness={0.1} color="red" />

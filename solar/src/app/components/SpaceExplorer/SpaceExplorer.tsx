@@ -8,11 +8,21 @@ import './SpaceExplorer.css';
 import Planet from "./Planet";
 import Orbit from "./Orbit";
 import { PlanetType } from "./planet_def";
-import { useControls } from "leva";
+import { Leva, LevaPanel, useControls } from "leva";
 import getAllCelestialObjects from "./fetchPlanets";
+import { Box } from "@chakra-ui/react";
 
 
-function  renderAllCelestialObjects(celestialObjects: PlanetType[]) {
+interface SunSystemProps {
+  celestialObjects: PlanetType[];
+  isHovered?: () => boolean;
+  setIsHovered?: () => boolean;
+  isClicked?: () => boolean;
+  setIsClicked?: () => boolean;
+}
+
+
+function SunSystem({celestialObjects, isHovered, setIsHovered, isClicked, setIsClicked}: SunSystemProps) {
   
   return (
     celestialObjects.map((planet) => (
@@ -59,6 +69,12 @@ function  renderAllCelestialObjects(celestialObjects: PlanetType[]) {
 
 const SpaceExplorer = () => {
 
+    // STATES -> HOVER + CLICKED ARE GLOBAL in order to stop the animation 
+    // TODO move these to the state! 
+    
+    const [isHovered, setIsHovered] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+
   // create Camera Reference:
   const cameraRef = useRef<THREE.Camera>();
 
@@ -92,13 +108,27 @@ const SpaceExplorer = () => {
   // ----------------------------------------------------------------
   
   return (
-    <div className="space-canvas-container">
+    <Box className="space-canvas-container">
+    
+      {/* RENDER LEVA CONTROLS INSIDE THIS BOX TO CONTROL POSITIONING! */}
+        <Box position='absolute'  
+            bottom='50px' 
+            left='50px' 
+            zIndex={11} 
+            width='20vw' 
+            height='25vh' 
+        >
+        
+          <Leva collapsed={true} fill />
+        
+        </Box>
+
+      {/*  
+      // ----------------------------------------------------------------
+      // R3F CANVAS
+      // ----------------------------------------------------------------*/}
+      
       <Canvas>
-
-        {/* TODO SHOW LEVA CONTROLS */}
-        {/* <Leva 
-        /> */}
-
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
           makeDefault // !!!
@@ -136,10 +166,10 @@ const SpaceExplorer = () => {
 
 
           {/* render all celestial objects that turn around the sun */}
-          {renderAllCelestialObjects(planets)}
+          <SunSystem celestialObjects={planets} />
 
         </Canvas>
-      </div>
+      </Box>
   );
 };
 
