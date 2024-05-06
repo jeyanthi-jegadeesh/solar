@@ -1,5 +1,18 @@
 [
   {
+    "name": "Sun",
+    "timeline": [
+      {
+        "date": "1610",
+        "event": "Galileo Galilei uses a telescope to observe sunspots"
+      },
+      {
+        "date": "2006",
+        "event": "STEREO mission launched to study the Sun's solar phenomena"
+      }
+    ]
+  },
+  {
     "name": "Mercury",
     "timeline": [
       {
@@ -47,6 +60,23 @@
       {
         "date": "1969",
         "event": "Apollo 11 lands on the Moon"
+      }
+    ]
+  },
+  {
+    "name": "Moon",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Recognition of the Moon as Earth's satellite"
+      },
+      {
+        "date": "1969",
+        "event": "Apollo 11 lands the first humans on the Moon"
+      },
+      {
+        "date": "2009",
+        "event": "LCROSS mission confirms water ice in Moon's craters"
       }
     ]
   },
@@ -132,6 +162,85 @@
       {
         "date": "1989",
         "event": "Voyager 2 flies by Neptune"
+      }
+    ]
+  },
+  {
+    "name": "Pluto",
+    "timeline": [
+      {
+        "date": "1930",
+        "event": "Discovery of Pluto by Clyde Tombaugh"
+      },
+      {
+        "date": "2006",
+        "event": "Pluto reclassified as a dwarf planet"
+      },
+      {
+        "date": "2015",
+        "event": "New Horizons spacecraft performs a flyby of Pluto"
+      }
+    ]
+  },
+  {
+    "name": "Ceres",
+    "timeline": [
+      {
+        "date": "1801",
+        "event": "Discovery of Ceres by Giuseppe Piazzi"
+      },
+      {
+        "date": "2015",
+        "event": "Dawn spacecraft enters orbit around Ceres"
+      }
+    ]
+  },
+  {
+    "name": "Pallas",
+    "timeline": [
+      {
+        "date": "1802",
+        "event": "Discovery of Pallas by Heinrich Wilhelm Olbers"
+      }
+    ]
+  },
+  {
+    "name": "Juno",
+    "timeline": [
+      {
+        "date": "1804",
+        "event": "Discovery of Juno by Karl Ludwig Harding"
+      }
+    ]
+  },
+  {
+    "name": "Vesta",
+    "timeline": [
+      {
+        "date": "1807",
+        "event": "Discovery of Vesta by Heinrich Wilhelm Olbers"
+      },
+      {
+        "date": "2011",
+        "event": "Dawn spacecraft enters orbit around Vesta"
+      }
+    ]
+  },
+  {
+    "name": "Chiron",
+    "timeline": [
+      {
+        "date": "1977",
+        "event": "Discovery of Chiron by Charles Kowal"
+      }
+    ]
+  },
+  {
+    "name": "Eris",
+    "timeline": [
+      {
+        "date": "2005",
+        "event": "Discovery of Eris by Mike Brown, Chad Trujillo, and David Rabinowitz"
       }
     ]
   }
