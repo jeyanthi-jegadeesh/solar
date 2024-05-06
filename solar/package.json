@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@react-three/drei": "^9.105.6",
     "@react-three/postprocessing": "^2.16.2",
     "@reduxjs/toolkit": "^2.2.3",
     "express": "^4.19.2",
+    "leva": "^0.9.35",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",

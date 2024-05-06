@@ -1,18 +1,17 @@
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture } from "@react-three/drei";
 import { Vector3, useFrame } from "@react-three/fiber";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef, useState } from "react";
 import * as THREE from 'three';
 
 
 interface PlanetProps {
-    name: string;
-    velocity: number;
-    distance: number;
-    size: number;
-    textureURL?: string;
-    color: string;
-    orbitingAround?: Vector3; //TODO: later: THREE.Object3D;
+    name: string,
+    velocity: number,
+    distance: number,
+    size: number,
+    textureURL?: string,
+    color: string,
+    orbitingAround?: Vector3 //TODO: later: THREE.Object3D;
   }
   
 // USEFUL FUNCTIONS
@@ -22,6 +21,8 @@ interface PlanetProps {
 // TODO create earth: https://matiasgf.dev/experiments/earth
 // TODO https://github.com/matiasngf/portfolio/tree/main/packages/experiments/earth
 
+
+// --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
 const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:PlanetProps) => {
@@ -175,7 +176,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
                 ref={boundingRingRef}
                 args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
               /> 
-              <Outlines thickness={0.1} color="white" />
+              {/* <Outlines thickness={0.1} color="white" /> */}
             </Billboard>
             <meshStandardMaterial opacity={0} color={'black'}/>
             </mesh>

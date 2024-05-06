@@ -5,14 +5,16 @@ import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import * as THREE from 'three';
 import './SpaceExplorer.css';
-import { planets } from "./mockPlanets";
 import Planet from "./Planet";
 import Orbit from "./Orbit";
 import { PlanetType } from "./planet_def";
+import { useControls } from "leva";
+import getAllCelestialObjects from "./fetchPlanets";
 
 
-function renderAllCelestialObjects(celestialObjects: PlanetType[]) {
-    return (
+function  renderAllCelestialObjects(celestialObjects: PlanetType[]) {
+  
+  return (
     celestialObjects.map((planet) => (
       <>
           {/* ORBIT - draw a circle representing the orbit 
@@ -60,6 +62,31 @@ const SpaceExplorer = () => {
   // create Camera Reference:
   const cameraRef = useRef<THREE.Camera>();
 
+  // get planets -> turn this into an api call / fetch from the server
+  const planets = getAllCelestialObjects(); // TODO figure out how to make this async etc...
+
+
+  // ----------------------------------------------------------------
+  // SET VARIABLES CONTROLLED BY LEVA CONTROLS
+  // ----------------------------------------------------------------
+  const { numOfStars } = useControls({ numOfStars: {
+                                          value: 10000,
+                                          min: 1000,
+                                          max: 20000,
+                                          step: 50,
+                                        },
+  })
+
+  const { ambientLightIntensity } = useControls({ ambientLightIntensity: {
+                                          value: 1,
+                                          min: 0,
+                                          max: 5,
+                                          step: 0.1,
+                                        },
+  })
+
+  const { showLabels } = useControls({ showLabels: true })
+
   // ----------------------------------------------------------------
   // RENDER THE SCENE
   // ----------------------------------------------------------------
@@ -67,6 +94,10 @@ const SpaceExplorer = () => {
   return (
     <div className="space-canvas-container">
       <Canvas>
+
+        {/* TODO SHOW LEVA CONTROLS */}
+        {/* <Leva 
+        /> */}
 
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
@@ -82,25 +113,25 @@ const SpaceExplorer = () => {
           enableRotate={true}
         />
 
+        {/* TODO ADD Presentation controls that can be toggled using LEVA
+            They later should be activated when a planet is focused
+            https://github.com/pmndrs/drei?tab=readme-ov-file#presentationcontrols
+        */}
+
         {/* ADD STARS (NATIVE DREI COMPONENT) */}
         <Stars 
-          radius={500} 
+          radius={250} 
           depth={200} 
-          count={5000}  
-          saturation={0} 
-          fade 
+          count={numOfStars}  
+          saturation={1} 
+          // fade 
           speed={1} 
-        />
-
-        <pointLight 
-          position={[0,0,0]} 
-          intensity={1.5} 
         />
 
         {/* SET THE LIGHTS */}
         <ambientLight 
           color={'yellow'} 
-          intensity={1} 
+          intensity={ambientLightIntensity} 
         />
 
 
