@@ -14,7 +14,6 @@ interface PlanetProps {
     color: string;
     orbitingAround?: Vector3; //TODO: later: THREE.Object3D;
   }
-
   
 // USEFUL FUNCTIONS
 // -> useHelper function from drei
@@ -22,7 +21,6 @@ interface PlanetProps {
 // TODO get textures from https://planetpixelemporium.com/earth.html OR https://www.solarsystemscope.com/textures/ and make planets look like planets :)
 // TODO create earth: https://matiasgf.dev/experiments/earth
 // TODO https://github.com/matiasngf/portfolio/tree/main/packages/experiments/earth
-
 
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
