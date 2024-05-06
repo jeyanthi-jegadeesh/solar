@@ -9,19 +9,34 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@clerk/clerk-react": "^5.0.3",
+    "@clerk/nextjs": "^5.0.6",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@react-three/drei": "^9.105.6",
+    "@react-three/fiber": "^8.16.3",
+    "@react-three/postprocessing": "^2.16.2",
     "@reduxjs/toolkit": "^2.2.3",
+    "@types/three": "^0.164.0",
     "express": "^4.19.2",
+    "framer-motion": "^11.1.8",
+    "leva": "^0.9.35",
+    "mongodb": "^6.6.0",
+    "mongoose": "^8.3.3",
     "next": "14.2.3",
+    "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "three": "^0.164.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/node": "^20.12.10",
+    "@types/react": "^18.3.1",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "typescript": "^5"
+    "typescript": "^5.4.5"
   }
 }
