@@ -77,7 +77,7 @@ const SpaceExplorer = () => {
 
     // STATES -> HOVER + CLICKED ARE GLOBAL in order to stop the animation 
     // TODO move these to the state! 
-    
+    const selectedPlanet = useSelector(state => state.selectedPlanet)
 
   // create Camera Reference:
   const cameraRef = useRef<THREE.Camera>();
@@ -113,7 +113,6 @@ const SpaceExplorer = () => {
   
   return (
     <Box className="space-canvas-container">
-    
       {/* RENDER LEVA CONTROLS INSIDE THIS BOX TO CONTROL POSITIONING! 
           ACHTUNG: placing them inside of canvas creates weird error message about SVG!!
       */}

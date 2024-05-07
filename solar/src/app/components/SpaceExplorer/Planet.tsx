@@ -4,6 +4,7 @@ import { useControls } from "leva";
 import * as THREE from 'three';
 import React, { MutableRefObject, Reference, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateSelectedPlanet } from "./solarSystemSlice";
 
 
 interface PlanetProps {
@@ -74,7 +75,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
   
     console.log("RENDERING: " + name);
   
-    // ADD ANIMATION -> The ref must be present in the <mesh ref={}> so next knows where it points to
+    const selectedPlanet = useSelector(state => state.solarSystem.selectedPlanet);
     
     // Add the redux dispatcher
     const dispatch = useDispatch();
@@ -82,39 +83,36 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
     // create a planetRef 
     const planetRef = useRef<THREE.Mesh>(); 
     const boundingRingRef = useRef<THREE.Mesh>();
- 
-    // STATES -> HOVER + CLICKED -> 
-    // TODO REFACTOR TO USE REDUX? -> better: trigger the updateSelectedPlanet Function 
-    const [isClicked, setIsClicked] = useState(false);
     
     // LEVA CONTROLS FOR LABEL RENDERING
     const { showLabels } = useControls({ showLabels: true })
     const { labelFontSize } = useControls({ labelFontSize: {
-                                                            value: 0.8,
-                                                            min:  0.2,
-                                                            max: 10,
-                                                            step: 0.2,
-                                                           }});
-
+      value: 0.8,
+      min:  0.2,
+      max: 10,
+      step: 0.2,
+    }});
+    
     let angle = 0; // -> angle between the last frame and the current frame, initialize as 0
     
-     // set the position it is circling around according to the orbitingAround-prop
-     // if no orbitingAround is defined set center to be the sun.
-
-     // TODO: replace the absolute position with a function that retrieves the current position of the 
-     // planet passed in the orbitingAround property. planet should be a THREE.Object3D object
-
-     let position = new THREE.Vector3(0, 0, 0);
-     if (!orbitingAround ) position = new THREE.Vector3(0, distance * systemScale, 0)
-  
-    // TODO MOVE THE ANIMATION TO A HIGHER LEVEL! SO IT CAN BE STOPPED GLOBALLY!
-    // info on the useFrame function:
-    // state: a lot of information about camera, mouse position etc.
-    //        can be printed in the console to investigate
-    // delta: difference between this frame and the last frame
-
-    useFrame((state,  delta) => {     
-      if (!isHovered || !isClicked ) { // only move when no planet is clicked 
+    // set the position it is circling around according to the orbitingAround-prop
+    // if no orbitingAround is defined set center to be the sun.
+    
+    // TODO: replace the absolute position with a function that retrieves the current position of the 
+    // planet passed in the orbitingAround property. planet should be a THREE.Object3D object
+    
+    let position = new THREE.Vector3(0, 0, 0);
+    if (!orbitingAround ) position = new THREE.Vector3(0, distance * systemScale, 0)
+      
+      // ADD ANIMATION -> The ref must be present in the <mesh ref={}> so next knows where it points to
+      // TODO MOVE THE ANIMATION TO A HIGHER LEVEL! SO IT CAN BE STOPPED GLOBALLY!
+      // info on the useFrame function:
+      // state: a lot of information about camera, mouse position etc.
+      //        can be printed in the console to investigate
+      // delta: difference between this frame and the last frame
+      
+      useFrame((state,  delta) => {     
+        if (!isHovered || !selectedPlanet ) { // only move when no planet is clicked 
         // -> TODO: planets jump around and the other planets do keep moving :(
         // increment the angle based on time passed (delta) 
         angle += delta * velocity * speedFactor;  
@@ -142,7 +140,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
     return (<>
         <mesh 
           ref={planetRef} // reference for the animation 
-          onClick={() => setIsClicked(!isClicked)} 
+          onClick={() => (dispatch(updateSelectedPlanet(name)))} 
           onPointerEnter={() => (isHovered = true) }
           onPointerLeave={() => (isHovered = false)}
         > 
