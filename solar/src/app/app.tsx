@@ -1,4 +1,4 @@
-import Overlay from '@/components/OverlayComponent';
+import OverlayLanding from '@/components/OverlayComponent';
 import { Box} from '@chakra-ui/react';
 
 export default function App () {
@@ -12,11 +12,11 @@ export default function App () {
             bgSize="cover" 
             bgPosition="center" 
             bgRepeat="no-repeat" 
-            // bg='black'
-            style={{ backgroundImage: "url('/solar.png')" }} >
-            {/* >    */}
+            bg='black'
+            // style={{ backgroundImage: "url('/solar.png')" }} >
+            >
          </Box>
-         <Overlay></Overlay> 
+         <OverlayLanding></OverlayLanding> 
       </div>
     );
 }

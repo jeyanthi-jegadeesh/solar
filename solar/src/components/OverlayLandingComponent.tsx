@@ -14,7 +14,7 @@ const newsMock: News[] = [
 
 // Will be modified at the moment when we will connect NewsComponent to click on News carousel
 // Also missing logic that NewsSection should be visualized only on click at News carousel
-const Overlay = () => {
+const OverlayLanding = () => {
   const dispatch = useDispatch();
 
   useEffect (() => {
@@ -38,4 +38,4 @@ const Overlay = () => {
   );
 }
 
-export default Overlay;
+export default OverlayLanding;
