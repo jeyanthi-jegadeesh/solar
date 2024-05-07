@@ -1,112 +1,222 @@
 [
   {
     "category": "Mercury",
-    "question": "Mercury is the closest planet to the Sun and is known for its what?",
+    "question": "What is the orbital period of Mercury around the Sun?",
     "answers": [
-      "Extreme temperature variations",
-      "Rings",
-      "Moons",
-      "Liquid water"
+      "88 days",
+      "365 days",
+      "687 days",
+      "10 years"
     ],
-    "correctAnswer": "Extreme temperature variations"
+    "correctAnswer": "88 days"
+  },
+  {
+    "category": "Mercury",
+    "question": "Mercury has no atmosphere, which means it lacks what common weather feature?",
+    "answers": [
+      "Clouds",
+      "Snow",
+      "Rain",
+      "All of the above"
+    ],
+    "correctAnswer": "All of the above"
+  },
+  {
+    "category": "Mercury",
+    "question": "How many missions have been sent to explore Mercury?",
+    "answers": [
+      "Two",
+      "None",
+      "Five",
+      "Ten"
+    ],
+    "correctAnswer": "Two"
+  },
+  {
+    "category": "Mercury",
+    "question": "What is the largest impact crater on Mercury named?",
+    "answers": [
+      "Caloris Basin",
+      "Hell's Kitchen",
+      "Tycho Crater",
+      "Olympus Mons"
+    ],
+    "correctAnswer": "Caloris Basin"
+  },
+  {
+    "category": "Mercury",
+    "question": "Due to its slow rotation and fast orbit, how many sunrises does Mercury experience in one year?",
+    "answers": [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    "correctAnswer": "Two"
   },
   {
     "category": "Venus",
-    "question": "Venus is the hottest planet in our solar system, with surface temperatures reaching up to how many degrees Fahrenheit?",
+    "question": "What is the main component of Venus's thick atmosphere?",
     "answers": [
-      "800",
-      "1,200",
-      "1,800",
-      "2,400"
+      "Oxygen",
+      "Hydrogen",
+      "Carbon Dioxide",
+      "Nitrogen"
     ],
-    "correctAnswer": "800"
+    "correctAnswer": "Carbon Dioxide"
+  },
+  {
+    "category": "Venus",
+    "question": "Venus rotates in the opposite direction to most planets in our solar system. This rotation is known as?",
+    "answers": [
+      "Prograde",
+      "Retrograde",
+      "Sidereal",
+      "Heliocentric"
+    ],
+    "correctAnswer": "Retrograde"
+  },
+  {
+    "category": "Venus",
+    "question": "Which of the following features is common on Venus's surface?",
+    "answers": [
+      "Ocean",
+      "Mountains",
+      "Deserts",
+      "Ice caps"
+    ],
+    "correctAnswer": "Mountains"
+  },
+  {
+    "category": "Venus",
+    "question": "Venus is often called Earth’s twin because it is similar in what way?",
+    "answers": [
+      "Size and structure",
+      "Orbital period",
+      "Number of moons",
+      "Surface temperature"
+    ],
+    "correctAnswer": "Size and structure"
+  },
+  {
+    "category": "Venus",
+    "question": "What Soviet mission was the first to successfully land on Venus and take pictures of its surface?",
+    "answers": [
+      "Luna 9",
+      "Venera 7",
+      "Venera 9",
+      "Mariner 10"
+    ],
+    "correctAnswer": "Venera 9"
   },
   {
     "category": "Earth",
-    "question": "Earth is the only planet known to support what?",
+    "question": "What percentage of Earth's surface is covered by water?",
     "answers": [
-      "Life",
-      "Rings",
-      "Moons",
-      "Liquid water"
+      "51%",
+      "71%",
+      "80%",
+      "60%"
     ],
-    "correctAnswer": "Life"
+    "correctAnswer": "71%"
+  },
+  {
+    "category": "Earth",
+    "question": "Earth's atmosphere is primarily composed of which two gases?",
+    "answers": [
+      "Oxygen and Hydrogen",
+      "Hydrogen and Nitrogen",
+      "Oxygen and Nitrogen",
+      "Carbon Dioxide and Oxygen"
+    ],
+    "correctAnswer": "Oxygen and Nitrogen"
+  },
+  {
+    "category": "Earth",
+    "question": "What natural phenomenon is caused by the interaction of Earth's magnetic field with solar wind?",
+    "answers": [
+      "Earthquakes",
+      "Auroras",
+      "Tsunamis",
+      "Volcanic eruptions"
+    ],
+    "correctAnswer": "Auroras"
+  },
+  {
+    "category": "Earth",
+    "question": "Which of the following is not a layer of Earth's atmosphere?",
+    "answers": [
+      "Troposphere",
+      "Stratosphere",
+      "Exosphere",
+      "Photosphere"
+    ],
+    "correctAnswer": "Photosphere"
+  },
+  {
+    "category": "Earth",
+    "question": "The deepest known part of Earth's oceans is called what?",
+    "answers": [
+      "Mariana Trench",
+      "Puerto Rico Trench",
+      "Java Trench",
+      "Tonga Trench"
+    ],
+    "correctAnswer": "Mariana Trench"
   },
   {
     "category": "Mars",
-    "question": "Mars is often called the 'Red Planet' due to the presence of what on its surface?",
+    "question": "What is the primary component of Mars's thin atmosphere?",
     "answers": [
-      "Iron oxide (rust)",
-      "Copper",
+      "Oxygen",
+      "Nitrogen",
+      "Carbon Dioxide",
+      "Argon"
+    ],
+    "correctAnswer": "Carbon Dioxide"
+  },
+  {
+    "category": "Mars",
+    "question": "What is the name of the largest canyon on Mars?",
+    "answers": [
+      "Grand Canyon",
+      "Valles Marineris",
+      "Yosemite Valley",
+      "Mariner Valley"
+    ],
+    "correctAnswer": "Valles Marineris"
+  },
+  {
+    "category": "Mars",
+    "question": "Which rover successfully landed on Mars in February 2021?",
+    "answers": [
+      "Spirit",
+      "Opportunity",
+      "Curiosity",
+      "Perseverance"
+    ],
+    "correctAnswer": "Perseverance"
+  },
+  {
+    "category": "Mars",
+    "question": "Mars's red color is due to the high concentration of what mineral in its soil?",
+    "answers": [
+      "Calcium",
+      "Iron",
       "Nickel",
-      "Magnesium"
+      "Silicon"
     ],
-    "correctAnswer": "Iron oxide (rust)"
+    "correctAnswer": "Iron"
   },
   {
     "category": "Mars",
-    "question": "Mars has two small moons named what?",
+    "question": "How many Earth days does it take Mars to complete one orbit around the Sun?",
     "answers": [
-      "Phobos and Deimos",
-      "Io and Europa",
-      "Titan and Enceladus",
-      "Oberon and Titania"
+      "365",
+      "687",
+      "433",
+      "780"
     ],
-    "correctAnswer": "Phobos and Deimos"
-  },
-  {
-    "category": "Mars",
-    "question": "Mars is home to the largest known volcano in the solar system, called what?",
-    "answers": [
-      "Olympus Mons",
-      "Mauna Loa",
-      "Mount Everest",
-      "Valles Marineris"
-    ],
-    "correctAnswer": "Olympus Mons"
-  },
-  {
-    "category": "Jupiter",
-    "question": "Jupiter is the largest planet in our solar system and is known for its distinctive feature called the what?",
-    "answers": [
-      "Great Red Spot",
-      "Rings",
-      "Hexagonal storm",
-      "Ice caps"
-    ],
-    "correctAnswer": "Great Red Spot"
-  },
-  {
-    "category": "Saturn",
-    "question": "Saturn is best known for its prominent system of what?",
-    "answers": [
-      "Rings",
-      "Moons",
-      "Asteroids",
-      "Comets"
-    ],
-    "correctAnswer": "Rings"
-  },
-  {
-    "category": "Uranus",
-    "question": "Uranus is unique among the planets in our solar system because it rotates on its side, leading to what unusual phenomenon?",
-    "answers": [
-      "Extreme seasonal changes",
-      "Constant daylight at the poles",
-      "Frequent eclipses",
-      "Reversed magnetic field"
-    ],
-    "correctAnswer": "Extreme seasonal changes"
-  },
-  {
-    "category": "Neptune",
-    "question": "Neptune is the windiest planet in our solar system, with wind speeds reaching up to how many miles per hour?",
-    "answers": [
-      "1,500",
-      "500",
-      "1,000",
-      "2,000"
-    ],
-    "correctAnswer": "1,500"
+    "correctAnswer": "687"
   }
 ]
