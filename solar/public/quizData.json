@@ -1,0 +1,112 @@
+[
+  {
+    "category": "Mercury",
+    "question": "Mercury is the closest planet to the Sun and is known for its what?",
+    "answers": [
+      "Extreme temperature variations",
+      "Rings",
+      "Moons",
+      "Liquid water"
+    ],
+    "correctAnswer": "Extreme temperature variations"
+  },
+  {
+    "category": "Venus",
+    "question": "Venus is the hottest planet in our solar system, with surface temperatures reaching up to how many degrees Fahrenheit?",
+    "answers": [
+      "800",
+      "1,200",
+      "1,800",
+      "2,400"
+    ],
+    "correctAnswer": "800"
+  },
+  {
+    "category": "Earth",
+    "question": "Earth is the only planet known to support what?",
+    "answers": [
+      "Life",
+      "Rings",
+      "Moons",
+      "Liquid water"
+    ],
+    "correctAnswer": "Life"
+  },
+  {
+    "category": "Mars",
+    "question": "Mars is often called the 'Red Planet' due to the presence of what on its surface?",
+    "answers": [
+      "Iron oxide (rust)",
+      "Copper",
+      "Nickel",
+      "Magnesium"
+    ],
+    "correctAnswer": "Iron oxide (rust)"
+  },
+  {
+    "category": "Mars",
+    "question": "Mars has two small moons named what?",
+    "answers": [
+      "Phobos and Deimos",
+      "Io and Europa",
+      "Titan and Enceladus",
+      "Oberon and Titania"
+    ],
+    "correctAnswer": "Phobos and Deimos"
+  },
+  {
+    "category": "Mars",
+    "question": "Mars is home to the largest known volcano in the solar system, called what?",
+    "answers": [
+      "Olympus Mons",
+      "Mauna Loa",
+      "Mount Everest",
+      "Valles Marineris"
+    ],
+    "correctAnswer": "Olympus Mons"
+  },
+  {
+    "category": "Jupiter",
+    "question": "Jupiter is the largest planet in our solar system and is known for its distinctive feature called the what?",
+    "answers": [
+      "Great Red Spot",
+      "Rings",
+      "Hexagonal storm",
+      "Ice caps"
+    ],
+    "correctAnswer": "Great Red Spot"
+  },
+  {
+    "category": "Saturn",
+    "question": "Saturn is best known for its prominent system of what?",
+    "answers": [
+      "Rings",
+      "Moons",
+      "Asteroids",
+      "Comets"
+    ],
+    "correctAnswer": "Rings"
+  },
+  {
+    "category": "Uranus",
+    "question": "Uranus is unique among the planets in our solar system because it rotates on its side, leading to what unusual phenomenon?",
+    "answers": [
+      "Extreme seasonal changes",
+      "Constant daylight at the poles",
+      "Frequent eclipses",
+      "Reversed magnetic field"
+    ],
+    "correctAnswer": "Extreme seasonal changes"
+  },
+  {
+    "category": "Neptune",
+    "question": "Neptune is the windiest planet in our solar system, with wind speeds reaching up to how many miles per hour?",
+    "answers": [
+      "1,500",
+      "500",
+      "1,000",
+      "2,000"
+    ],
+    "correctAnswer": "1,500"
+  }
+]
