@@ -3,11 +3,11 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import planetsData from '../../../public/planetsData.json';
 import { useMediaQuery } from '@chakra-ui/react';
-import { ChakraProvider } from '@chakra-ui/react';
 
 interface Event {
   date: string;
   event: string;
+  image?: string;
 }
 
 interface TimelineEventProps {
@@ -21,7 +21,7 @@ const TimelineLine = ({ isSmallScreen }: { isSmallScreen: boolean }) => (
     width={isSmallScreen ? "2px" : "100%"}
     height={isSmallScreen ? "calc(100% - 24px)" : "2px"}
     bg="white"
-    position="absolute"
+    // position="absolute"
     top={isSmallScreen ? "24px" : "3px"}
     left={isSmallScreen ? "3px" : "0"}
     transform={isSmallScreen ? "translateY(3px)" : "translateY(-50%)"}
@@ -36,6 +36,15 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
     mb={isSmallScreen ? 12 : 24}
     position="relative"
   >
+    {!isSmallScreen && (
+      <Box mb={4} width="100px" height="100px">
+        {event.image ? (
+          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100px', height: '100px' }} />
+        ) : (
+          <Box width="100px" height="100px" />
+        )}
+      </Box>
+    )}
     <Box
       width={6}
       height={6}
@@ -47,6 +56,16 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
       zIndex={1}
       mr={isSmallScreen ? 4 : 0}
     />
+    {isSmallScreen && (
+      <Box mr={4} width="100px" height="100px">
+        {event.image ? (
+          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100%', height: '100px' }} />
+        ) : (
+          <Box width="100px" height="100px" />
+        )}
+      </Box>
+    )}
+    <TimelineLine isSmallScreen={isSmallScreen} />
     <Box textAlign={isSmallScreen ? "left" : "center"} mt={isSmallScreen ? 0 : 8}>
       <Text fontWeight="bold" mb={2}>
         {event.date}
@@ -57,6 +76,8 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
     </Box>
   </Flex>
 );
+
+
 
 interface PlanetTimelineProps {
   planetName?: string;
@@ -72,7 +93,6 @@ function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
   }
 
   return (
-    // <ChakraProvider>
     <Box position="relative">
       <Text
         fontSize="2xl"
@@ -84,7 +104,7 @@ function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
         {planet.name}
       </Text>
       <Box position="relative">
-        <TimelineLine isSmallScreen={isSmallScreen} />
+      
         <Flex direction={isSmallScreen ? 'column' : 'row'} alignItems='flex-start'>
           {planet.timeline.map((event, index) => (
             <TimelineEvent key={`${index}-${event.date}`} event={event} index={index} isSmallScreen={isSmallScreen} />
@@ -92,7 +112,6 @@ function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
         </Flex>
       </Box>
     </Box>
-    // </ChakraProvider>
   );
 };
 

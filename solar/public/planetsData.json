@@ -85,11 +85,13 @@
     "timeline": [
       {
         "date": "Ancient times",
-        "event": "Discovery of Mars"
+        "event": "Discovery of Mars",
+        "image": "mars.svg"
       },
       {
         "date": "1965",
-        "event": "First flyby by Mariner 4"
+        "event": "First flyby by Mariner 4",
+        "image": "shuttle.svg"
       },
       {
         "date": "1976",
