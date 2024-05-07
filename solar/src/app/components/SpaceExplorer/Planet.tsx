@@ -1,8 +1,9 @@
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture } from "@react-three/drei";
 import { Vector3, useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
-import { Reference, useRef, useState } from "react";
 import * as THREE from 'three';
+import React, { MutableRefObject, Reference, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 
 interface PlanetProps {
@@ -12,7 +13,8 @@ interface PlanetProps {
     size: number,
     textureURL?: string,
     color: string,
-    orbitingAround?: Vector3 //TODO: later: THREE.Object3D;
+    orbitingAround?: Vector3 //TODO: later: THREE.Object3D? -> NO make it a  string that later finds it in an array that stores our 
+    isHovered: boolean;
   }
   
 // USEFUL FUNCTIONS
@@ -56,25 +58,36 @@ return (
 // --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
-const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:PlanetProps) => {
+const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isHovered}:PlanetProps) => {
   
     // set constants for scaling etc.
-    const systemScale = 0.1; // factor for scaling of sizes
-    const scaledDiameter = size / 100000;
+    const { systemScale } = useControls({
+                                    systemScale: {
+                                      value: 0.1,
+                                      min: 0.1,
+                                      max: 1
+                                    }}
+                                    ); // factor for scaling of sizes
+
+    const scaledDiameter = size / 100000; // scale the planet to a smaller size
     const speedFactor = 0.01;
   
     console.log("RENDERING: " + name);
   
     // ADD ANIMATION -> The ref must be present in the <mesh ref={}> so next knows where it points to
+    
+    // Add the redux dispatcher
+    const dispatch = useDispatch();
+    
+    // create a planetRef 
     const planetRef = useRef<THREE.Mesh>(); 
-    const textRef = useRef<THREE.Mesh>();
     const boundingRingRef = useRef<THREE.Mesh>();
-  
-    // STATES -> HOVER + CLICKED 
-    const [isHovered, setIsHovered] = useState(false);
+ 
+    // STATES -> HOVER + CLICKED -> 
+    // TODO REFACTOR TO USE REDUX? -> better: trigger the updateSelectedPlanet Function 
     const [isClicked, setIsClicked] = useState(false);
     
-    // LEVA CONTROL FOR LABEL RENDERING
+    // LEVA CONTROLS FOR LABEL RENDERING
     const { showLabels } = useControls({ showLabels: true })
     const { labelFontSize } = useControls({ labelFontSize: {
                                                             value: 0.8,
@@ -91,7 +104,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
      // TODO: replace the absolute position with a function that retrieves the current position of the 
      // planet passed in the orbitingAround property. planet should be a THREE.Object3D object
 
-     let position = new THREE.Vector3(0,0,0);
+     let position = new THREE.Vector3(0, 0, 0);
      if (!orbitingAround ) position = new THREE.Vector3(0, distance * systemScale, 0)
   
     // TODO MOVE THE ANIMATION TO A HIGHER LEVEL! SO IT CAN BE STOPPED GLOBALLY!
@@ -101,7 +114,8 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
     // delta: difference between this frame and the last frame
 
     useFrame((state,  delta) => {     
-      if (!isClicked ) { // only move when no planet is clicked -> TODO: planets jump around and the other planets do keep moving :(
+      if (!isHovered || !isClicked ) { // only move when no planet is clicked 
+        // -> TODO: planets jump around and the other planets do keep moving :(
         // increment the angle based on time passed (delta) 
         angle += delta * velocity * speedFactor;  
   
@@ -109,11 +123,10 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
         const x = Math.cos(angle) * distance * systemScale; // distance is the radius of the circular orbit
         const y = Math.sin(angle) * distance * systemScale;
         const z = 0; // change later
-  
+        
         if (planetRef.current) {
           // update the planet position
           planetRef.current.position.set(x,y,z);
-        
           // rotate the planet around itself
           planetRef.current.rotation.y += delta;
         }
@@ -124,17 +137,14 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
 
      // TODO: add more shaders for halos and stuff
       const texturePath = 'textures/' + textureURL
-      
-      console.log(texturePath)
-
       const colorMap = useTexture(texturePath)
   
     return (<>
         <mesh 
-          ref={planetRef} // reference for the animation
-          onPointerEnter={(event) => (event.stopPropagation(), setIsHovered(true))}
-          onPointerLeave={(event) => (event.stopPropagation(),setIsHovered(false))} 
+          ref={planetRef} // reference for the animation 
           onClick={() => setIsClicked(!isClicked)} 
+          onPointerEnter={() => (isHovered = true) }
+          onPointerLeave={() => (isHovered = false)}
         > 
 
         {/* event.stopPropagation() means that the event is contained only to the mesh and no other element in the application cares about this event. */} 
@@ -170,9 +180,8 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
           {/*------------------------------------------------ 
              GLOW EFFECT
              TODO FIX THAT THE GLOW IS APPLIED TO EVERYTHING IN THE MESH -> UNTANGLE THE MESH
-          ------------------------------------------------ */}
-
-          {/* <EffectComposer>
+          ------------------------------------------------ */
+          /* <EffectComposer>
             <Bloom 
               intensity={1} 
               luminanceThreshold={0} 
@@ -217,4 +226,4 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
     );
   }
 
-  export default Planet;
+  export default React.memo(Planet);

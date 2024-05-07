@@ -8,22 +8,27 @@ import './SpaceExplorer.css';
 import Planet from "./Planet";
 import Orbit from "./Orbit";
 import { PlanetType } from "./planet_def";
-import { Leva, LevaPanel, useControls } from "leva";
+import { Leva, useControls } from "leva";
 import getAllCelestialObjects from "./fetchPlanets";
 import { Box } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
 
 
-interface SunSystemProps {
+interface SolarSystemProps {
   celestialObjects: PlanetType[];
-  isHovered?: () => boolean;
-  setIsHovered?: () => boolean;
-  isClicked?: () => boolean;
-  setIsClicked?: () => boolean;
 }
 
 
-function SunSystem({celestialObjects, isHovered, setIsHovered, isClicked, setIsClicked}: SunSystemProps) {
-  
+function SolarSystem({celestialObjects}: SolarSystemProps) {
+    
+    // isHovered is a reference for internal "state management", because references do not
+    // rerender the component
+     const isHovered = useSelector(state => state.solarSystem.isPlanetHovered);
+     const dispatch = useDispatch()
+
+   // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
+
+
   return (
     celestialObjects.map((planet) => (
       <>
@@ -58,6 +63,7 @@ function SunSystem({celestialObjects, isHovered, setIsHovered, isClicked, setIsC
               size={planet.size} 
               distance={planet.distance}
               textureURL={planet.textureURL}
+              isHovered={isHovered}
             />
 
           </Trail>
@@ -72,8 +78,6 @@ const SpaceExplorer = () => {
     // STATES -> HOVER + CLICKED ARE GLOBAL in order to stop the animation 
     // TODO move these to the state! 
     
-    const [isHovered, setIsHovered] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
 
   // create Camera Reference:
   const cameraRef = useRef<THREE.Camera>();
@@ -110,7 +114,9 @@ const SpaceExplorer = () => {
   return (
     <Box className="space-canvas-container">
     
-      {/* RENDER LEVA CONTROLS INSIDE THIS BOX TO CONTROL POSITIONING! */}
+      {/* RENDER LEVA CONTROLS INSIDE THIS BOX TO CONTROL POSITIONING! 
+          ACHTUNG: placing them inside of canvas creates weird error message about SVG!!
+      */}
         <Box position='absolute'  
             bottom='50px' 
             left='50px' 
@@ -118,16 +124,14 @@ const SpaceExplorer = () => {
             width='350px' 
             height='200px' 
         >
-        
           <Leva collapsed={true} fill />
-        
         </Box>
-
+      
+      
       {/*  
       // ----------------------------------------------------------------
       // R3F CANVAS
       // ----------------------------------------------------------------*/}
-      
       <Canvas>
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
@@ -143,9 +147,12 @@ const SpaceExplorer = () => {
           enableRotate={true}
         />
 
-        {/* TODO ADD Presentation controls that can be toggled using LEVA
+        {/* 
+        // ----------------------------------------------------------------
+            TODO ADD Presentation controls that can be toggled using LEVA
             They later should be activated when a planet is focused
             https://github.com/pmndrs/drei?tab=readme-ov-file#presentationcontrols
+        // ----------------------------------------------------------------
         */}
 
         {/* ADD STARS (NATIVE DREI COMPONENT) */}
@@ -158,13 +165,20 @@ const SpaceExplorer = () => {
           speed={1} 
         />
 
-        {/* SET THE LIGHTS */}
+        {/* 
+        // ----------------------------------------------------------------
+        SET THE LIGHTS
+        // ---------------------------------------------------------------- */}
         <ambientLight 
           color={'yellow'} 
           intensity={ambientLightIntensity} 
         />
-          {/* render all celestial objects that turn around the sun */}
-          <SunSystem celestialObjects={planets} />
+          {/* 
+          // ----------------------------------------------------------------
+          render all celestial objects that turn around the sun 
+          // ----------------------------------------------------------------
+          */}
+          <SolarSystem celestialObjects={planets} />
 
         </Canvas>
       </Box>
