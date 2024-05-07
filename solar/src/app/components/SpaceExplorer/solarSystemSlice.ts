@@ -1,9 +1,5 @@
 
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { MutableRefObject } from 'react'
-import * as THREE from 'three';
-
 
 interface SolarSystemStateType {
   showControls: boolean, // show Leva controls for variables
@@ -58,6 +54,6 @@ const solarSystemSlice = createSlice({
   },
 })
 
-export const { addPlanetRef, startMovement, stopMovement, updateSelectedPlanet, toggleIsPlanetHovered, toggleControls } = solarSystemSlice.actions
+export const { startMovement, stopMovement, updateSelectedPlanet, toggleIsPlanetHovered, toggleControls } = solarSystemSlice.actions
 export default solarSystemSlice.reducer
 
