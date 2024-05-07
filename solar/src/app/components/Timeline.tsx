@@ -32,7 +32,7 @@ const TimelineLine = ({ isSmallScreen }: { isSmallScreen: boolean }) => (
 const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
   <Flex
     direction={isSmallScreen ? "row" : "column"}
-    alignItems={isSmallScreen ? "center" : "center"}
+    alignItems={isSmallScreen ? "flex-start" : "center"}
     mb={isSmallScreen ? 12 : 24}
     position="relative"
   >
@@ -55,17 +55,29 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
       position="relative"
       zIndex={1}
       mr={isSmallScreen ? 4 : 0}
+      mt={isSmallScreen ? "11px" : 0}
     />
     {isSmallScreen && (
-      <Box mr={4} width="100px" height="100px">
-        {event.image ? (
-          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100%', height: '100px' }} />
-        ) : (
-          <Box width="100px" height="100px" />
-        )}
-      </Box>
+      <>
+        <Box
+          width="2px"
+          height="calc(100% + 24px)"
+          bg="white"
+          position="absolute"
+          top="-12px"
+          left="3px"
+          zIndex={0}
+        />
+        <Box mr={4} width="100px" height="100px">
+          {event.image ? (
+            <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100%', height: '100px' }} />
+          ) : (
+            <Box width="100px" height="100px" />
+          )}
+        </Box>
+      </>
     )}
-    <TimelineLine isSmallScreen={isSmallScreen} />
+    {!isSmallScreen && <TimelineLine isSmallScreen={isSmallScreen} />}
     <Box textAlign={isSmallScreen ? "left" : "center"} mt={isSmallScreen ? 0 : 8}>
       <Text fontWeight="bold" mb={2}>
         {event.date}
@@ -76,6 +88,7 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
     </Box>
   </Flex>
 );
+
 
 
 
