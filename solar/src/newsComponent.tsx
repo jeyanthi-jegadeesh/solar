@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../src/app/store/store';
-import { News } from '../src/app/store/newsSlice';
+import { RootState } from './app/store/store';
+import { News } from './app/store/newsSlice';
 import { Flex, Heading, Text } from '@chakra-ui/react'
 
 const NewsSection: React.FC = () => {
