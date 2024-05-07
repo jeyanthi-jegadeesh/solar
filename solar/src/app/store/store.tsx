@@ -1,6 +1,7 @@
 import { combineReducers, applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'; // asynch actions
+import newsReducer from './newsSlice';
 
 const rootReducer = combineReducers({
 });
@@ -8,7 +9,9 @@ const rootReducer = combineReducers({
 const middleware = [thunk];
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    news: newsReducer
+  }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

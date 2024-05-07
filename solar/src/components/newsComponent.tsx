@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from './app/store/store';
-import { News } from './app/store/newsSlice';
+import { RootState } from '../app/store/store';
+import { News } from '../app/store/newsSlice';
 import { Flex, Heading, Text } from '@chakra-ui/react'
 
 const NewsSection: React.FC = () => {
@@ -12,6 +12,7 @@ const NewsSection: React.FC = () => {
     <Flex height='100vp' alignItems='center' justifyContent='center' bgGradient='linear(to-t, blue.700, black)' color='white'>
       {news.map((item: News) => (
         <Flex direction='column' key={item.id}>
+          <Heading>Full article here</Heading>
           <Heading>{item.title}</Heading>
           <Text>{item.text}</Text>
         </Flex>
