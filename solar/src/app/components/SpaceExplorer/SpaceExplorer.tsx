@@ -115,8 +115,8 @@ const SpaceExplorer = () => {
             bottom='50px' 
             left='50px' 
             zIndex={11} 
-            width='20vw' 
-            height='25vh' 
+            width='350px' 
+            height='200px' 
         >
         
           <Leva collapsed={true} fill />
@@ -163,8 +163,6 @@ const SpaceExplorer = () => {
           color={'yellow'} 
           intensity={ambientLightIntensity} 
         />
-
-
           {/* render all celestial objects that turn around the sun */}
           <SunSystem celestialObjects={planets} />
 

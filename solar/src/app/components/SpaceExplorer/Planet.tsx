@@ -83,7 +83,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround}:Pla
                                                             step: 0.2,
                                                            }});
 
-  
     let angle = 0; // -> angle between the last frame and the current frame, initialize as 0
     
      // set the position it is circling around according to the orbitingAround-prop
