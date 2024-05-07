@@ -12,7 +12,9 @@ export default function App () {
             bgSize="cover" 
             bgPosition="center" 
             bgRepeat="no-repeat" 
-            style={{ backgroundImage: "url('/solar.png')" }} >   
+            // bg='black'
+            style={{ backgroundImage: "url('/solar.png')" }} >
+            {/* >    */}
          </Box>
          <Overlay></Overlay> 
       </div>
