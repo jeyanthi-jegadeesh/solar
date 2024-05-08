@@ -8,6 +8,7 @@ import { News, addNews } from '../app/store/newsSlice';
 import NewsSection from './newsComponent';
 import JoinSection from './JoinSection';
 
+
 // Mock data, will be removed when NewsComponent will be connected to click on News carousel
 const newsMock: News[] = [
     {id: 1, title: 'Breaking news from space', text: 'Some article will be here'}

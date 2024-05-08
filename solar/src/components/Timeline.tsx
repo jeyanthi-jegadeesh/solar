@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Flex, Text } from '@chakra-ui/react';
-import planetsData from '../../../public/planetsData.json';
+import planetsData from '../../public/planetsData.json';
 import { useMediaQuery } from '@chakra-ui/react';
 
 interface Event {
