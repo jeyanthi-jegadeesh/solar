@@ -17,6 +17,7 @@ import getAllCelestialObjects from "./fetchPlanets"; // API functionality goes h
 
 // TYPE DEFINITIONS
 import { PlanetType } from "./planet_def";
+import { RootState } from "@/app/store/store";
 
 
 interface SolarSystemProps {
@@ -26,9 +27,9 @@ interface SolarSystemProps {
 const AnimationManagement = () => {
 
   // STATES:
-  const planetRefs = useSelector(state => state.solarSystem.planetRefs);
-  const selectedPlanet = useSelector(state => state.solarSystem.selectedPlanet);
-  const isHovered = useSelector(state => state.solarSystem.isPlanetHovered);
+  const planetRefs = useSelector((state: RootState) => state.solarSystem.planetRefs);
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
 
 
   // LEVA CONTROLS
