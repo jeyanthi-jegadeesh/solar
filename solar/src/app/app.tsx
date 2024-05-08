@@ -1,4 +1,4 @@
-import OverlayLanding from '@/components/OverlayComponent';
+import OverlayLanding from '@/components/OverlayLandingComponent';
 import { Box} from '@chakra-ui/react';
 
 export default function App () {
@@ -16,7 +16,7 @@ export default function App () {
             // style={{ backgroundImage: "url('/solar.png')" }} >
             >
          </Box>
-         <OverlayLanding></OverlayLanding> 
+         <OverlayLanding />
       </div>
     );
 }
