@@ -1,3 +1,5 @@
+'use client'
+
 import { Box} from '@chakra-ui/react';
 import  AboutContent  from "@/components/AboutContent";
 import { Flex, Text } from '@chakra-ui/react';
