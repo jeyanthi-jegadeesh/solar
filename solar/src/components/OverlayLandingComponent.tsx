@@ -1,6 +1,6 @@
 import { Box} from '@chakra-ui/react';
 import  AboutContent  from "@/components/AboutContent";
-import { Flex, Spacer, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { News, addNews } from '../app/store/newsSlice';

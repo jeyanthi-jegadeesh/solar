@@ -1,8 +1,6 @@
 'use client'
-import { Stack, HStack, VStack } from '@chakra-ui/react'
-import { Box, Flex, Text , Center , AbsoluteCenter,Button , ButtonGroup, Link} from '@chakra-ui/react';
-import { useMediaQuery } from '@chakra-ui/react';
-import { ChakraProvider } from '@chakra-ui/react';
+import { HStack, VStack } from '@chakra-ui/react'
+import { Box, Text , Button, Link} from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react'
 import NextLink from 'next/link';
 
@@ -44,53 +42,6 @@ function JoinSection () {
                 </GridItem>
             </Grid>
         </Box>
-
-// {/* <Box bgGradient='linear(to-t, blue.700, black)' opacity={0.9} w='100%' color='white' padding="5" maxW="3xl" margin="auto">
-// <Grid templateColumns='repeat(2,1fr)'>
-//     <GridItem colSpan={1}>
-//         <Text fontSize='xl' mb={5}>
-//         Start Your Journey Today  
-//         </Text>
-//         <Text fontSize='12px'>
-//         Join Cosmos Explorer and start your exploration now and see where it takes you!                    </Text>
-//     </GridItem>
-//     <GridItem>
-//         <HStack>
-//             <Text  >travel space with us:</Text>
-        
-//         <VStack>
-//             <Button>Sign Up</Button>
-//             <HStack>
-//             <Text fontSize='xs'>have an Account?</Text>
-//             <Link fontSize='10px'>Log In</Link>
-
-//             </HStack>
-//         </VStack>
-
-        
-
-//         </HStack>
-//     </GridItem>
-// </Grid>
-// </Box> */}
-        // <Grid templateColumns='repeat(3 , 1fr)' width='50%'>
-        //     <GridItem w='100%' h='150' bg='white'/>
-        //     <GridItem w='100%' h='150' bg='blue'>
-        //         <Center h='100%'>
-        //             <Text>travel space wuth us:</Text>
-        //         </Center>
-        //     </GridItem>
-        //     <GridItem w='100%' h='150' bg='gray'>
-        //         <Center h='100%'>
-        //             <Button colorScheme='blue'>
-        //                 Sign up
-        //             </Button>
-
-        //         </Center>
-                
-        //     </GridItem>
-
-        // </Grid>
     )
 
 }
