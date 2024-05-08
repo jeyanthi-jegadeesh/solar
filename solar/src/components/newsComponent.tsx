@@ -9,7 +9,7 @@ const NewsSection: React.FC = () => {
   const {news} = newsState; // extracted the news array from the newsState object returned by useSelector
 
   return (
-    <Flex p='10' height='100vp' alignItems='center' justifyContent='center' bgGradient='linear(to-t, blue.700, black)' color='white' opacity={0.9}>
+    <Flex p='5' height='100vp' alignItems='center' justifyContent='center' bgGradient='linear(to-t, blue.700, black)' color='white' opacity={0.9}>
       {news.map((item: News) => (
         <Flex direction='column' key={item.id}>
           <Heading mb={10}>{item.title}</Heading>
