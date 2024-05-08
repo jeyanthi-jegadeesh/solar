@@ -77,8 +77,8 @@ const AnimationManagement = () => {
          const planet = planets.find(planet => planet.name === planetName);
         
          // TODO get the props from the actual planets object!
-         const velocity = planet.velocity;  // get the actual velocity from the planet (planet.velocity)
-         const distance = planet.distance; // get the distance from the planet object (planet.distance)
+         const velocity = planet!.velocity;  // get the actual velocity from the planet (planet.velocity)
+         const distance = planet!.distance; // get the distance from the planet object (planet.distance)
         //  const planetAngle = planet.angle; //
          
          // -> TODO: planets jump around and the other planets do keep moving :(
@@ -99,6 +99,7 @@ const AnimationManagement = () => {
          }
     })
   })
+  return <></>
 }
 
 
