@@ -4,7 +4,7 @@ import { useControls } from "leva";
 import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPlanetRef, updateSelectedPlanet } from "./solarSystemSlice";
+import { addPlanetRef, updateSelectedPlanet } from "../../app/store/solarSystemSlice";
 
 
 interface PlanetProps {

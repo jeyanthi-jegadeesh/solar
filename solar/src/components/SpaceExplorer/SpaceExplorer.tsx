@@ -171,15 +171,11 @@ const SpaceExplorer = () => {
   // ----------------------------------------------------------------
   const cameraRef = useRef<THREE.Camera>();
 
-     // Context to handle all planetRefs
-     const planetRefContext = createContext({}); 
+     // TODO REFACTOR STORING REFS from Redux to Context to handle all planetRefs
+     // const planetRefContext = createContext({}); 
 
   // TODO create a Map of planets and celestial objects with their respective ref
 
-  // ----------------------------------------------------------------
-  // REFERENCES 
-  // -> needed for updating all celestial objects from a central function (have to write it yet)
-  // ----------------------------------------------------------------
   // get planets -> turn this into an api call / fetch from the server
   const planets = getAllCelestialObjects(); // TODO figure out how to make this async etc...
 
@@ -210,7 +206,7 @@ const SpaceExplorer = () => {
   // ----------------------------------------------------------------
   
   return (
-    <Box className="space-canvas-container" width='100%' height='100%'  margin={0}  padding={0}  background='black'>
+    <Box className="space-canvas-container" width='100vw' height='100vh' zIndex={-1} margin={0}  padding={0}  background='black'>
       {/* 
       // ----------------------------------------------------------------
           RENDER LEVA CONTROLS INSIDE THIS BOX TO CONTROL POSITIONING! 
@@ -219,7 +215,7 @@ const SpaceExplorer = () => {
       // ----------------------------------------------------------------*/}
         <Box position='absolute'  
             bottom='50px' 
-            left='50px' 
+            right='50px' 
             zIndex={11} 
             width='350px' 
             height='200px' 
