@@ -25,7 +25,7 @@ interface SolarSystemProps {
   celestialObjects: PlanetType[];
 }
 
-const AnimationMaster = () => {
+const AnimationManagement = () => {
 
   // STATES:
   const planetRefs = useSelector(state => state.solarSystem.planetRefs);
@@ -54,7 +54,7 @@ const AnimationMaster = () => {
    console.log('PLANETS ARRAY: ', planets);
     
   // Initialize angles for each planet
-  const anglesRef = useRef({});
+  const anglesRef = useRef({}); // TODO Typing
 
   useEffect(() => {
     planets.forEach(planet => {
@@ -285,7 +285,7 @@ const SpaceExplorer = () => {
           */}
           <SolarSystem celestialObjects={planets} />
 
-          <AnimationMaster />
+          <AnimationManagement />
 
         </Canvas>
       </Box>
