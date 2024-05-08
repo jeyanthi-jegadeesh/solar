@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
-import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex} from "@chakra-ui/react";
 import PlanetTimeline from "./Timeline";
 import PlanetsInfo from "./PlanetsInfo";
 
