@@ -1,5 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
+import { ModifierKey } from 'react';
+import { Mesh } from 'three';
 
 interface SolarSystemStateType {
   showControls: boolean, // show Leva controls for variables
@@ -7,6 +9,7 @@ interface SolarSystemStateType {
   selectedPlanet: string | null,
   systemScale: number, //the factor to define the scale og the solar system
   systemSpeed: number, // factor to change the velocity of celestial objects
+  planetRefs: {string: Mesh} | {};
 }
 
 const initialState:SolarSystemStateType = { 
@@ -15,6 +18,7 @@ const initialState:SolarSystemStateType = {
         selectedPlanet: null,
         systemScale: 0.1, 
         systemSpeed: 0.1,
+        planetRefs: {}
         }
 
 const solarSystemSlice = createSlice({
@@ -23,6 +27,13 @@ const solarSystemSlice = createSlice({
   initialState,
 
   reducers: {
+
+    addPlanetRef(state, action) {
+      const planetName = action.payload.name;
+      const planetRef = action.payload.ref;
+      state.planetRefs = {...state.planetRefs, [planetName]:planetRef};
+      console.log(state.planetRefs)
+    },
 
     toggleControls(state, action) {
       const isVisible:boolean = action.payload;
@@ -54,6 +65,6 @@ const solarSystemSlice = createSlice({
   },
 })
 
-export const { startMovement, stopMovement, updateSelectedPlanet, toggleIsPlanetHovered, toggleControls } = solarSystemSlice.actions
+export const { addPlanetRef, startMovement, stopMovement, updateSelectedPlanet, toggleIsPlanetHovered, toggleControls } = solarSystemSlice.actions
 export default solarSystemSlice.reducer
 

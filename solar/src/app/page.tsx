@@ -24,12 +24,12 @@ export default function Home() {
       <Box height='100vh'> 
         <SpaceExplorer />
       </Box>
-      {/* <Box height='90vh' width='33vw' zIndex={10} position='absolute' top='5vh' right='5vw' border='2px solid white'  padding={25} opacity='33%' background='whitesmoke'>
+      <Box height='90vh' width='33vw' zIndex={10} position='absolute' top='5vh' right='5vw' border='2px solid white'  padding={25} opacity='33%' background='whitesmoke'>
         <h1>[selectedPlanet]</h1>
         <p>Earth is the third planet from the Sun and the only astronomical object known to harbor life. According to radiometric dating and other evidence, Earth formed over 4.5 billion years ago.</p>
         <p>Earth is the only planet not named after a god or greek deity.</p>
         
-      </Box> */}
+      </Box>
      </main>
      </Provider>
   );

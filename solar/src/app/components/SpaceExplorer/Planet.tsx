@@ -2,9 +2,10 @@ import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture } from 
 import { Vector3, useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import * as THREE from 'three';
-import React, { MutableRefObject, Reference, useRef, useState } from "react";
+import React, { MutableRefObject, Reference, useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSelectedPlanet } from "./solarSystemSlice";
+import { addPlanetRef, updateSelectedPlanet } from "./solarSystemSlice";
+import getAllCelestialObjects, { planets } from "./fetchPlanets";
 
 
 interface PlanetProps {
@@ -56,34 +57,40 @@ return (
   )
 }
 
+
+
 // --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
 const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isHovered}:PlanetProps) => {
   
-    // set constants for scaling etc.
-    const { systemScale } = useControls({
-                                    systemScale: {
-                                      value: 0.1,
-                                      min: 0.1,
-                                      max: 1
-                                    }}
-                                    ); // factor for scaling of sizes
-
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
-    const speedFactor = 0.01;
   
     console.log("RENDERING: " + name);
   
-    const selectedPlanet = useSelector(state => state.solarSystem.selectedPlanet);
-    
     // Add the redux dispatcher
     const dispatch = useDispatch();
     
     // create a planetRef 
     const planetRef = useRef<THREE.Mesh>(); 
-    const boundingRingRef = useRef<THREE.Mesh>();
+    const planetRefs = useSelector(state => state.solarSystem.planetRefs);
+
+    // refactor to have the planetRef in the context
     
+
+
+    // store the ref on creation of the planet mesh
+    useEffect(() => {
+      if (planetRef.current) { // will only be run after the ref has been created
+          dispatch(addPlanetRef({  // add the planet ref to later use in the animation updater
+              name: name, 
+              ref: planetRef
+          }));
+      }
+  }, [planetRef, name, dispatch]);                                
+    
+    console.log('PLANET REFS: ', planetRefs)
+
     // LEVA CONTROLS FOR LABEL RENDERING
     const { showLabels } = useControls({ showLabels: true })
     const { labelFontSize } = useControls({ labelFontSize: {
@@ -93,8 +100,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
       step: 0.2,
     }});
     
-    let angle = 0; // -> angle between the last frame and the current frame, initialize as 0
-    
+   
     // set the position it is circling around according to the orbitingAround-prop
     // if no orbitingAround is defined set center to be the sun.
     
@@ -103,33 +109,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
     
     let position = new THREE.Vector3(0, 0, 0);
     if (!orbitingAround ) position = new THREE.Vector3(0, distance * systemScale, 0)
-      
-      // ADD ANIMATION -> The ref must be present in the <mesh ref={}> so next knows where it points to
-      // TODO MOVE THE ANIMATION TO A HIGHER LEVEL! SO IT CAN BE STOPPED GLOBALLY!
-      // info on the useFrame function:
-      // state: a lot of information about camera, mouse position etc.
-      //        can be printed in the console to investigate
-      // delta: difference between this frame and the last frame
-      
-      useFrame((state,  delta) => {     
-        if (!isHovered || !selectedPlanet ) { // only move when no planet is clicked 
-        // -> TODO: planets jump around and the other planets do keep moving :(
-        // increment the angle based on time passed (delta) 
-        angle += delta * velocity * speedFactor;  
-  
-        // calculate the new x and y positions for the orbit (circular movement)
-        const x = Math.cos(angle) * distance * systemScale; // distance is the radius of the circular orbit
-        const y = Math.sin(angle) * distance * systemScale;
-        const z = 0; // change later
-        
-        if (planetRef.current) {
-          // update the planet position
-          planetRef.current.position.set(x,y,z);
-          // rotate the planet around itself
-          planetRef.current.rotation.y += delta;
-        }
-      }
-    })
 
      /* TODO REPOSITION THE CAMERA AND FACE THE OBJECT WHEN CLICKED */
 
@@ -141,7 +120,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
         <mesh 
           ref={planetRef} // reference for the animation 
           onClick={() => (dispatch(updateSelectedPlanet(name)))} 
-          onPointerEnter={() => (isHovered = true) }
+          onPointerEnter={() => (isHovered = true)}
           onPointerLeave={() => (isHovered = false)}
         > 
 
@@ -203,13 +182,13 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
           A RING THAT ACTS AS A BOUNDING BOX 
           TODO give it a transparent material and make it the clickable bounding box 
           TODO {give it the DREI Outline effect} 
+          TODO MAKE IT A SEPARATE COMPONENT
           ------------------------------------------------*/}
         {
         name.toLowerCase() !== 'sun' ? 
             <mesh>
               <Billboard> {/* MAKE IT FACE THE CAM ALWAYS*/}
                 <Ring
-                  ref={boundingRingRef}
                   args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
                 /> 
                 {/* <Outlines thickness={0.1} color="white" /> */}
