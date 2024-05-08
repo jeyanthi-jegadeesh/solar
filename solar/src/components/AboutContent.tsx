@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux';
 import { hideOverlay } from '../app/store/overlaySlice';
 
 const About = () => {
-  const dispatch = useDispatch(); // Redux dispatch
+  const dispatch = useDispatch();
 
   const handleExploreClick = () => {
-    console.log('handleExploreClick');
     dispatch(hideOverlay()); // Hide the overlay when "EXPLORE" is clicked
   };
    return (
