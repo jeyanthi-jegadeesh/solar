@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import PlanetTimeline from "./Timeline";
 import PlanetsInfo from "./PlanetsInfo";
 
@@ -13,8 +13,15 @@ const OverlayPlanets: React.FC = () => {
   return (
     (planetState && (
       <Box bg='green' position='fixed' top='0' right='0' bottom='0' width='50%' zIndex={10} m={5} p={10}>
-        <PlanetTimeline />
-        <PlanetsInfo />
+        <Button>Back to space</Button>
+        <Flex flexDirection='column'>
+          <Box>
+            <PlanetTimeline />
+          </Box>
+          <Box>
+            <PlanetsInfo />
+          </Box>
+        </Flex>
       </Box>
     ))
   )
