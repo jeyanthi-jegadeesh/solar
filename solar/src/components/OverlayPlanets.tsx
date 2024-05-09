@@ -1,25 +1,32 @@
 'use client'
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store/store';
 import { Box, Button, Flex} from "@chakra-ui/react";
 import PlanetTimeline from "./Timeline";
-import PlanetsInfo from "./PlanetsInfo";
-import { useDispatch } from "react-redux";
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 import PlanetSpecs from './PlanetSpecs';
 import ShortDescPlanet from './ShortDescPlanet';
 import PlanetTitle from './PlanetTitle';
+import { setSelectedContent } from '@/app/store/contentSlice';
+import { showOverlay } from '@/app/store/overlaySlice';
+import OverlayDialog from '@/components/OverlayDialog';
 
 const OverlayPlanets: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  
+  const isOverlayVisible = useSelector((state: RootState) => state.overlay.isVisible);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(updateSelectedPlanet(''));
-  }
+  };
+
+  const handleQuizClick = () => {
+    dispatch(setSelectedContent('quiz'));
+    dispatch(showOverlay());
+  };
 
   return (
     (selectedPlanet && (
@@ -29,7 +36,7 @@ const OverlayPlanets: React.FC = () => {
           
           <Flex flexDirection='row' justifyContent='space-between'>
             <Button onClick={handleClick} variant='unstyled' mb={10} alignSelf='flex-start'>BACK TO SPACE</Button>
-            <Button onClick={handleClick} variant='unstyled' mb={10}>TAKE A QUIZ</Button>
+            <Button onClick={handleQuizClick} variant='unstyled' mb={10}>TAKE A QUIZ</Button>
           </Flex>
  
             <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
@@ -41,6 +48,7 @@ const OverlayPlanets: React.FC = () => {
             </Box>
 
             <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
+            {isOverlayVisible && <OverlayDialog />}
 
         </Flex>
       </Box>

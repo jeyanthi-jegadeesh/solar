@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import newsReducer from './newsSlice';
 import solarSystemReducer from './solarSystemSlice';
 import overlayReducer from './overlaySlice';
+import contentReducer from './contentSlice';
 
 const rootReducer = combineReducers({
 });
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: {
+    content: contentReducer,
     news: newsReducer,
     solarSystem: solarSystemReducer,
     overlay: overlayReducer, // Add the overlay slice to the store
