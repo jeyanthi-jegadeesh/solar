@@ -65,8 +65,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
   
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
   
-    console.log("RENDERING: " + name);
-  
     // Add the redux dispatcher
     const dispatch = useDispatch();
     
@@ -88,8 +86,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
       }
   }, [planetRef, name, dispatch]);                                
     
-    console.log('PLANET REFS: ', planetRefs)
-
     // LEVA CONTROLS FOR LABEL RENDERING
     const { showLabels } = useControls({ showLabels: true })
     const { labelFontSize } = useControls({ labelFontSize: {

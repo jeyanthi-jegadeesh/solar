@@ -49,7 +49,6 @@ const AnimationManagement = () => {
    let speedFactor = speedFactorBIG * 0.001
 
    const planets = getAllCelestialObjects() // get all planets and their properties
-   console.log('PLANETS ARRAY: ', planets);
     
   // Initialize angles for each planet
   const anglesRef = useRef({}); // TODO Typing
