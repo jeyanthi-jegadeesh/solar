@@ -9,7 +9,8 @@ import { News, addNews } from '../app/store/newsSlice';
 
 import NewsSection from './newsComponent';
 import JoinSection from './JoinSection';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 
 // Mock data, will be removed when NewsComponent will be connected to click on News carousel
 const newsMock: News[] = [
@@ -25,8 +26,10 @@ const OverlayLanding = () => {
     dispatch(addNews(newsMock));
   }, [dispatch]);
 
+  const isOverlayVisible = useSelector((state : RootState) => state.overlay.isVisible); // Get Redux state
+
   return (
-    <Box position="absolute" zIndex={10}  top={2.5} left={2.5} m={5} >
+    <Box position="absolute" zIndex={10}  top={2.5} left={2.5} m={5}  display={isOverlayVisible ? 'block' : 'none'}>
       <Flex flexDirection='row'>
         <Box flex='1' p='5'>
           <AboutContent></AboutContent>
