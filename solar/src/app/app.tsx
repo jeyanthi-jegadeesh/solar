@@ -1,10 +1,13 @@
-import OverlayLanding from '@/components/OverlayLandingComponent';
 import SpaceExplorer from '@/components/SpaceExplorer/SpaceExplorer';
-import { Box} from '@chakra-ui/react';
-import OverlayDialog from '@/components/OverlayDialog';
+import OverlayLanding from '@/components/OverlayLandingComponent';
+
+
 
 export default function App () {
     return(
-      <><PlanetsInfo /><OverlayDialog /></>
+      <>
+        <SpaceExplorer />
+        <OverlayLanding />
+      </>
     );
 }
