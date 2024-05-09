@@ -76,13 +76,9 @@ const AnimationManagement = () => {
         
          const planet = planets.find(planet => planet.name === planetName);
         
-         // TODO get the props from the actual planets object!
-         const velocity = planet!.velocity;  // get the actual velocity from the planet (planet.velocity)
-         const distance = planet!.distance; // get the distance from the planet object (planet.distance)
-        //  const planetAngle = planet.angle; //
+         const velocity = planet!.velocity;  
+         const distance = planet!.distance;
          
-         // -> TODO: planets jump around and the other planets do keep moving :(
-         // increment the angle based on time passed (delta) 
          anglesRef.current[planetName] += delta * velocity * speedFactor;
          const angle = anglesRef.current[planetName];  
     
@@ -108,7 +104,6 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
      const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
-     const planetRefMap = useSelector((state: RootState) => state.solarSystem.planetRefMap);
      const dispatch = useDispatch()
 
    // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
