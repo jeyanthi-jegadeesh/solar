@@ -93,8 +93,7 @@ const PlanetSpecs: React.FC = () => {
     <Box>
 
     {/* // LATER ADD CHAKRA "POPOVER" ELEMENTS FOR EXPLANATION TOOLTIPS  */}
-     <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
- 
+
         <PlanetSpecsTable planetName={selectedPlanet ? selectedPlanet : ''} />
 
     </Box>
