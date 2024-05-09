@@ -5,7 +5,7 @@ interface OverlayState {
 }
 
 const initialState: OverlayState = {
-  isVisible: false,
+  isVisible: true,
 };
 
 const overlaySlice = createSlice({
