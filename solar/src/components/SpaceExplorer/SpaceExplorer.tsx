@@ -17,6 +17,7 @@ import getAllCelestialObjects from "./fetchPlanets"; // API functionality goes h
 
 // TYPE DEFINITIONS
 import { PlanetType } from "./planet_def";
+import { RootState } from "@/app/store/store";
 
 
 interface SolarSystemProps {
@@ -26,9 +27,9 @@ interface SolarSystemProps {
 const AnimationManagement = () => {
 
   // STATES:
-  const planetRefs = useSelector(state => state.solarSystem.planetRefs);
-  const selectedPlanet = useSelector(state => state.solarSystem.selectedPlanet);
-  const isHovered = useSelector(state => state.solarSystem.isPlanetHovered);
+  const planetRefs = useSelector((state: RootState) => state.solarSystem.planetRefs);
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
 
 
   // LEVA CONTROLS
@@ -106,8 +107,8 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
     
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
-     const isHovered = useSelector(state => state.solarSystem.isPlanetHovered);
-     const planetRefMap = useSelector(state => state.solarSystem.planetRefMap);
+     const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
+     const planetRefMap = useSelector((state: RootState) => state.solarSystem.planetRefMap);
      const dispatch = useDispatch()
 
    // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
@@ -163,7 +164,7 @@ const SpaceExplorer = () => {
   // STATE MANAGEMENT
   // ----------------------------------------------------------------
 
-  const selectedPlanet = useSelector(state => state.selectedPlanet)
+  const selectedPlanet = useSelector((state: RootState) => state.selectedPlanet)
 
   // ----------------------------------------------------------------
   // REFERENCES 
@@ -232,7 +233,7 @@ const SpaceExplorer = () => {
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
           makeDefault // !!!
-          position={[0, 0, 500]}
+          position={[0, 0, 200]}
           fov={50} // field of view
         />
 

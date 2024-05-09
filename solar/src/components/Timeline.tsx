@@ -100,6 +100,7 @@ interface PlanetTimelineProps {
 function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
   const planet = planetsData.find((planet) => planet.name === planetName);
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');
+  
 
   if (!planet) {
     return <Text>Planet not found.</Text>;
