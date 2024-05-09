@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'; // asynch actions
 import newsReducer from './newsSlice';
 import solarSystemReducer from './solarSystemSlice';
+import overlayReducer from './overlaySlice';
 
 const rootReducer = combineReducers({
 });
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     news: newsReducer,
     solarSystem: solarSystemReducer,
+    overlay: overlayReducer, // Add the overlay slice to the store
   }
 });
 
