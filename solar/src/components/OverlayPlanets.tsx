@@ -11,15 +11,17 @@ import ShortDescPlanet from './ShortDescPlanet';
 import PlanetTitle from './PlanetTitle';
 import { setSelectedContent } from '@/app/store/contentSlice';
 import { showOverlay } from '@/app/store/overlaySlice';
+import OverlayDialog from '@/components/OverlayDialog';
 
 const OverlayPlanets: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  
+  const isOverlayVisible = useSelector((state: RootState) => state.overlay.isVisible);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(updateSelectedPlanet(''));
-  }
+  };
 
   const handleQuizClick = () => {
     dispatch(setSelectedContent('quiz'));
@@ -45,7 +47,8 @@ const OverlayPlanets: React.FC = () => {
               <PlanetSpecs />
             </Box>
 
-            <PlanetTimeline />
+            <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
+            {isOverlayVisible && <OverlayDialog />}
 
         </Flex>
       </Box>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { hideOverlay } from '../app/store/overlaySlice';
-import { RootState } from '../app/store';
+import { RootState } from '../app/store/store';
 import Quiz from './Quiz';
 // import Article from './Article';
 
