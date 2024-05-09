@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'; // asynch actions
 import newsReducer from './newsSlice';
 import solarSystemReducer from './solarSystemSlice';
 import overlayReducer from './overlaySlice';
+import contentReducer from './contentSlice';
 
 const rootReducer = combineReducers({
 });
@@ -12,6 +13,7 @@ const middleware = [thunk];
 
 export const store = configureStore({
   reducer: {
+    content: contentReducer,
     news: newsReducer,
     solarSystem: solarSystemReducer,
     overlay: overlayReducer, // Add the overlay slice to the store

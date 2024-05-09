@@ -10,7 +10,7 @@ const overlaySlice = createSlice({
       state.isVisible = true; 
     },
     hideOverlay(state) {
-      state.isVisible = false; // action to hide the overlay
+      state.isVisible = false;
     },
   },
 });
