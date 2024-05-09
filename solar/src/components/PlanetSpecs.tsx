@@ -24,24 +24,26 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
     <Table variant='simple' size='sm' layout='fixed' w='100%' >
         <TableCaption>Planet Specs</TableCaption>
         <Tbody>
-        <Tr>
-            <Td>Type:</Td>
-            <Td>{planetInfo?.bodyType}</Td>
-        </Tr>
-            {/* Render conditionally */}
+            <Tr>
+                <Td>Type:</Td>
+                <Td>{planetInfo?.bodyType}</Td>
+            </Tr>
             
             { (planetInfo?.isPlanet && planetInfo?.moons?.length) ? 
                 <>
-        <Tr>
+            <Tr>
                 <Td>Moons ({planetInfo?.moons?.length}):</Td>
+                
                 <Td overflow={'hidden'} whiteSpace={'nowrap'}>
+                
                     {planetInfo?.moons?.map((moon, index) => (
-                    <Tag key={index} marginRight={'0.5em'}>
-                        {moon.moon} 
-                    </Tag>
+                        <Tag key={index} marginRight={'0.5em'}>
+                            {moon.moon} 
+                        </Tag>
                     ))}
+                
                 </Td>
-        </Tr>
+            </Tr>
                 </>
              : 
              null
@@ -67,13 +69,17 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
             <Td>Orbit Time (sideral Orbit)</Td>
             <Td>approx. {Math.round(planetInfo!.sideralOrbit!)} Earth Days</Td>
         </Tr>
-        {planetInfo!.avgTemp! ? 
-        <Tr>
-            <Td>avg. temperature:</Td>
-            <Td>{planetInfo!.avgTemp!} Kelvin</Td>
-        </Tr>
-        :
-        null }
+        
+        {
+            planetInfo!.avgTemp! ? 
+                <Tr>
+                    <Td>avg. temperature:</Td>
+                    <Td>{planetInfo!.avgTemp!} Kelvin</Td>
+                </Tr>
+                :
+                null 
+        }
+
         </Tbody>
     </Table>
 </TableContainer>
