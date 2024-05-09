@@ -65,8 +65,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
   
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
   
-    console.log("RENDERING: " + name);
-  
     // Add the redux dispatcher
     const dispatch = useDispatch();
     
@@ -88,8 +86,6 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
       }
   }, [planetRef, name, dispatch]);                                
     
-    console.log('PLANET REFS: ', planetRefs)
-
     // LEVA CONTROLS FOR LABEL RENDERING
     const { showLabels } = useControls({ showLabels: true })
     const { labelFontSize } = useControls({ labelFontSize: {
@@ -169,13 +165,15 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
           {/*------------------------------------------------ 
              PLANET LABEL with conditional rendering (when the Leva control is clicked)
           ------------------------------------------------ */}
-          {showLabels ? <PlanetLabel
-                          planetRef={planetRef}
-                          labelText={name} 
-                          fontSize={labelFontSize}
-                          position={position.add(new THREE.Vector3(0,-(scaledDiameter / 2) - 0.5,0))} // new position of the label
-                        /> 
-                      : null}
+          {showLabels ? 
+              <PlanetLabel
+                planetRef={planetRef}
+                labelText={name} 
+                fontSize={labelFontSize}
+                position={position.add(new THREE.Vector3(0,-(scaledDiameter / 2) - 0.5,0))} // new position of the label
+              /> 
+              : null
+          }
   
         {/*------------------------------------------------ 
           A RING THAT ACTS AS A BOUNDING BOX 
@@ -187,12 +185,19 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
         name.toLowerCase() !== 'sun' ? 
             <mesh>
               <Billboard> {/* MAKE IT FACE THE CAM ALWAYS*/}
+                {/* WHITE RING FOR VISUAL INDICATION */}
+                <Ring
+                  args={[scaledDiameter, scaledDiameter+3, 32]} 
+                > 
+                <meshStandardMaterial opacity={0} transparent/>
+                <Outlines thickness={0.1} color="white" />
+                </Ring>
+
                 <Ring
                   args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
                 /> 
-                {/* <Outlines thickness={0.1} color="white" /> */}
+                  <meshStandardMaterial color={'white'}/>
               </Billboard>
-              <meshStandardMaterial opacity={0} color={'black'}/>
             </mesh>
           : 
             <Outlines thickness={0.1} color="red" />

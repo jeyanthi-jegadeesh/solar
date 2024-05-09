@@ -13,8 +13,6 @@ const Orbit = ({planetName, orbitCenter, distanceFromParent, thickness, color}: 
 
     const systemScale = 0.1; {/*take this from the state!*/}
 
-    console.log("RENDERING ORBIT: " + planetName);
-
     return (
         <mesh>
             <ringGeometry 
