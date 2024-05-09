@@ -9,9 +9,11 @@ import PlanetsInfo from "./PlanetsInfo";
 import { useDispatch } from "react-redux";
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 import PlanetSpecs from './PlanetSpecs';
+import ShortDescPlanet from './ShortDescPlanet';
+import PlanetTitle from './PlanetTitle';
 
 const OverlayPlanets: React.FC = () => {
-  const planetState = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   
   const dispatch = useDispatch();
 
@@ -20,18 +22,25 @@ const OverlayPlanets: React.FC = () => {
   }
 
   return (
-    (planetState && (
-      <Box position='fixed' top='0' right='0' bottom='0' width='50%' zIndex={10} m={5} p={10} bgGradient='linear(to-t, blue.700, black)' color='white' opacity={0.9}>
-        <Button onClick={handleClick} variant='unstyled' mb={10}>BACK TO SPACE</Button>
-        <Flex flexDirection='column'>
+    (selectedPlanet && (
+      <Box position='fixed' top='0' right='0' bottom='0' width='50%' zIndex={10} m={5} p={10}  bgGradient='linear(to-t, blue.700, black)' color='white' opacity={0.9}>
+       
+        <Flex flexDirection='column' overflow='auto' height='100%' pr={10}>
           
-          <Box >
-            <PlanetSpecs />
-          </Box>
+          <Flex flexDirection='row' justifyContent='space-between'>
+            <Button onClick={handleClick} variant='unstyled' mb={10} alignSelf='flex-start'>BACK TO SPACE</Button>
+            <Button onClick={handleClick} variant='unstyled' mb={10}>TAKE A QUIZ</Button>
+          </Flex>
+ 
+            <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
 
-          <Box >
+            <ShortDescPlanet />
+
+            <Box mt={10}>
+              <PlanetSpecs />
+            </Box>
+
             <PlanetTimeline />
-          </Box>
 
         </Flex>
       </Box>

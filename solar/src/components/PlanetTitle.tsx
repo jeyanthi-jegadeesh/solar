@@ -41,7 +41,7 @@ const PlanetTitle: React.FC<PlanetTitleProps> = ({ planetName }) => {
   
     return (
       <Box>
-        <Heading as="h2" size="lg" fontWeight="bold">
+        <Heading as="h2" size="lg" fontWeight="bold" marginBottom={'1.5rem'}>
           <span dangerouslySetInnerHTML={{ __html: symbol }} /> {name}
         </Heading>
       </Box>

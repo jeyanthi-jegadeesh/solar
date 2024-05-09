@@ -105,3 +105,33 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Styles for the Navbar */
+.navbar {
+  background: linear-gradient(180deg, #006FBF 0%, #003F7F 100%);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 1000; 
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center; 
+  justify-content: space-between;
+}
+
+.nav-item {
+  margin-right: 20px; 
+}
+
+.nav-link {
+  color: white; 
+  text-decoration: none;
+  padding: 0.5rem 1rem; 
+}
+
