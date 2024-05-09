@@ -9,6 +9,7 @@ import PlanetsInfo from "./PlanetsInfo";
 import { useDispatch } from "react-redux";
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 import PlanetSpecs from './PlanetSpecs';
+import ShortDescPlanet from './ShortDescPlanet';
 
 const OverlayPlanets: React.FC = () => {
   const planetState = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
@@ -22,8 +23,8 @@ const OverlayPlanets: React.FC = () => {
   return (
     (planetState && (
       <Box position='fixed' top='0' right='0' bottom='0' width='50%' zIndex={10} m={5} p={10} bgGradient='linear(to-t, blue.700, black)' color='white' opacity={0.9}>
-        <Button onClick={handleClick} variant='unstyled' mb={10}>BACK TO SPACE</Button>
-        <Flex flexDirection='column'>
+        <Flex flexDirection='column' overflow='auto' height='100%'>
+          <Button onClick={handleClick} variant='unstyled' mb={10}>BACK TO SPACE</Button>
           
           <Box >
             <PlanetSpecs />
@@ -31,6 +32,10 @@ const OverlayPlanets: React.FC = () => {
 
           <Box >
             <PlanetTimeline />
+          </Box>
+
+          <Box >
+            <ShortDescPlanet />
           </Box>
 
         </Flex>
