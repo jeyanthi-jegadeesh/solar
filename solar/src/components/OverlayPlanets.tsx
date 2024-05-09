@@ -40,7 +40,7 @@ const OverlayPlanets: React.FC = () => {
               <PlanetSpecs />
             </Box>
 
-            <PlanetTimeline />
+            <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
 
         </Flex>
       </Box>
