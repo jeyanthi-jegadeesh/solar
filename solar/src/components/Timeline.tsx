@@ -1,8 +1,7 @@
 'use client'
 
-import { Box, Flex, Text } from '@chakra-ui/react';
-import planetsData from '../../public/planetsData.json';
-import { useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, Text, useMediaQuery } from '@chakra-ui/react';
+import planetsData from '../../public/timeline/planetsData.json';
 
 interface Event {
   date: string;
@@ -21,7 +20,6 @@ const TimelineLine = ({ isSmallScreen }: { isSmallScreen: boolean }) => (
     width={isSmallScreen ? "2px" : "100%"}
     height={isSmallScreen ? "calc(100% - 24px)" : "2px"}
     bg="white"
-    // position="absolute"
     top={isSmallScreen ? "24px" : "3px"}
     left={isSmallScreen ? "3px" : "0"}
     transform={isSmallScreen ? "translateY(3px)" : "translateY(-50%)"}
@@ -39,7 +37,7 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
     {!isSmallScreen && (
       <Box mb={4} width="100px" height="100px">
         {event.image ? (
-          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100px', height: '100px' }} />
+          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100px', minHeight: '100px' }} />
         ) : (
           <Box width="100px" height="100px" />
         )}
@@ -89,13 +87,9 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
   </Flex>
 );
 
-
-
-
 interface PlanetTimelineProps {
   planetName?: string;
 }
-
 
 function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
   const planet = planetsData.find((planet) => planet.name === planetName);
