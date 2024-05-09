@@ -102,17 +102,7 @@ function PlanetTimeline({ planetName = "Mars" }: PlanetTimelineProps) {
 
   return (
     <Box position="relative">
-      <Text
-        fontSize="2xl"
-        fontWeight="bold"
-        mb={8}
-        textAlign={isSmallScreen ? "left" : "left"}
-        pl={isSmallScreen ? 12 : 8}
-      >
-        {planet.name}
-      </Text>
       <Box position="relative">
-      
         <Flex direction={isSmallScreen ? 'column' : 'row'} alignItems='flex-start'>
           {planet.timeline.map((event, index) => (
             <TimelineEvent key={`${index}-${event.date}`} event={event} index={index} isSmallScreen={isSmallScreen} />
