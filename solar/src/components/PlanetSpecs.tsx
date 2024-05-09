@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbSeparator, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
 import PlanetTitle from './PlanetTitle';
@@ -21,28 +21,29 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
     if (!planetInfo) return <><Text>No planet info available.</Text></>;
     return (
     <TableContainer>
-    <Table variant='simple' size='sm'>
-        <TableCaption></TableCaption>
+    <Table variant='simple' size='sm' layout='fixed' w='100%' >
+        <TableCaption>Planet Specs</TableCaption>
         <Tbody>
-        <Tr>
-            <Td>Type:</Td>
-            <Td>{planetInfo?.bodyType}</Td>
-        </Tr>
-            {/* Render conditionally */}
+            <Tr>
+                <Td>Type:</Td>
+                <Td>{planetInfo?.bodyType}</Td>
+            </Tr>
             
             { (planetInfo?.isPlanet && planetInfo?.moons?.length) ? 
                 <>
-        <Tr>
-                <Td>Moons:</Td>
-                <Td>
+            <Tr>
+                <Td>Moons ({planetInfo?.moons?.length}):</Td>
+                
+                <Td overflow={'hidden'} whiteSpace={'nowrap'}>
+                
                     {planetInfo?.moons?.map((moon, index) => (
-                    <span key={index}>
-                        {moon.moon}
-                        {index < planetInfo.moons.length - 1 && ', '}
-                    </span>
+                        <Tag key={index} marginRight={'0.5em'}>
+                            {moon.moon} 
+                        </Tag>
                     ))}
+                
                 </Td>
-        </Tr>
+            </Tr>
                 </>
              : 
              null
@@ -68,13 +69,17 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
             <Td>Orbit Time (sideral Orbit)</Td>
             <Td>approx. {Math.round(planetInfo!.sideralOrbit!)} Earth Days</Td>
         </Tr>
-        {planetInfo!.avgTemp! ? 
-        <Tr>
-            <Td>avg. temperature:</Td>
-            <Td>{planetInfo!.avgTemp!} Kelvin</Td>
-        </Tr>
-        :
-        null }
+        
+        {
+            planetInfo!.avgTemp! ? 
+                <Tr>
+                    <Td>avg. temperature:</Td>
+                    <Td>{planetInfo!.avgTemp!} Kelvin</Td>
+                </Tr>
+                :
+                null 
+        }
+
         </Tbody>
     </Table>
 </TableContainer>
