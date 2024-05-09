@@ -108,13 +108,14 @@ a {
 
 /* Styles for the Navbar */
 .navbar {
-  background: linear-gradient(180deg, #006FBF 0%, #003F7F 100%);
+  background: linear-gradient(to top, #1a365d, #000000);
   padding: 1rem;
   position: fixed;
   top: 0;
   width: 100%; 
   z-index: 1000; 
 }
+
 
 .nav-list {
   list-style: none;
@@ -134,4 +135,5 @@ a {
   text-decoration: none;
   padding: 0.5rem 1rem; 
 }
+
 
