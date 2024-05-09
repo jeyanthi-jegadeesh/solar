@@ -1,29 +1,21 @@
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Box, Heading, Text } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
-import PlanetSpecs from './PlanetSpecs';
-import { setSelectedContent } from '../app/store/contentSlice';
-import { showOverlay } from '../app/store/overlaySlice';
+import PlanetTimeline from './Timeline';
 
 const PlanetsInfo: React.FC = () => {
-  const dispatch = useDispatch();
-  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  
-  const handleQuizClick = () => {
-    dispatch(setSelectedContent('quiz'));
-    dispatch(showOverlay());
-  };
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet) || 'Mars';
 
   return (
     <Box>
-      <PlanetSpecs />
+      <Heading>{selectedPlanet}</Heading>
       <Text>Images carousel</Text>
       <Text>Basic info</Text>
-      <Button onClick={handleQuizClick}>Quiz</Button>
+      <PlanetTimeline planetName={selectedPlanet}/>
       <Text>Short description</Text>
       <Text>Articles carousel</Text>
     </Box>
   )
 }
-  
+
 export default PlanetsInfo;

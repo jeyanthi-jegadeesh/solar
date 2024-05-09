@@ -4,7 +4,8 @@
     "timeline": [
       {
         "date": "1610",
-        "event": "Galileo Galilei uses a telescope to observe sunspots"
+        "event": "Galileo Galilei uses a telescope to observe sunspots",
+        "image": "/timeline/sun.svg"
       },
       {
         "date": "2006",
@@ -17,11 +18,13 @@
     "timeline": [
       {
         "date": "Ancient times",
-        "event": "Discovery of Mercury"
+        "event": "Discovery of Mercury",
+        "image": "/timeline/mercury.svg"
       },
       {
         "date": "1974",
-        "event": "First exploration by Mariner 10"
+        "event": "First exploration by Mariner 10",
+        "image": "/timeline/satellite.svg"
       },
       {
         "date": "2011",
@@ -38,7 +41,8 @@
       },
       {
         "date": "1961",
-        "event": "First exploration by Venera 1"
+        "event": "First exploration by Venera 1",
+        "image": "/timeline/satellite.svg"
       },
       {
         "date": "1975",
@@ -51,7 +55,8 @@
     "timeline": [
       {
         "date": "4.54 billion years ago",
-        "event": "Formation of Earth"
+        "event": "Formation of Earth",
+        "image": "/timeline/earth.svg"
       },
       {
         "date": "1961",
@@ -68,11 +73,13 @@
     "timeline": [
       {
         "date": "Ancient times",
-        "event": "Recognition of the Moon as Earth's satellite"
+        "event": "Recognition of the Moon as Earth's satellite",
+        "image": "/timeline/moon.svg"
       },
       {
         "date": "1969",
-        "event": "Apollo 11 lands the first humans on the Moon"
+        "event": "Apollo 11 lands the first humans on the Moon",
+        "image": "/timeline/astronaut.svg"
       },
       {
         "date": "2009",
@@ -86,20 +93,22 @@
       {
         "date": "Ancient times",
         "event": "Discovery of Mars",
-        "image": "mars.svg"
+        "image": "/timeline/mars.svg"
       },
       {
         "date": "1965",
         "event": "First flyby by Mariner 4",
-        "image": "shuttle.svg"
+        "image": "/timeline/shuttle.svg"
       },
       {
         "date": "1976",
-        "event": "Viking 1 and 2 land on Mars surface"
+        "event": "Viking 1 and 2 land on Mars surface",
+        "image": "/timeline/lander.svg"
       },
       {
         "date": "2012",
-        "event": "Curiosity rover lands on Mars"
+        "event": "Curiosity rover lands on Mars",
+        "image": "/timeline/rover.svg"
       }
     ]
   },
@@ -108,11 +117,13 @@
     "timeline": [
       {
         "date": "Ancient times",
-        "event": "Discovery of Jupiter"
+        "event": "Discovery of Jupiter",
+        "image": "/timeline/jupiter.svg"
       },
       {
         "date": "1973",
-        "event": "First flyby by Pioneer 10"
+        "event": "First flyby by Pioneer 10",
+        "image": "/timeline/satellite.svg"
       },
       {
         "date": "1995",
@@ -129,11 +140,13 @@
     "timeline": [
       {
         "date": "Ancient times",
-        "event": "Discovery of Saturn"
+        "event": "Discovery of Saturn",
+        "image": "/timeline/saturn.svg"
       },
       {
         "date": "1979",
-        "event": "Pioneer 11 flies by Saturn"
+        "event": "Pioneer 11 flies by Saturn",
+        "image": "/timeline/satellite.svg"
       },
       {
         "date": "2004",
@@ -146,7 +159,8 @@
     "timeline": [
       {
         "date": "1781",
-        "event": "Discovery of Uranus by William Herschel"
+        "event": "Discovery of Uranus by William Herschel",
+        "image": "/timeline/uranus.svg"
       },
       {
         "date": "1986",
@@ -159,7 +173,8 @@
     "timeline": [
       {
         "date": "1846",
-        "event": "Discovery of Neptune by Urbain Le Verrier"
+        "event": "Discovery of Neptune by Urbain Le Verrier",
+        "image": "/timeline/neptune.svg"
       },
       {
         "date": "1989",

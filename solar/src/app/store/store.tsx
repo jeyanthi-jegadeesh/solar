@@ -1,6 +1,6 @@
 import { combineReducers, applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'; // asynch actions
+// import thunk from 'redux-thunk';
 import newsReducer from './newsSlice';
 import solarSystemReducer from './solarSystemSlice';
 import overlayReducer from './overlaySlice';
@@ -9,7 +9,7 @@ import contentReducer from './contentSlice';
 const rootReducer = combineReducers({
 });
 
-const middleware = [thunk];
+// const middleware = [thunk];
 
 export const store = configureStore({
   reducer: {
