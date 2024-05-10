@@ -43,19 +43,18 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
                 <Td>{planetInfo?.bodyType}</Td>
             </Tr>
             
+
+            {/* MOONS -> LOGIC TO SHOW ALL OF THEM... */}
             { (planetInfo?.isPlanet && planetInfo?.moons?.length) ? 
                 <>
             <Tr>
                 <Td>Moons ({planetInfo?.moons?.length}):</Td>
-                
                 <Td overflow={'hidden'} whiteSpace={'nowrap'}>
-                
                     {planetInfo?.moons?.map((moon, index) => (
                         <Button key={index} marginRight={'0.5em'} size='xs' onClick={() => handleMoonClick(moon.moon)} >
                             {moon.moon} 
                         </Button>
                     ))}
-                
                 </Td>
             </Tr>
                 </>
