@@ -13,8 +13,8 @@ const initialState: InitialState = {
   news: [],
 };
 
-const contentSlice = createSlice({
-  name: "content",
+const carouselSlice = createSlice({
+  name: "carousel",
   initialState,
   reducers: {
     addImage(state, action: PayloadAction<ImageContent>) {
@@ -26,9 +26,9 @@ const contentSlice = createSlice({
   },
 });
 
-export const { addImage, addNews } = contentSlice.actions;
+export const { addImage, addNews } = carouselSlice.actions;
 
 export const selectImages = (state: RootState) => state.carouselSlice.images;
 export const selectNews = (state: RootState) => state.carouselSlice.news;
 
-export default contentSlice.reducer;
+export default carouselSlice.reducer;
