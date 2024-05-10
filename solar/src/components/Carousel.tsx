@@ -3,10 +3,7 @@ import { Box, Flex, Button, Card } from "@chakra-ui/react"; // study relative pa
 import NewsComponent from "./carouselNews";
 import ImageComponent from "./carouselImage";
 import { mockNewsData, mockImageData } from "./carouselMockData";
-import { Provider } from "react-redux";
-
-import { store } from "@/app/store/store";
-import { NewsContent, ImageContent } from "@/app/utils/types"; // Import types for NewsContent and ImageContent
+import { NewsContent } from "@/app/utils/types"; // Import types for NewsContent and ImageContent
 
 interface CarouselProps {
   contentType: "news" | "image";
