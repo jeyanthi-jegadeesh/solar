@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { HStack, VStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';
-// import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { showsSignOverlay , showsLogInOverlay , hideSignOverlay } from '@/app/store/overlaySlice';
 import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
 
 
-interface SignInForm {
+interface SignUpForm {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,18 +14,17 @@ interface SignInForm {
 }
 
 export default function SignUp() {
-  const [signInForm, setSignInForm] = useState<SignInForm>({
+  const [signUpForm, setSignUpForm] = useState<SignUpForm>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
   });
 
-  // const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setSignInForm(prevState => ({
+    setSignUpForm(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -33,8 +33,8 @@ export default function SignUp() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await signIn('credentials', {
-      email: signInForm.email,
-      password: signInForm.password,
+      email: signUpForm.email,
+      password: signUpForm.password,
       callbackUrl: '/',
     });
 
@@ -43,6 +43,15 @@ export default function SignUp() {
       window.location.href = "/";
     }
   };
+
+
+  const dispatch = useDispatch();
+
+  const handleOpenLog = () => {
+      dispatch(showsLogInOverlay());
+      dispatch(hideSignOverlay())
+      
+    };
 
   return (
     <>
@@ -55,7 +64,7 @@ export default function SignUp() {
             <Input
               type="firstName"
               name="firstName"
-              value={signInForm.firstName}
+              value={signUpForm.firstName}
               onChange={handleChange}
               placeholder="First Name"
             />
@@ -65,7 +74,7 @@ export default function SignUp() {
             <Input
               type="lastName"
               name="lastName"
-              value={signInForm.lastName}
+              value={signUpForm.lastName}
               onChange={handleChange}
               placeholder="Last Name"
             />
@@ -75,7 +84,7 @@ export default function SignUp() {
             <Input
               type="email"
               name="email"
-              value={signInForm.email}
+              value={signUpForm.email}
               onChange={handleChange}
               placeholder="Email address"
             />
@@ -85,7 +94,7 @@ export default function SignUp() {
             <Input
               type="password"
               name="password"
-              value={signInForm.password}
+              value={signUpForm.password}
               onChange={handleChange}
               placeholder="Password"
             />
@@ -93,16 +102,8 @@ export default function SignUp() {
           <Button type="submit" colorScheme="blue">Sign Up</Button>
           <HStack>
             <Text fontSize='xs'>have an Account?</Text>
-            <Button  sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Log In</Button>
-            {/* {isVisible ? (
-        <Box>
-          <SignUp/>
-        </Box>
-      ) : (
-        <Box>
-          <LogIn/>
-        </Box>
-      )} */}
+            <Button onClick={handleOpenLog} sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Log In</Button>
+           
           </HStack>
         </Stack>
       </form>

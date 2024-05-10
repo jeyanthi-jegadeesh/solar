@@ -3,20 +3,22 @@ import { HStack, VStack } from '@chakra-ui/react'
 import { Box, Text , Button, Link} from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react'
 import NextLink from 'next/link';
-import { showsSignOverlay } from '@/app/store/overlaySlice';
+import { showsSignOverlay , showsLogInOverlay } from '@/app/store/overlaySlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/app/store/store';
 
 function JoinSection () {
 
     const dispatch = useDispatch();
-    const isVisible = useSelector((state: RootState) => state.overlay.signIsVisible);
 
-    const handleOpen = () => {
+    const handleOpenSign = () => {
       dispatch(showsSignOverlay());
       
     };
 
+    const handleOpenLog = () => {
+        dispatch(showsLogInOverlay());
+        
+      };
     return (
 
 
@@ -35,12 +37,12 @@ function JoinSection () {
                         <Text>travel space with us:</Text>
                     <VStack>
                         
-                            <Button onClick={handleOpen} bgColor='rgb(23,18,68)' color='rgb(220,220,220)' width='10rem' _hover={{color: 'rgb(255,255,255)', backgroundColor: 'rgb(89,81,169)'}}>
+                            <Button onClick={handleOpenSign} bgColor='rgb(23,18,68)' color='rgb(220,220,220)' width='10rem' _hover={{color: 'rgb(255,255,255)', backgroundColor: 'rgb(89,81,169)'}}>
                                 Sign Up
                             </Button>
                         <HStack>
                         <Text fontSize='xs'>have an Account?</Text>
-                            <Button sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Log In</Button>
+                            <Button onClick={handleOpenLog} sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Log In</Button>
 
                         </HStack>
                     </VStack>
