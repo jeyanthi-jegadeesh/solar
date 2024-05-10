@@ -1,8 +1,9 @@
-import { Box, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { Accordion, Box, Button, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
 import PlanetTitle from './PlanetTitle';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
+import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 
 function getPlanetInfo(planetName: string) {
     if (!planetName) return undefined;
@@ -15,10 +16,23 @@ interface PlanetSpecsTableProps {
     planetName: string;
   }
 function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
+    
+    // define a function that jumps to the moon when clicked on
+    const dispatch = useDispatch();
+    const handleMoonClick = (moonName: string) => {
+        console.log('JUMPING TO MOON:', moonName)
+        dispatch(updateSelectedPlanet(moonName));
+    }
+    
+    // check if a planet name was given
     if (!planetName) return <><Text>no planet info available :(</Text></>;
     
+    // get all Planets info for the selected planet
     const planetInfo = getPlanetInfo(planetName);
+
+    // set placeholder text in case there is no information available
     if (!planetInfo) return <><Text>No planet info available.</Text></>;
+        
     return (
     <TableContainer>
     <Table variant='simple' size='sm' layout='fixed' w='100%' >
@@ -29,19 +43,18 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
                 <Td>{planetInfo?.bodyType}</Td>
             </Tr>
             
+
+            {/* MOONS -> LOGIC TO SHOW ALL OF THEM... */}
             { (planetInfo?.isPlanet && planetInfo?.moons?.length) ? 
                 <>
             <Tr>
                 <Td>Moons ({planetInfo?.moons?.length}):</Td>
-                
                 <Td overflow={'hidden'} whiteSpace={'nowrap'}>
-                
                     {planetInfo?.moons?.map((moon, index) => (
-                        <Tag key={index} marginRight={'0.5em'}>
+                        <Button key={index} marginRight={'0.5em'} size='xs' onClick={() => handleMoonClick(moon.moon)} >
                             {moon.moon} 
-                        </Tag>
+                        </Button>
                     ))}
-                
                 </Td>
             </Tr>
                 </>
@@ -88,6 +101,10 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
 
 const PlanetSpecs: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+
+  function handleMoonClick(planetName: string) {
+
+  }
 
   return (
     <Box>

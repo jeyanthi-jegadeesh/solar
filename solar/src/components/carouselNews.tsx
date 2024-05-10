@@ -28,14 +28,29 @@ const NewsComponent: React.FC<NewsProps> = ({ content }) => {
 
   return (
     <Box>
-      <Heading as="h1" size="md" mb={4}>
+      {/* TITLE */}
+      <Heading as="h1" size="sm" mb={4}>
         {content.h1}
       </Heading>
-      <Heading as="h2" size="sm" mb={2}>
+
+      {/* SUBTITLE */}
+      <Heading as="h2" size="xs" mb={2} color='grey'>
         {content.h2}
       </Heading>
-      <Text p="4" size='sm'>{content.p}</Text>
-      <Button onClick={() => addNewsToStore(content)}>Read more</Button>
+
+      {/* PREVIEW TEXT */}
+      <Text whiteSpace="nowrap"
+            overflow="hidden"
+            textOverflow="ellipsis" 
+            p="4" 
+            size='xs'
+      >
+        {content.p}
+      </Text>
+      
+      <Button onClick={() => addNewsToStore(content)} size='xs'>
+        Read more
+      </Button>
     </Box>
   );
 };

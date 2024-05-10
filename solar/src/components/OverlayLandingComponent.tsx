@@ -1,6 +1,6 @@
 'use client'
 
-import { Box} from '@chakra-ui/react';
+import { Box, Heading} from '@chakra-ui/react';
 import  AboutContent  from "@/components/AboutContent";
 import { Flex, Text } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
@@ -33,17 +33,29 @@ const OverlayLanding = () => {
     <Box position="absolute" zIndex={10}  top={2.5} left={2.5} m={5}  display={isOverlayVisible ? 'block' : 'none'}>
       <Flex flexDirection='row'>
         <Box flex='1' p='5'>
-          <AboutContent></AboutContent>
-          <Box maxW="3xl">
-          <CarouselComponent key="news-carousel" contentType="news"></CarouselComponent>
-          <CarouselComponent key="image-carousel" contentType="image"></CarouselComponent>
+          
+          <AboutContent />
+          
+          {/* CarouselSection */}
+          <Box  bgGradient='linear(to-t, blue.700, black)' opacity={0.9} w='100%' color='white' padding="5" maxW="3xl" margin="auto">
+            
+            {/* NEWS FROM SPACE */}
+            <Heading as='h2' size='md'>latest news from space</Heading>
+            <CarouselComponent key="news-carousel" contentType="news"></CarouselComponent>
+            
+            {/* FROM THE COMMUNITY */}
+            <Heading as='h2' size='md'>community picks</Heading>
+            <CarouselComponent key="image-carousel" contentType="image"></CarouselComponent>
           </Box>
-          <Text color='white'>From Community Carousel here</Text>
+          
           <JoinSection/>
+        
         </Box>
+        
         <Box flex='1' p='6'>
           <NewsSection />
         </Box>
+      
       </Flex>
     </Box>
   );

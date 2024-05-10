@@ -4,6 +4,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { hideDialogOverlay } from '../app/store/overlaySlice';
 import { RootState } from '../app/store/store';
 import Quiz from './Quiz';
+import Article from './Article';
 // import Article from './Article';
 
 const OverlayDialog: React.FC = () => {
@@ -20,7 +21,7 @@ const OverlayDialog: React.FC = () => {
   if (selectedContent === 'quiz') {
     content = selectedPlanet ? <Quiz planetName={selectedPlanet} /> : <Quiz planetName="Mars" />;
   } else {
-    // content = selectedPlanet ? <ArticleComponent planetName={selectedPlanet} /> : null;
+    content = selectedPlanet ? <Article planetName={selectedPlanet} editMode={true} /> : null;
   }
 
   return (

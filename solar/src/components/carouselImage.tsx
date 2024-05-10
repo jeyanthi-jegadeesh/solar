@@ -27,7 +27,7 @@ const ImageComponent: React.FC<ImageProps> = ({ content }) => {
   };
 
   return (
-    <Box width="400px" height="300px" overflow="hidden">
+    <Box width="250px" height="250px" overflow="hidden">
       <Image
         src={content.imageUrl}
         alt="Carousel Image"
