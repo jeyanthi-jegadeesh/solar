@@ -1,19 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
-import { hideOverlay } from '../app/store/overlaySlice';
+import { hideDialogOverlay } from '../app/store/overlaySlice';
 import { RootState } from '../app/store/store';
 import Quiz from './Quiz';
 // import Article from './Article';
 
 const OverlayDialog: React.FC = () => {
   const dispatch = useDispatch();
-  const isVisible = useSelector((state: RootState) => state.overlay.isVisible);
+  const isVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const selectedContent = useSelector((state: RootState) => state.content.selectedContent);
 
   const handleClose = () => {
-    dispatch(hideOverlay());
+    dispatch(hideDialogOverlay());
   };
 
   let content;
