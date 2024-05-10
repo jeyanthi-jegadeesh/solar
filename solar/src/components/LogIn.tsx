@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { HStack, VStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';
-// import { useRouter } from 'next/router';
-import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
-import { useDispatch , useSelector } from 'react-redux';
-// import { hideDialogOverlay } from '@/app/store/overlaySlice';
-import { RootState } from '@/app/store/store';
-import SignUp from './SignUp';
+import { useSelector, useDispatch } from 'react-redux';
+import { showsSignOverlay , showsLogInOverlay, hideLogInOverlay } from '@/app/store/overlaySlice';import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
 
 
 interface LogInForm {
@@ -44,16 +40,16 @@ export default function LogIn() {
     }
   };
 
-  const isVisible = useSelector((state: RootState) => state.overlay.isVisible);
+
   const dispatch = useDispatch();
 
-  const toggleVisibility = () => {
-    if (isVisible) {
-      dispatch(hideOverlay());
-    } else {
-      dispatch(showOverlay());
-    }
+  const handleOpenSign = () => {
+    dispatch(showsSignOverlay());
+    dispatch(hideLogInOverlay())
+    
   };
+
+ 
 
   return (
     <>
@@ -82,19 +78,11 @@ export default function LogIn() {
               placeholder="Password"
             />
           </FormControl>
-          <Button type="submit" colorScheme="blue">Sign Up</Button>
+          <Button type="submit" colorScheme="blue">Log In</Button>
           <HStack>
             <Text fontSize='xs'>do not have an Account?</Text>
-            <Button onClick={toggleVisibility} sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Sign Up!</Button>
-            {isVisible ? (
-        <Box>
-          <LogIn/>
-        </Box>
-      ) : (
-        <Box>
-          <SignUp/>
-        </Box>
-      )}
+            <Button onClick={handleOpenSign} sx={{ textDecoration: "none" , color:'rgb(141,66,239)',fontSize:'xs' ,fontWeight:'700' }}>Sign Up!</Button>
+            
           </HStack>
         </Stack>
       </form>

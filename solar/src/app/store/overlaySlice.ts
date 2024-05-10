@@ -4,7 +4,8 @@ interface OverlayState {
   landingIsVisible: boolean,
   planetsIsVisible: boolean,
   dialogIsVisible: boolean,
-  signIsVisible: boolean
+  signIsVisible: boolean,
+  logInIsVisible: boolean
 }
 
 const initialState: OverlayState = {
@@ -12,6 +13,7 @@ const initialState: OverlayState = {
   planetsIsVisible: false,
   dialogIsVisible: false,
   signIsVisible: false,
+  logInIsVisible: false,
 
 };
 
@@ -42,12 +44,18 @@ const overlaySlice = createSlice({
     },
     hideSignOverlay(state)  {
       state.signIsVisible = false;
+    },
+    showsLogInOverlay(state) {
+      state.logInIsVisible = true;
+    },
+    hideLogInOverlay(state)  {
+      state.logInIsVisible = false;
     }
 
   },
 });
 
-export const { showLandingOverlay, hideLandingOverlay, showPlanetsOverlay, hidePlanetsOverlay, showDialogOverlay, hideDialogOverlay, showsSignOverlay, hideSignOverlay } = overlaySlice.actions;
+export const { showLandingOverlay, hideLandingOverlay, showPlanetsOverlay, hidePlanetsOverlay, showDialogOverlay, hideDialogOverlay, showsSignOverlay, hideSignOverlay, showsLogInOverlay, hideLogInOverlay } = overlaySlice.actions;
 
 export default overlaySlice.reducer;
 
