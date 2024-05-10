@@ -11,6 +11,7 @@ import NewsSection from './newsComponent';
 import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
+import CarouselComponent from './Carousel';
 
 // Mock data, will be removed when NewsComponent will be connected to click on News carousel
 const newsMock: News[] = [
@@ -33,8 +34,11 @@ const OverlayLanding = () => {
       <Flex flexDirection='row'>
         <Box flex='1' p='5'>
           <AboutContent></AboutContent>
-          <Text color='white'>News Carousel here</Text>
-          <Text color='white'>From Community Carousel her e</Text>
+          <Box maxW="3xl">
+          <CarouselComponent key="news-carousel" contentType="news"></CarouselComponent>
+          <CarouselComponent key="image-carousel" contentType="image"></CarouselComponent>
+          </Box>
+          <Text color='white'>From Community Carousel here</Text>
           <JoinSection/>
         </Box>
         <Box flex='1' p='6'>
