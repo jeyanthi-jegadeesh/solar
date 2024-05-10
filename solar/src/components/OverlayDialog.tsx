@@ -24,8 +24,11 @@ const OverlayDialog: React.FC = () => {
   }
 
   return (
-    <Modal isOpen={isVisible} onClose={handleClose}>
-      <ModalOverlay />
+    <Modal isOpen={isVisible} onClose={handleClose} size="xl">
+      <ModalOverlay 
+      bg='blackAlpha.300'
+      backdropFilter='blur(10px) hue-rotate(90deg)'
+      />
       <ModalContent>
         <ModalHeader>
           {selectedContent === 'quiz' ? 'Quiz' : 'Article'}
