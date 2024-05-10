@@ -1,13 +1,13 @@
 import { Box, Heading, Text, Link, Button } from '@chakra-ui/react';
 import NextLink from 'next/link'; // Next.js link component for routing
 import { useDispatch } from 'react-redux';
-import { hideOverlay } from '../app/store/overlaySlice';
+import { hideLandingOverlay } from '../app/store/overlaySlice';
 
 const About = () => {
   const dispatch = useDispatch();
 
   const handleExploreClick = () => {
-    dispatch(hideOverlay()); // Hide the overlay when "EXPLORE" is clicked
+    dispatch(hideLandingOverlay()); // Hide the overlay when "EXPLORE" is clicked
   };
    return (
     <Box bgGradient='linear(to-t, blue.700, black)' opacity={0.9} w='100%' color='white' padding="5" maxW="3xl" margin="auto">

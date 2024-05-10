@@ -26,7 +26,7 @@ const OverlayLanding = () => {
     dispatch(addNews(newsMock));
   }, [dispatch]);
 
-  const isOverlayVisible = useSelector((state : RootState) => state.overlay.isVisible); // Get Redux state
+  const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 
   return (
     <Box position="absolute" zIndex={10}  top={2.5} left={2.5} m={5}  display={isOverlayVisible ? 'block' : 'none'}>
