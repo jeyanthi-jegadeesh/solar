@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { showOverlay, hideOverlay } from '../app/store/overlaySlice';
+import { showOverlay, hideOverlay, hideLandingOverlay, showLandingOverlay } from '../app/store/overlaySlice';
 import { Link, Flex, IconButton, Icon, Box, useColorMode, ChakraProvider } from '@chakra-ui/react';
 import { FiUser, FiSun, FiMoon } from 'react-icons/fi';
 
@@ -9,11 +9,11 @@ const Navbar: React.FC = () => {
     const { colorMode, toggleColorMode } = useColorMode(); //Chakra's useColorMode hook
 
     const handleShowOverlay = () => {
-        dispatch(showOverlay());
+        dispatch(showLandingOverlay());
     };
 
     const handleHideOverlay = () => {
-        dispatch(hideOverlay());
+        dispatch(hideLandingOverlay());
     };
 
     const handleQuizClick = () => {
