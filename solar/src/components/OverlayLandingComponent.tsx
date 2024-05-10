@@ -34,7 +34,7 @@ const OverlayLanding = () => {
         <Box flex='1' p='5'>
           <AboutContent></AboutContent>
           <Text color='white'>News Carousel here</Text>
-          <Text color='white'>From Community Carousel her e</Text>
+          <Text color='white'>From Community Carousel here</Text>
           <JoinSection/>
         </Box>
         <Box flex='1' p='6'>
