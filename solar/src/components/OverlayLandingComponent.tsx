@@ -12,20 +12,24 @@ import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import CarouselComponent from './Carousel';
+import { GetServerSideProps } from 'next';
+import NewsApiClient from './newsApiClient';
+import NewsServerComponent from './newsApiServer';
 
-// Mock data, will be removed when NewsComponent will be connected to click on News carousel
-const newsMock: News[] = [
-    {id: 1, title: 'Breaking news from space', text: 'Some article will be here'}
-  ]
+interface NewsApiItem {
+  id: number,
+  title: string,
+  url: string,
+  summary: string
+}
+
+interface Props {
+  news: NewsApiItem[] | null;
+}
 
 // Will be modified at the moment when we will connect NewsComponent to click on News carousel
 // Also missing logic that NewsSection should be visualized only on click at News carousel
-const OverlayLanding = () => {
-  const dispatch = useDispatch();
-
-  useEffect (() => {
-    dispatch(addNews(newsMock));
-  }, [dispatch]);
+const OverlayLanding: React.FC<Props> = ({ data }) => {
 
   const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 
@@ -54,6 +58,8 @@ const OverlayLanding = () => {
         
         <Box flex='1' p='6'>
           <NewsSection />
+          <NewsServerComponent />
+          <NewsApiClient data={data}/>
         </Box>
       
       </Flex>
