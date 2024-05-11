@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Box, Flex, Button, Card } from "@chakra-ui/react"; // study relative paths
 import NewsComponent from "./carouselNews";
 import ImageComponent from "./carouselImage";
-import { mockNewsData, mockImageData } from "./carouselMockData";
-import { NewsContent } from "@/app/utils/types"; // Import types for NewsContent and ImageContent
+import { mockNewsData, mockImageData } from "../app/data/mockData";
+import { Provider } from "react-redux";
+
+import { store } from "@/app/store/store";
+import { NewsContent, ImageContent } from "@/app/utils/types"; // Import types for NewsContent and ImageContent
 
 interface CarouselProps {
   contentType: "news" | "image";
 }
 
 const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
-  
-  const [content, setContent] = useState(() => { // TODO RESOLVE TYPE!!!
-      if (contentType === "news") {
+  const [content, setContent] = useState<(NewsContent | ImageContent)[]>(() => {
+    if (contentType === "news") {
       return mockNewsData;
     } else if (contentType === "image") {
       return mockImageData;
@@ -20,7 +22,6 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
       return [];
     }
   });
-  
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -32,6 +33,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
   };
 
   return (
+    <Provider store={store}>
       <Flex direction="column" alignItems="center">
         <Box p="4" width="100%" overflow="hidden">
           <Flex>
@@ -63,6 +65,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
           </Button>
         </Flex>
       </Flex>
+    </Provider>
   );
 };
 
