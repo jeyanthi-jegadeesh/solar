@@ -18,8 +18,8 @@ const ImageComponent: React.FC<ImageProps> = ({ content }) => {
   const dispatch = useDispatch();
   const images = useSelector(selectImages);
 
-  console.log("Image content:", content);
-  console.log("Images from Redux store:", images);
+  // console.log("Image content:", content);
+  // console.log("Images from Redux store:", images);
 
   const addImageToStore = (image: ImageContent) => {
     console.log("Adding image to store:", image);
