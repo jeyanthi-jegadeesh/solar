@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
 
 function getPlanetSymbol(planetName: string): { symbol: string; name: string } {
-    const planetSymbols = {
+    const planetSymbols : { [key: string]: string } = {
       sun: "&#x2609;",        // Sun ☉
       mercury: "&#x263F;",    // Mercury ☿
       venus: "&#x2640;",      // Venus ♀

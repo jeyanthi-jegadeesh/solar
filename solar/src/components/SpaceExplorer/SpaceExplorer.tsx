@@ -31,7 +31,7 @@ const AnimationManagement = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
 
-
+  
   // LEVA CONTROLS
   // set constants for scaling etc.
   let { systemScale } = useControls({systemScale: {
@@ -46,13 +46,19 @@ const AnimationManagement = () => {
                                             max: 10,
                                             step: 0.1}
                                           });
+
    // scale down the speed factor from a human readable number to the actual speed factor   
    let speedFactor = speedFactorBIG * 0.001
 
    const planets = getAllCelestialObjects() // get all planets and their properties
     
+  // type the AnglesRef
+   interface AnglesRef {
+    [key: string]: number;
+  }
+
   // Initialize angles for each planet
-  const anglesRef = useRef({}); // TODO Typing
+  const anglesRef = useRef<AnglesRef>({}); // TODO Typing
 
   useEffect(() => {
     planets.forEach(planet => {
@@ -159,7 +165,7 @@ const SpaceExplorer = () => {
   // STATE MANAGEMENT
   // ----------------------------------------------------------------
 
-  const selectedPlanet = useSelector((state: RootState) => state.selectedPlanet)
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet)
 
   // ----------------------------------------------------------------
   // REFERENCES 

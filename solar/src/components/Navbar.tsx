@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { showOverlay, hideOverlay, hideLandingOverlay, showLandingOverlay } from '../app/store/overlaySlice';
+import { hideLandingOverlay, showLandingOverlay } from '../app/store/overlaySlice';
 import { Link, Flex, IconButton, Icon, Box, useColorMode, ChakraProvider } from '@chakra-ui/react';
 import { FiUser, FiSun, FiMoon } from 'react-icons/fi';
 
