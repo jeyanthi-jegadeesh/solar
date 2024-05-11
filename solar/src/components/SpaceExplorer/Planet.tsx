@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlanetRef, updateSelectedPlanet } from "../../app/store/solarSystemSlice";
+import { RootState } from "@/app/store/store";
 
 
 interface PlanetProps {
@@ -69,8 +70,8 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
     const dispatch = useDispatch();
     
     // create a planetRef 
-    const planetRef = useRef<THREE.Mesh>(); 
-    const planetRefs = useSelector(state => state.solarSystem.planetRefs);
+    const planetRef = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[], THREE.Object3DEventMap> | null>(null); 
+    const planetRefs = useSelector((state:RootState) => state.solarSystem.planetRefs);
 
     // refactor to have the planetRef in the context
     

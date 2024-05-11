@@ -15,9 +15,7 @@ const Orbit = ({planetName, orbitCenter, distanceFromParent, thickness, color}: 
 
     return (
         <mesh>
-            <ringGeometry 
-                position={orbitCenter}
-                color={color}             
+            <ringGeometry                
                 args={[distanceFromParent * 0.1,
                        distanceFromParent * 0.1 + thickness, 
                        128]} 

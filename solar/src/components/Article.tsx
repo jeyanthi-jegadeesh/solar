@@ -24,22 +24,24 @@ function getPlanetInfo(planetName: string) {
   interface ArticleProps {
     planetName: string;
     editMode: boolean;
-    articleId: number;
+    articleId?: number | undefined;
   }
 
-const Article = ({planetName, editMode, articleID}:ArticleProps) => {
+const Article = ({planetName, editMode, articleId}:ArticleProps) => {
   // const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
 
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
 
   function getArticleById(articleID?: number) {
-    if (!articleID) return '';
+    if (!articleId) return 'no article found...';
+    return 'article dummy!'
+    // TODO create actual fetch function for article!
   }
 
-  if (!articleID) articleID = null;
+  let article = getArticleById(articleId);
 
-  let article = getArticleById(articleID);
+
 
   // STATES: 
   const [quillText, setQuillText] = useState(article); // quillText -> the text inside of the quill editor.
@@ -72,7 +74,7 @@ const Article = ({planetName, editMode, articleID}:ArticleProps) => {
               <>
               {/* QUILL EDITOR */}
               {/* TODO PUT THE EDITOR ITSELF IN ITS OWN FUNCTION / SUBCOMPONENT */}
-              <Box minHeighth='50vh'>
+              <Box minHeight='50vh'>
                 <ReactQuill className='blog-editor' 
                           theme='snow' 
                           value={quillText} 
