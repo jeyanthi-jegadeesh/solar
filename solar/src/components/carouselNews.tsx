@@ -18,8 +18,8 @@ const NewsComponent: React.FC<NewsProps> = ({ content }) => {
   const dispatch = useDispatch();
   const news = useSelector(selectNews);
 
-  console.log("News content:", content); // Log the content prop
-  console.log("News from Redux store:", news); // Log the news from the Redux store
+  // console.log("News content:", content); // Log the content prop
+  // console.log("News from Redux store:", news); // Log the news from the Redux store
 
   const addNewsToStore = (news: NewsContent) => {
     console.log("Adding news to store:", news); // Log the news being added to the store

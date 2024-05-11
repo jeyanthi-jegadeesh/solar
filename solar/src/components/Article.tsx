@@ -1,14 +1,15 @@
+'use client'
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
-import ReactQuill from 'react-quill'; // RTF Editor
 import "react-quill/dist/quill.snow.css"; 
 import DOMPurify from 'dompurify'; // purify input
 
 
 import { FiSave, FiXCircle  } from 'react-icons/fi';
 import PlanetTitle from './PlanetTitle';
+import dynamic from 'next/dynamic';
 
 
 
@@ -28,6 +29,9 @@ function getPlanetInfo(planetName: string) {
 
 const Article = ({planetName, editMode, articleID}:ArticleProps) => {
   // const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+
+  // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
+  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
 
   function getArticleById(articleID?: number) {
     if (!articleID) return '';
