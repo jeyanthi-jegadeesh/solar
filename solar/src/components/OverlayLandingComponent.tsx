@@ -12,9 +12,7 @@ import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import CarouselComponent from './Carousel';
-import { GetServerSideProps } from 'next';
-import NewsApiClient from './newsApiClient';
-import NewsServerComponent from './newsApiServer';
+import NewsApi from './newsTestApi';
 
 interface NewsApiItem {
   id: number,
@@ -29,7 +27,7 @@ interface Props {
 
 // Will be modified at the moment when we will connect NewsComponent to click on News carousel
 // Also missing logic that NewsSection should be visualized only on click at News carousel
-const OverlayLanding: React.FC<Props> = ({ data }) => {
+const OverlayLanding: React.FC<Props> = () => {
 
   const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 
@@ -58,8 +56,7 @@ const OverlayLanding: React.FC<Props> = ({ data }) => {
         
         <Box flex='1' p='6'>
           <NewsSection />
-          <NewsServerComponent />
-          <NewsApiClient data={data}/>
+          <NewsApi />
         </Box>
       
       </Flex>
