@@ -1,9 +1,15 @@
 "use client";
-import IUser from "../app/utils/types";
 
-type Props = {
-    user: IUser
-}
+interface User {
+    email: string;
+    firstName: string;
+    lastName: string;
+    _id: string;
+};
+
+interface Props {
+    user: User;
+};
 
 export default function UserProfile({ user }: Props) {
    console.log("user: ", user)
