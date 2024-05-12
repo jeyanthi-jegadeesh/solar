@@ -1,15 +1,9 @@
-import { combineReducers, applyMiddleware } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import thunk from "redux-thunk"; // asynch actions
-import newsReducer from "./newsSlice";
+import newsReducer from "./newsApiSlice";
 import solarSystemReducer from "./solarSystemSlice";
 import overlayReducer from "./overlaySlice";
 import contentReducer from "./carouselSlice"; //Costanza imported her slice
 import fullNewsReducer from "./fullNewsSlice";
-
-const rootReducer = combineReducers({});
-
-const middleware = [thunk];
 
 export const store = configureStore({
   reducer: {
