@@ -2,9 +2,10 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, NewsContent } from "../utils/types";
+import { NewsApiItem } from './newsApiSlice';
 
 interface FullNewsState {
-  fullNews: NewsContent[];
+  fullNews: NewsApiItem[];
 }
 
 const initialState: FullNewsState = {
@@ -15,7 +16,7 @@ const fullNewsSlice = createSlice({
   name: "fullNews",
   initialState,
   reducers: {
-    addFullNews(state, action: PayloadAction<NewsContent>) {
+    addFullNews(state, action: PayloadAction<NewsApiItem>) {
       state.fullNews.push(action.payload);
     },
   },
