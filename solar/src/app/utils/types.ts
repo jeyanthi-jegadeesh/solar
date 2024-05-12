@@ -15,3 +15,11 @@ export interface RootState {
   images: ImageContent[];
   news: NewsContent[];
 }
+interface IUser {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
+export default IUser;

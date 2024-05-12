@@ -3,7 +3,7 @@ import { HStack, VStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showsSignOverlay , showsLogInOverlay, hideLogInOverlay } from '@/app/store/overlaySlice';import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
-
+import { useRouter } from 'next/navigation';
 
 interface LogInForm {
   email: string;
@@ -11,6 +11,7 @@ interface LogInForm {
 }
 
 export default function LogIn() {
+  const router = useRouter();
   const [logInForm, setLogInForm] = useState<LogInForm>({
     email: '',
     password: '',
@@ -31,12 +32,18 @@ export default function LogIn() {
     const result = await signIn('credentials', {
       email: logInForm.email,
       password: logInForm.password,
-      callbackUrl: '/',
+      //callbackUrl: '/',
+      redirect: false,
     });
 
     if (result && !result.error) {
       // Redirect to the home page
-      window.location.href = "/";
+      //window.location.href = "/";
+       // Redirect to the user information page
+       router.push('/user');
+    }else{
+      // TODO show toaster  that the user does not exist or wrong credentials
+      console.log("error ",{ result });
     }
   };
 

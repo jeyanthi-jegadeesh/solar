@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showsSignOverlay , showsLogInOverlay , hideSignOverlay } from '@/app/store/overlaySlice';
 import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
-
+import { useRouter } from "next/navigation";
 
 interface SignUpForm {
   firstName: string;
@@ -14,6 +14,7 @@ interface SignUpForm {
 }
 
 export default function SignUp() {
+  const router = useRouter();
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({
     firstName: '',
     lastName: '',
@@ -32,15 +33,42 @@ export default function SignUp() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const result = await signIn('credentials', {
-      email: signUpForm.email,
-      password: signUpForm.password,
-      callbackUrl: '/',
-    });
+    if (!setSignUpForm) {
+      // Show toaster compoennt ("All fields are necessary.");
+      return;
+    }
+    try {
+      const respUserExists = await fetch("api/userExists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: signUpForm.email }),
+      });
 
-    if (result && !result.error) {
-      // Redirect to the home page
-      window.location.href = "/";
+      const { user } = await respUserExists.json();
+      console.log("respUserExists user: ", user)
+      if (user) {
+        // Show toaster compoennt ("User already exists.");
+        return;
+      }
+      console.log("signUpForm ... ",signUpForm)
+      const res = await fetch("api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...signUpForm }),
+      });
+
+      if (res.ok) {
+       // TODO : reset form to clear fields
+        router.push("/user");
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("Error during registration: ", error);
     }
   };
 
