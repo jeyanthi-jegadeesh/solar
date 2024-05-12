@@ -54,7 +54,6 @@ export const nextauthOptions: NextAuthOptions = {
  async function getUserByEmail(email : string, password : string) {
   await dbConnect();
   const user = await User.findOne({ email });
-  console.log("user: ", user);
   if (!user) {
     // return null;
     throw new Error('User not found');

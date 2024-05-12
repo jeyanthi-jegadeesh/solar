@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showsSignOverlay , showsLogInOverlay , hideSignOverlay } from '@/app/store/overlaySlice';
 import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
 import { useRouter } from "next/navigation";
-
+import { useToast } from '@chakra-ui/react';
 interface SignUpForm {
   firstName: string;
   lastName: string;
@@ -15,6 +15,8 @@ interface SignUpForm {
 
 export default function SignUp() {
   const router = useRouter();
+  const toast = useToast()
+
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({
     firstName: '',
     lastName: '',
@@ -39,20 +41,29 @@ export default function SignUp() {
     }
     try {
       const respUserExists = await fetch("api/userExists", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: signUpForm.email }),
+        body: JSON.stringify({ email: signUpForm.email }), // TODO Should this be changed to query string
       });
 
       const { user } = await respUserExists.json();
-      console.log("respUserExists user: ", user)
       if (user) {
-        // Show toaster compoennt ("User already exists.");
+        toast({
+          title: 'User already exists.',
+          description: "Account already exists. Please login with your email and password.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          render: () => (
+            <Box color='white' p={3} bg='blue.500'>
+              Account already exists. Please login with your email and password.
+            </Box>
+          ),
+        }) 
         return;
       }
-      console.log("signUpForm ... ",signUpForm)
       const res = await fetch("api/register", {
         method: "POST",
         headers: {
@@ -62,8 +73,19 @@ export default function SignUp() {
       });
 
       if (res.ok) {
-       // TODO : reset form to clear fields
-        router.push("/user");
+       // TODO : reset form to clear fields and 
+       // after registration user user session is empty so we need to login again
+       // check the possibility to display user profile without login
+       // Toster component to display successfull registration
+      
+       toast({
+        title: 'Account created.',
+        description: "We've created your account for you. Please login with your credentials.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        })
+        router.push("/");
       } else {
         console.log("User registration failed.");
       }
