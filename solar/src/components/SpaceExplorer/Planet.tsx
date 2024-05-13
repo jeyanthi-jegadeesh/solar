@@ -17,7 +17,7 @@ interface PlanetProps {
     color: string,
     orbitingAround?: Vector3 //TODO: later: THREE.Object3D? -> NO make it a  string that later finds it in an array that stores our 
     isHovered: boolean;
-    cameraControlsRef: React.MutableRefObject<CameraControls | null>; // TODO: change to correct type!!
+    cameraControlsRef: React.MutableRefObject<CameraControls>; // TODO: change to correct type!!
   }
   
 // USEFUL FUNCTIONS
