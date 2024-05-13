@@ -2,30 +2,16 @@
 
 import { Box, Heading} from '@chakra-ui/react';
 import  AboutContent  from "@/components/AboutContent";
-import { Flex, Text } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { News, addNews } from '../app/store/newsSlice';
-
+import { Flex } from '@chakra-ui/react';
+import React from 'react';
 import NewsSection from './newsComponent';
 import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import CarouselComponent from './Carousel';
 
-// Mock data, will be removed when NewsComponent will be connected to click on News carousel
-const newsMock: News[] = [
-    {id: 1, title: 'Breaking news from space', text: 'Some article will be here'}
-  ]
 
-// Will be modified at the moment when we will connect NewsComponent to click on News carousel
-// Also missing logic that NewsSection should be visualized only on click at News carousel
-const OverlayLanding = () => {
-  const dispatch = useDispatch();
-
-  useEffect (() => {
-    dispatch(addNews(newsMock));
-  }, [dispatch]);
+const OverlayLanding: React.FC = () => {
 
   const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 

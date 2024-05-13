@@ -1,5 +1,4 @@
 import { Box, Heading, Text, Link, Button } from '@chakra-ui/react';
-import NextLink from 'next/link'; // Next.js link component for routing
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay } from '../app/store/overlaySlice';
 
