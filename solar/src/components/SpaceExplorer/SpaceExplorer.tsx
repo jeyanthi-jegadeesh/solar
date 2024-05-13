@@ -22,7 +22,7 @@ import { RootState } from "@/app/store/store";
 
 interface SolarSystemProps {
   celestialObjects: PlanetType[];
-  cameraControlsRef: Camera;
+  cameraControlsRef: React.Ref<Camera>;
 }
 
 const AnimationManagement = () => {
