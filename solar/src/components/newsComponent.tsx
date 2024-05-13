@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState, NewsContent } from "../app/utils/types";
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text, Link } from "@chakra-ui/react";
+import { RootState } from '../app/store/store';
 
 const NewsSection: React.FC = () => {
   // Selector to access the fullNews slice from the Redux store
   const fullNews = useSelector((state: RootState) => state.fullNews.fullNews);
 
   // Check if fullNews is still loading or if it's empty
-  const isLoading = fullNews === undefined || fullNews.length === 0;
+  const isLoading = fullNews === undefined || fullNews === null;
 
   return (
     <Flex
@@ -24,15 +24,13 @@ const NewsSection: React.FC = () => {
       {isLoading ? (
         <p>Loading...</p> // Display a loading indicator
       ) : (
-        fullNews.map((item: NewsContent, index: number) => (
-          <Flex direction="column" key={index}>
-            <Heading mb={10}>{item.h1}</Heading>
+          <Flex direction="column">
             <Heading as="h2" size="md" mb={2}>
-              {item.h2}
+              {fullNews.title}
             </Heading>
-            <Text>{item.p}</Text>
+            <Text>{fullNews.summary}</Text>
+            <Link href={fullNews.url} fontSize="lg" fontWeight="bold" color="white">Read full article</Link>
           </Flex>
-        ))
       )}
     </Flex>
   );

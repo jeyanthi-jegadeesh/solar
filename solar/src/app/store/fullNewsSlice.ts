@@ -5,11 +5,11 @@ import { RootState, NewsContent } from "../utils/types";
 import { NewsApiItem } from './newsApiSlice';
 
 interface FullNewsState {
-  fullNews: NewsApiItem[];
+  fullNews: NewsApiItem | null;
 }
 
 const initialState: FullNewsState = {
-  fullNews: [],
+  fullNews: null,
 };
 
 const fullNewsSlice = createSlice({
@@ -17,7 +17,7 @@ const fullNewsSlice = createSlice({
   initialState,
   reducers: {
     addFullNews(state, action: PayloadAction<NewsApiItem>) {
-      state.fullNews.push(action.payload);
+      state.fullNews = action.payload;
     },
   },
 });

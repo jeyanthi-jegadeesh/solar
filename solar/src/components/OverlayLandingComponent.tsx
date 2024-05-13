@@ -9,7 +9,7 @@ import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import CarouselComponent from './Carousel';
-import NewsApi from './newsApi'
+
 
 const OverlayLanding: React.FC = () => {
 
@@ -40,7 +40,6 @@ const OverlayLanding: React.FC = () => {
         
         <Box flex='1' p='6'>
           <NewsSection />
-          <NewsApi />
         </Box>
       
       </Flex>
