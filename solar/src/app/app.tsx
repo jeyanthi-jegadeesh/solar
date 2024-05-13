@@ -8,12 +8,11 @@ import PhotoUpload from '@/components/PhotoUpload';
 export default function App () {
     return(
       <>
-        {/* <SpaceExplorer />
+        <SpaceExplorer />
         <OverlayLanding />
         <OverlayPlanets />
         <OverlaySign/>
-        <OverlayLog/> */}
-        <PhotoUpload />
+        <OverlayLog/>
       </>
     );
 }
