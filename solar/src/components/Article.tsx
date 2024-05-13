@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
@@ -41,8 +41,6 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
 
   let article = getArticleById(articleId);
 
-
-
   // STATES: 
   const [quillText, setQuillText] = useState(article); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(editMode); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
@@ -58,15 +56,15 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
   return (
     <>
         <Box>
-            <Text size='sm' color='gray'>write something about...</Text>
-            
-            <PlanetTitle planetName={planetName} />
+            <Text size='sm' color='gray'>write something about {planetName}...</Text>
+            <form>
+              <Input type='text' placeholder='My title...'></Input>
+            </form>
             
             {/* SHOW THE DATE ABOVE THE ARTICLE */}
             {/* TODO SHOW AUTHOR etc. according to the auth data */}
             {/* TODO make conditional rendering of editor dependent on auth -> if not logged in you can't edit. */}
-            <Text size='sm' color='grey'>{(new Date()).toLocaleDateString()}</Text>
-            
+            <Text size='sm' color='grey' textAlign='right'>{(new Date()).toLocaleDateString()} <br /></Text>
             
             {/* CONDITIONAL RENDERING OF EDITOR ACCORDING TO THE editMode */}
             {
@@ -74,12 +72,15 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               <>
               {/* QUILL EDITOR */}
               {/* TODO PUT THE EDITOR ITSELF IN ITS OWN FUNCTION / SUBCOMPONENT */}
-              <Box minHeight='50vh'>
-                <ReactQuill className='blog-editor' 
+              <Box h='500px'>
+                <ReactQuill
+                          className='ql-editor' 
                           theme='snow' 
                           value={quillText} 
                           onChange={setQuillText} 
-                          min-height='250px'/>
+                          min-height='200px'
+                          max-height='300px'
+                />
               </Box>
 
               {/* CONTROLS */}
