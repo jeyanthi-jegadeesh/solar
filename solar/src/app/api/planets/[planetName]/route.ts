@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, context: any) {
 
   try {
     const planets = await Planet.find({name: planetName}); // find all the data in our database
-    return NextResponse.json({ success: true, planetId: planetName, data: planets });
+    return NextResponse.json({ success: true, searchQuery: planetName, data: planets });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ success: false, message: 'Error fetching planets' });
