@@ -12,7 +12,6 @@ interface Props {
 };
 
 export default function UserProfile({ user }: Props) {
-   console.log("user: ", user)
     return (
         <div>
             <h2>User Profile</h2>
