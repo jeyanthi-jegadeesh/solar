@@ -1,13 +1,13 @@
 'use client'
 
-import { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 
 // 3D related libraries
 import * as THREE from 'three';
 import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
-import {  CameraControls, OrbitControls, PerspectiveCamera, Stars, Trail } from "@react-three/drei";
+import {  CameraControls,  PerspectiveCamera, Stars, Trail } from "@react-three/drei";
 import { Leva, useControls } from "leva"; // CONTROLS
 
 // SOLAR SYSTEM related COMPONENTS
@@ -111,6 +111,7 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
      const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
+     const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
      const dispatch = useDispatch()
 
    // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
@@ -118,21 +119,23 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
 
   return (
     celestialObjects.map((planet) => (
+      <React.Fragment key={planet.name}>
       <>
           {/* ORBIT - draw a circle representing the orbit 
               TODO make the orbit elliptical and make the planet follow the path of this object!
           */}
+          {!selectedPlanet ? 
           <Orbit
             orbitCenter={planet.orbitCenter}
             color={planet.color}
             thickness={0.1}
             distanceFromParent={planet.distance}
-          />
+          /> : null}
 
           {/* TRAIL -> a line that follows the planet to show its path... not necessary...*/}
           <Trail
             width={1} 
-            color={'yellow'}
+            color={'white'}
             length={10}
             decay={3} // How fast the line fades away
             local={true} // Wether to use the target's world or local positions
@@ -156,6 +159,7 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
 
           </Trail>
       </>
+      </React.Fragment>
     ))
   )
   }
