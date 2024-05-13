@@ -3,14 +3,16 @@ import { HStack, VStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showsSignOverlay , showsLogInOverlay, hideLogInOverlay } from '@/app/store/overlaySlice';import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
-
-
+import { useRouter } from 'next/navigation';
+import { useToast } from '@chakra-ui/react';
 interface LogInForm {
   email: string;
   password: string;
 }
 
 export default function LogIn() {
+  const router = useRouter();
+  const toast = useToast();
   const [logInForm, setLogInForm] = useState<LogInForm>({
     email: '',
     password: '',
@@ -31,12 +33,22 @@ export default function LogIn() {
     const result = await signIn('credentials', {
       email: logInForm.email,
       password: logInForm.password,
-      callbackUrl: '/',
+      redirect: false,
     });
 
     if (result && !result.error) {
-      // Redirect to the home page
-      window.location.href = "/";
+       // Redirect to the user information page
+       router.push('/user');
+    }else{
+      // TODO show toaster  that the user does not exist or wrong credentials
+      toast({
+        title: 'Error',
+        description: "User does not exist or wrong credentials", 
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        })
+      console.log("error ",{ result });
     }
   };
 
