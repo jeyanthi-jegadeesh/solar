@@ -1,5 +1,5 @@
 
-import IUser from '../utils/types'; 
+//import IUser from '../utils/types'; 
 import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options"; 
 import { getServerSession } from "next-auth";
 import UserProfile from '../../components/UserProfile';
@@ -26,6 +26,7 @@ export default async function page() {
     const email = session && session.user && session.user.email;
     if(email){
         userData = await getUserData(email); // Await the getUserData function
+        console.log('userData ,',userData);
     }
   }
 

@@ -16,7 +16,8 @@ export default function UserProfile({ user }: Props) {
     return (
         <div>
             <h2>User Profile</h2>
-            <p>Email: {user.email}</p>
+            <p>Email:{user.email} </p>
+            
         </div>
     )
 }

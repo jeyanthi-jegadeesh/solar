@@ -7,8 +7,8 @@ export async function GET(req : NextRequest) {
     await dbConnect();
     const url = new URL(req.url);
     const email = url.searchParams.get("email")
-    const user = await User.findOne({ email });
-    return NextResponse.json({ user });
+    const user = await User.findOne({ email }).select("-password");
+    return NextResponse.json(user);
   } catch (error) {
     console.log(error);
     return NextResponse.json({ success: false });
