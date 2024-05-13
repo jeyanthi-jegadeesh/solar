@@ -1,10 +1,17 @@
+
+'use client'
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay, showLandingOverlay } from '../app/store/overlaySlice';
 import { Link, Flex, IconButton, Icon, Box, useColorMode, ChakraProvider } from '@chakra-ui/react';
 import { FiUser, FiSun, FiMoon } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
+import { getServerSession } from "next-auth";
+import { nextauthOptions } from "../app/api/auth/[...nextauth]/nextauth-options"; 
+import SignUp from './SignUp';
 
 const Navbar: React.FC = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { colorMode, toggleColorMode } = useColorMode(); //Chakra's useColorMode hook
 
@@ -20,6 +27,20 @@ const Navbar: React.FC = () => {
         //quiz button click logic here
     };
 
+    const handleProfileClick = async () =>{
+        // const session = await getServerSession(nextauthOptions);
+        // let userData = null;
+        // if(session?.user){
+        //   const email = session && session.user && session.user.email;
+        //   if(email){
+        //     router.push('/user');
+        //      console.log('userData ,',userData);
+        //   }
+        // }else{
+        //    <SignUp></SignUp>
+        // }
+        router.push('/user');
+    }
     const handleToggleColorMode = () => {
         console.log('Current color mode:', colorMode);
         toggleColorMode();
@@ -57,7 +78,9 @@ const Navbar: React.FC = () => {
                         size="sm"
                     />
                 </Box>
-                <Icon as={FiUser} color="white" boxSize={20} />
+                <Box onClick={handleProfileClick} cursor="pointer">
+                 <Icon as={FiUser} color="white" boxSize={20} />
+                </Box>
             </Flex>
         </nav>
     );

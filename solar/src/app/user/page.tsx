@@ -36,6 +36,7 @@ export default async function page() {
         <UserProfile user={userData}/> // Pass userData directly
       ) : (
         <h1>You have to login to view this page</h1>
+        
       )} 
     </>
   );
