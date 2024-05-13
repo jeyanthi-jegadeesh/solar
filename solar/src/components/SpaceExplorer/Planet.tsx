@@ -111,9 +111,11 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
           paddingRight: -1,
         });
     
+        // alternative: use .fitToBox or fitToSphere, but that also only places the mesh in the middle and not on the left where we want it :(
+
         // Adjust the camera position to show the planet on the left
         const planetPosition = planetRef.current.position;
-        const offset = new THREE.Vector3(50, 0, 0); // Adjust the offset value as needed
+        const offset = new THREE.Vector3(0, 0, scaledDiameter); // Adjust the offset value as needed
         const newCameraPosition = planetPosition.clone().add(offset);
         cameraControlsRef.current.setLookAt(
           newCameraPosition.x,
