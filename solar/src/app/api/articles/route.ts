@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import connectDB from "../../../lib/dbConnect";
 import Article from "../../../lib/models/article.model";
 import { NextRequest, NextResponse } from "next/server";
@@ -17,11 +16,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   await connectDB();
-
+  
+  const body = await req.json();
+  
   try {
-    const article = await Article.create(req.body); // create a new model in the database
+    const article = await Article.create(body); // create a new model in the database
     return NextResponse.json({ success: true, data: article });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ success: false });
   }
 }
