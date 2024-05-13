@@ -1,5 +1,6 @@
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
 import { Camera, Vector3 } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import { useControls } from "leva";
 import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
@@ -178,13 +179,12 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
           onPointerEnter={() => (isHovered = true)}
           onPointerLeave={() => (isHovered = false)}
         > 
-
+        
         {/* event.stopPropagation() means that the event is contained only to the mesh and no other element in the application cares about this event. */} 
           {/* A icosahedronGeometry might be more apt performance wise -> less polygons */}
           <icosahedronGeometry 
               args={[scaledDiameter , 12]} 
           />
-                   
                    
           {/*------------------------------------------------ 
              IF IT IS THE SUN -> MAKE IT WOBBLE 
@@ -201,27 +201,28 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                   opacity={0.3}
                 /> 
                 : 
-                <meshStandardMaterial 
+                <meshPhongMaterial 
                   // color={isHovered ? 'orange' : 'lightblue'}
                   map={colorMap} 
                   emissive={'white'} 
-                  emissiveIntensity={0.3}
+                  emissiveIntensity={0.01}
                 />
           } 
-          
-          {/*------------------------------------------------ 
-             GLOW EFFECT
-             TODO FIX THAT THE GLOW IS APPLIED TO EVERYTHING IN THE MESH -> UNTANGLE THE MESH
-          ------------------------------------------------ */
-          /* <EffectComposer>
-            <Bloom 
-              intensity={1} 
-              luminanceThreshold={0} 
-              luminanceSmoothing={1} 
-              height={300}
-            />
-          </EffectComposer> */}
-  
+
+        {/* Atmosphere effect */}
+        
+        <mesh>
+          <sphereGeometry args={[scaledDiameter * 1.07, 32, 32]} />
+          <MeshWobbleMaterial
+            color={'#white'}
+            transparent={true}
+            opacity={0.2}
+            emissive={'#87CEEB'}
+            emissiveIntensity={0.4}
+          />
+        </mesh>
+
+
           {/*------------------------------------------------ 
              PLANET LABEL with conditional rendering (when the Leva control is clicked)
           ------------------------------------------------ */}
@@ -250,7 +251,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                   args={[scaledDiameter, scaledDiameter+3, 32]} 
                 > 
                 <meshStandardMaterial opacity={0} transparent/>
-                <Outlines thickness={0.1} color="white" />
+                <Outlines thickness={0.05} color="white" />
                 </Ring>
 
                 <Ring

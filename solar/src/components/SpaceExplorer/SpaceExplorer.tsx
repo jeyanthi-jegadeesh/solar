@@ -98,7 +98,7 @@ const AnimationManagement = () => {
            // update the planet position
            planetRef.current.position.set(x,y,z);
            // rotate the planet around itself
-           planetRef.current.rotation.y += delta;
+           planetRef.current.rotation.y += delta * 0.3;
          }
     })
   })
@@ -132,8 +132,8 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
           {/* TRAIL -> a line that follows the planet to show its path... not necessary...*/}
           <Trail
             width={1} 
-            color={'pale'}
-            length={5}
+            color={'yellow'}
+            length={10}
             decay={3} // How fast the line fades away
             local={true} // Wether to use the target's world or local positions
             stride={0} // Min distance between previous and current point
@@ -282,7 +282,7 @@ const SpaceExplorer = () => {
             SET THE LIGHTS
         // ---------------------------------------------------------------- */}
         <ambientLight 
-          color={'yellow'} 
+          color={'white'} 
           intensity={ambientLightIntensity} 
         />
 
