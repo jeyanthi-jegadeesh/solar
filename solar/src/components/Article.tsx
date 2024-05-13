@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Input, Text } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
@@ -9,22 +9,25 @@ import DOMPurify from 'dompurify'; // purify input
 
 import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 
-
-
-async function createArticle(userId: number, isPrivate: boolean, title: string, articleBody: string) {
+async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
+ 
   // TODO create actual fetch function for article!
     const articleData = {
       authorId: userId,
       isPrivate: isPrivate,
       title: title,
-      article: articleBody,
+      subtitle: '',
+      articleBody: articleBody,
+      associatedPlanets: associatedPlanets,
     }
 
-    console.log(articleData);
+    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
 
     try {
-      const response = await fetch('localhost:3000/api/articles', {
+      const response = await fetch(URL + '/api/articles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +70,7 @@ function getPlanetInfo(planetName: string) {
   }
 
 const Article = ({planetName, editMode, articleId}:ArticleProps) => {
-  // const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
 
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
@@ -76,6 +79,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
 
   // STATES: 
   const [quillText, setQuillText] = useState(article); // quillText -> the text inside of the quill editor.
+  const [isArticlePrivate, setIsArticlePrivate] = useState(true); // quillText -> the text inside of the quill editor.
   const [articleTitle, setArticleTitle] = useState(''); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(editMode); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
 
@@ -85,7 +89,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
       const purifiedArticle = DOMPurify.sanitize(quillText);
       const purifiedTitle = DOMPurify.sanitize(articleTitle);
 
-      createArticle(userId, true, purifiedTitle,  purifiedArticle);
+      createArticle(userId, true, purifiedTitle, purifiedArticle, ['mars']); // TODO set it to the actual planet
       
       article = purifiedArticle;
       console.log("SAVING BLOG ARTICLE", purifiedArticle);
@@ -95,6 +99,10 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
   function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setArticleTitle(event.target.value);
     console.log(articleTitle);
+  };
+
+  function handleIsPrivateChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setIsArticlePrivate(!isArticlePrivate);
   };
 
   return (
@@ -108,6 +116,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               <Text size='sm' color='gray'>write something about {planetName}...</Text>
               <form>
                 <Input type='text' placeholder='My title...' value={articleTitle} onChange={handleTitleChange} ></Input>
+                <Checkbox onChange={handleIsPrivateChange} isChecked> public Article</Checkbox>
               </form>
               
               {/* SHOW THE DATE ABOVE THE ARTICLE */}
@@ -127,16 +136,17 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
                 />
               </Box>
 
+              {/* UPLOAD IMAGES TO ARTICLE */}
+              <Button leftIcon={ <FiUploadCloud size={24} />} variant='outline' w='100%' h={76}>upload Images to Article</Button>
               {/* CONTROLS */}
               <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
                 <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
                   cancel
                 </Button>
-                <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='ghost'>
+                <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
                   save article
                 </Button>
               </Flex>
-              <Button leftIcon={ <FiUploadCloud size={48} />} variant='ghost'>upload Images to Article</Button>
             </>
             : article 
             }

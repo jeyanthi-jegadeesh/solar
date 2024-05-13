@@ -17,9 +17,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   await connectDB();
-
+  const body = await req.json();
   try {
-    const image = await Image.create(req.body); // create a new model in the database
+    const image = await Image.create(body); // create a new model in the database
     return NextResponse.json({ success: true, data: image });
   } catch (error) {
     return NextResponse.json({ success: false });
