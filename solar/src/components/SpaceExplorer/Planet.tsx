@@ -169,10 +169,12 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
      /* TODO REPOSITION THE CAMERA AND FACE THE OBJECT WHEN CLICKED */
 
      // TODO: add more shaders for halos and stuff
-      const texturePath = 'textures/' + textureURL
-      const colorMap = useTexture(texturePath)
+      const texturePath = 'textures/' + textureURL;
+      const colorMap = useTexture(texturePath);
+      const colorMapSaturnRing = useTexture('textures/2k_saturn_ring_alpha.png');
   
-    return (<>
+    return (
+    <>
         <mesh 
           ref={planetRef} // reference for the animation 
           onClick={() => (onPlanetClickHandler(name, planetRef))} 
@@ -263,8 +265,20 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
           : 
             <Outlines thickness={0.1} color="red" />
         }     
+
+         {/*------------------------------------------------ 
+            SATURN'S RING
+          ------------------------------------------------ */}
+          {
+          name.toLowerCase() === 'saturn' && (
+            <mesh rotation={[Math.PI / 2, 0, 0]}>
+              <ringGeometry args={[scaledDiameter * 1.2, scaledDiameter * 2, 64]} />
+              {/* <meshBasicMaterial color="gray" transparent alphaMap={colorMapSaturnRing} opacity={0.6} side={THREE.DoubleSide} /> */}
+              <meshBasicMaterial color="gray" transparent opacity={0.6} side={THREE.DoubleSide} />
+            </mesh>)
+          }
         </mesh>
-        </>
+      </>
     );
   }
 

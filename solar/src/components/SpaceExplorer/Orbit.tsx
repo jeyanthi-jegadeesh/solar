@@ -1,4 +1,4 @@
-import { Vector3 } from "three";
+import { DoubleSide, Vector3 } from "three";
 
 interface OrbitProps {
     planetName?: string,
@@ -19,6 +19,7 @@ const Orbit = ({planetName, orbitCenter, distanceFromParent, thickness, color}: 
                 args={[distanceFromParent * 0.1,
                        distanceFromParent * 0.1 + thickness, 
                        128]} 
+                side={DoubleSide}
                 />
                 <meshBasicMaterial color={color} />
         </mesh>
