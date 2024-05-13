@@ -11,6 +11,7 @@ import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
+import { Date } from 'mongoose';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
@@ -40,7 +41,7 @@ async function createArticle(userId: number, isPrivate: boolean = true, title: s
       }
   
       const result = await response.json();
-      return result;
+      return result.data;
     } catch (err) {
       console.error('Error creating article:', err);
       return { success: false, message: err };
@@ -62,6 +63,18 @@ function getPlanetInfo(planetName: string) {
     return currentPlanetInfo[0];
   }
 
+
+  type ArticleType = {
+        authorId: 123,
+        isPrivate: true,
+        title: "asdgdafasdfasdfasdfasdfasdfgseghbtgrsh",
+        subtitle?: "",
+        articleBody: "<p>sghstrhbtrnhjrzjnhgfhasdfasdfasdfasdfasdfdfgafgasdfgervdfbgfrhbgf</p>",
+        associatedPlanets?: string[],
+        _id?: string,
+        createdAt?: Date,
+        updatedAt?: Date,
+      }
   
   interface ArticleProps {
     planetName: string;
@@ -75,24 +88,26 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
 
-  let article = getArticleById(articleId);
+  let firstArticle = getArticleById(articleId);
 
   // STATES: 
-  const [quillText, setQuillText] = useState(article); // quillText -> the text inside of the quill editor.
+  const [quillText, setQuillText] = useState(''); // quillText -> the text inside of the quill editor.
   const [isArticlePrivate, setIsArticlePrivate] = useState(true); // quillText -> the text inside of the quill editor.
   const [articleTitle, setArticleTitle] = useState(''); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(editMode); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
+  const [article, setArticle] = useState(firstArticle); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
+  
+
 
   // HANDLERS:
-  function onSaveHandler() { // handle saving the article
+  async function onSaveHandler() { // handle saving the article
       const userId = 123;
       const purifiedArticle = DOMPurify.sanitize(quillText);
       const purifiedTitle = DOMPurify.sanitize(articleTitle);
 
-      createArticle(userId, true, purifiedTitle, purifiedArticle, ['mars']); // TODO set it to the actual planet
+      const newArticle = await createArticle(userId, true, purifiedTitle, purifiedArticle, ['mars']); // TODO set it to the actual planet
       
-      article = purifiedArticle;
-      console.log("SAVING BLOG ARTICLE", purifiedArticle);
+      setArticle(newArticle!.articleBody)
       setBlogEditMode(false);
   }
 
@@ -148,7 +163,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
                 </Button>
               </Flex>
             </>
-            : article 
+            : article && <Box dangerouslySetInnerHTML={{ __html: article }} /> 
             }
     
         </Box>
