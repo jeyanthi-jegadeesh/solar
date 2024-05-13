@@ -116,7 +116,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
 
         // Adjust the camera position to show the planet on the left
         const planetPosition = planetRef.current.position;
-        const offset = new THREE.Vector3(0, 0, scaledDiameter*3); // Adjust the offset value as needed
+        const offset = new THREE.Vector3(0, 0, scaledDiameter*3.4); // Adjust the offset value as needed
         
         // 
         const newCameraPosition = planetPosition.clone().add(offset);
@@ -259,7 +259,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                 <Ring
                   args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
                 /> 
-                  <meshStandardMaterial color={'white'}/>
+                  <meshStandardMaterial color={'white'} opacity={0.1} />
               </Billboard>
             </mesh>
           : 
