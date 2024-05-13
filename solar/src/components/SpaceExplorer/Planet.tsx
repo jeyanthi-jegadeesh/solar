@@ -115,18 +115,22 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
 
         // Adjust the camera position to show the planet on the left
         const planetPosition = planetRef.current.position;
-        const offset = new THREE.Vector3(0, scaledDiameter*3, 0); // Adjust the offset value as needed
+        const offset = new THREE.Vector3(0, 0, scaledDiameter*3); // Adjust the offset value as needed
+        
+        // 
         const newCameraPosition = planetPosition.clone().add(offset);
+        // cameraControlsRef.current.moveTo(newCameraPosition.x, newCameraPosition.y, newCameraPosition.z,true);
+        // cameraControlsRef.current.setTarget(planetPosition.x, planetPosition.y, planetPosition.z); //
         cameraControlsRef.current.setLookAt(
           newCameraPosition.x,
           newCameraPosition.y,
           newCameraPosition.z,
-          planetPosition.x, // direction to look at needs to be adjusted!!! now they all look towards the sun or something :/
+          planetPosition.x + scaledDiameter, //move the planet to the left (camera to the right)
           planetPosition.y,
           planetPosition.z,
           true
         );
-    
+        cameraControlsRef.current.zoom(-0.01, true);
         // Update the selected planet
         dispatch(updateSelectedPlanet(name));
       }

@@ -202,7 +202,7 @@ const SpaceExplorer = () => {
                                         },
   })
 
-  const { showLabels } = useControls({ showLabels: false })
+  const { showLabels } = useControls({ showLabels: true })
 
   // ----------------------------------------------------------------
   // RENDER THE SCENE
@@ -257,12 +257,6 @@ const SpaceExplorer = () => {
 
         />
 
-        {/* ORBIT CONTROLS */}
-        <OrbitControls 
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-        />
 
         {/* 
         // ----------------------------------------------------------------
