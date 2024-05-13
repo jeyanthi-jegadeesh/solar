@@ -40,15 +40,16 @@ export default function SignUp() {
       return;
     }
     try {
-      const respUserExists = await fetch("api/userExists", {
+      const respUserExists = await fetch(`api/userExists/?email=${signUpForm.email}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: signUpForm.email }), // TODO Should this be changed to query string
+       // body: JSON.stringify({ email: signUpForm.email }), // TODO Should this be changed to query string
       });
 
-      const { user } = await respUserExists.json();
+      const user = await respUserExists.json();
+      console.log(respUserExists)
       if (user) {
         toast({
           title: 'User already exists.',

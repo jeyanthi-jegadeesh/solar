@@ -58,7 +58,7 @@ export const nextauthOptions: NextAuthOptions = {
     // return null;
     throw new Error('User not found');
   }
-  // write regular expression th sanitize email
+  // TODO write regular expression to sanitize email
   const sanitizedPassword = password.replace(/[$/(){}]/g, '');
   const passwordsMatch = await bcrypt.compare(sanitizedPassword, user.password);
   if (!passwordsMatch) {

@@ -33,13 +33,10 @@ export default function LogIn() {
     const result = await signIn('credentials', {
       email: logInForm.email,
       password: logInForm.password,
-      //callbackUrl: '/',
       redirect: false,
     });
 
     if (result && !result.error) {
-      // Redirect to the home page
-      //window.location.href = "/";
        // Redirect to the user information page
        router.push('/user');
     }else{

@@ -5,9 +5,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req : NextRequest) {
   try {
     await dbConnect();
-    const { email } = await req.json();
+    const url = new URL(req.url);
+    const email = url.searchParams.get("email")
     const user = await User.findOne({ email });
-    return NextResponse.json({ user });
+    return NextResponse.json(user);
   } catch (error) {
     console.log(error);
     return NextResponse.json({ success: false });
