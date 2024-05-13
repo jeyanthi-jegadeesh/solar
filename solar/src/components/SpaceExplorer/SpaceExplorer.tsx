@@ -6,8 +6,8 @@ import { Box } from "@chakra-ui/react";
 
 // 3D related libraries
 import * as THREE from 'three';
-import { Canvas, useFrame } from "@react-three/fiber";
-import {  OrbitControls, PerspectiveCamera, Stars, Trail } from "@react-three/drei";
+import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import {  CameraControls, OrbitControls, PerspectiveCamera, Stars, Trail } from "@react-three/drei";
 import { Leva, useControls } from "leva"; // CONTROLS
 
 // SOLAR SYSTEM related COMPONENTS
@@ -22,6 +22,7 @@ import { RootState } from "@/app/store/store";
 
 interface SolarSystemProps {
   celestialObjects: PlanetType[];
+  cameraControlsRef: Camera;
 }
 
 const AnimationManagement = () => {
@@ -105,7 +106,7 @@ const AnimationManagement = () => {
 }
 
 
-function SolarSystem({celestialObjects}: SolarSystemProps) {
+function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
     
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
@@ -150,7 +151,7 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
               distance={planet.distance}
               textureURL={planet.textureURL}
               isHovered={isHovered}
-              cameraRef={cameraRef}
+              cameraControlsRef={cameraControlsRef}
             />
 
           </Trail>
@@ -182,7 +183,6 @@ const SpaceExplorer = () => {
   // get planets -> turn this into an api call / fetch from the server
   const planets = getAllCelestialObjects(); // TODO figure out how to make this async etc...
 
-
   // ----------------------------------------------------------------
   // SET VARIABLES CONTROLLED BY LEVA CONTROLS 
   // ----------------------------------------------------------------
@@ -202,12 +202,18 @@ const SpaceExplorer = () => {
                                         },
   })
 
-  const { showLabels } = useControls({ showLabels: true })
+  const { showLabels } = useControls({ showLabels: false })
 
   // ----------------------------------------------------------------
   // RENDER THE SCENE
   // ----------------------------------------------------------------
   
+
+  // Take care of camera controls
+  const cameraControlsRef = useRef()
+
+  // const { camera } = useThree()
+
   return (
     <Box className="space-canvas-container" width='100vw' height='100vh' zIndex={-1} margin={0}  padding={0}  background='black'>
       {/* 
@@ -238,6 +244,17 @@ const SpaceExplorer = () => {
           makeDefault // !!!
           position={[0, 0, 200]}
           fov={50} // field of view
+        />
+
+        {/*
+        // ----------------------------------------------------------------
+            IMPORT THE CAMERA CONTROLS LIBRARY
+        // ----------------------------------------------------------------
+        */}
+        <CameraControls
+          ref={cameraControlsRef}
+          enabled={true}
+
         />
 
         {/* ORBIT CONTROLS */}
@@ -281,7 +298,10 @@ const SpaceExplorer = () => {
               render all celestial objects that turn around the sun 
           // ----------------------------------------------------------------
           */}
-          <SolarSystem celestialObjects={planets} />
+          <SolarSystem 
+            celestialObjects={planets} 
+            cameraControlsRef={cameraControlsRef}
+            />
 
           <AnimationManagement />
 
