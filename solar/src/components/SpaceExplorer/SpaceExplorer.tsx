@@ -150,6 +150,7 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
               distance={planet.distance}
               textureURL={planet.textureURL}
               isHovered={isHovered}
+              cameraRef={cameraRef}
             />
 
           </Trail>
@@ -233,6 +234,7 @@ const SpaceExplorer = () => {
       <Canvas>
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
+          ref={cameraRef}
           makeDefault // !!!
           position={[0, 0, 200]}
           fov={50} // field of view

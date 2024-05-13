@@ -1,5 +1,5 @@
-import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture } from "@react-three/drei";
-import { Vector3 } from "@react-three/fiber";
+import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
+import { Camera, Vector3 } from "@react-three/fiber";
 import { useControls } from "leva";
 import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
@@ -35,6 +35,7 @@ interface PlanetLabelProps {
   labelText: string;
   position: Vector3;
   fontSize?: number;
+  cameraRef: Camera;
 }
 
 const PlanetLabel = ({planetRef, 
@@ -62,7 +63,7 @@ return (
 // --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
-const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isHovered}:PlanetProps) => {
+const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isHovered, cameraRef}:PlanetProps) => {
   
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
   
@@ -75,7 +76,15 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
 
     // refactor to have the planetRef in the context
     
-
+    // onPlanetClick -> move the cam to the planet and update the selected planet
+    function onPlanetClickHandler(name, planetRef) {
+      // move to the planet using cameracontrols included in drei
+      // TODO move this to separate function for reusablility
+      cameraRef.current?.fitToBox(planetRef.current, true));
+      //update planet name
+      dispatch(updateSelectedPlanet(name))
+      
+    }
 
     // store the ref on creation of the planet mesh
     useEffect(() => {
@@ -115,7 +124,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
     return (<>
         <mesh 
           ref={planetRef} // reference for the animation 
-          onClick={() => (dispatch(updateSelectedPlanet(name)))} 
+          onClick={() => (onPlanetClickHandler(name, planetRef))} 
           onPointerEnter={() => (isHovered = true)}
           onPointerLeave={() => (isHovered = false)}
         > 
