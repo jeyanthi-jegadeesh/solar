@@ -1,13 +1,13 @@
 'use client'
 
-import { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 
 // 3D related libraries
 import * as THREE from 'three';
-import { Canvas, useFrame } from "@react-three/fiber";
-import {  OrbitControls, PerspectiveCamera, Stars, Trail } from "@react-three/drei";
+import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import {  CameraControls,  PerspectiveCamera, Stars, Trail } from "@react-three/drei";
 import { Leva, useControls } from "leva"; // CONTROLS
 
 // SOLAR SYSTEM related COMPONENTS
@@ -22,6 +22,7 @@ import { RootState } from "@/app/store/store";
 
 interface SolarSystemProps {
   celestialObjects: PlanetType[];
+  cameraControlsRef: React.Ref<Camera>;
 }
 
 const AnimationManagement = () => {
@@ -97,7 +98,7 @@ const AnimationManagement = () => {
            // update the planet position
            planetRef.current.position.set(x,y,z);
            // rotate the planet around itself
-           planetRef.current.rotation.y += delta;
+           planetRef.current.rotation.y += delta * 0.3;
          }
     })
   })
@@ -105,11 +106,12 @@ const AnimationManagement = () => {
 }
 
 
-function SolarSystem({celestialObjects}: SolarSystemProps) {
+function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
     
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
      const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
+     const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
      const dispatch = useDispatch()
 
    // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
@@ -117,22 +119,24 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
 
   return (
     celestialObjects.map((planet) => (
+      <React.Fragment key={planet.name}>
       <>
           {/* ORBIT - draw a circle representing the orbit 
               TODO make the orbit elliptical and make the planet follow the path of this object!
           */}
+          {!selectedPlanet ? 
           <Orbit
             orbitCenter={planet.orbitCenter}
             color={planet.color}
             thickness={0.1}
             distanceFromParent={planet.distance}
-          />
+          /> : null}
 
           {/* TRAIL -> a line that follows the planet to show its path... not necessary...*/}
           <Trail
             width={1} 
-            color={'pale'}
-            length={5}
+            color={'white'}
+            length={10}
             decay={3} // How fast the line fades away
             local={true} // Wether to use the target's world or local positions
             stride={0} // Min distance between previous and current point
@@ -150,10 +154,12 @@ function SolarSystem({celestialObjects}: SolarSystemProps) {
               distance={planet.distance}
               textureURL={planet.textureURL}
               isHovered={isHovered}
+              cameraControlsRef={cameraControlsRef}
             />
 
           </Trail>
       </>
+      </React.Fragment>
     ))
   )
   }
@@ -181,7 +187,6 @@ const SpaceExplorer = () => {
   // get planets -> turn this into an api call / fetch from the server
   const planets = getAllCelestialObjects(); // TODO figure out how to make this async etc...
 
-
   // ----------------------------------------------------------------
   // SET VARIABLES CONTROLLED BY LEVA CONTROLS 
   // ----------------------------------------------------------------
@@ -207,6 +212,12 @@ const SpaceExplorer = () => {
   // RENDER THE SCENE
   // ----------------------------------------------------------------
   
+
+  // Take care of camera controls
+  const cameraControlsRef = useRef()
+
+  // const { camera } = useThree()
+
   return (
     <Box className="space-canvas-container" width='100vw' height='100vh' zIndex={-1} margin={0}  padding={0}  background='black'>
       {/* 
@@ -233,17 +244,23 @@ const SpaceExplorer = () => {
       <Canvas>
         {/* SET THE DEFAULT CAMERA */}
         <PerspectiveCamera 
+          ref={cameraRef}
           makeDefault // !!!
           position={[0, 0, 200]}
           fov={50} // field of view
         />
 
-        {/* ORBIT CONTROLS */}
-        <OrbitControls 
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
+        {/*
+        // ----------------------------------------------------------------
+            IMPORT THE CAMERA CONTROLS LIBRARY
+        // ----------------------------------------------------------------
+        */}
+        <CameraControls
+          ref={cameraControlsRef}
+          enabled={true}
+
         />
+
 
         {/* 
         // ----------------------------------------------------------------
@@ -269,7 +286,7 @@ const SpaceExplorer = () => {
             SET THE LIGHTS
         // ---------------------------------------------------------------- */}
         <ambientLight 
-          color={'yellow'} 
+          color={'white'} 
           intensity={ambientLightIntensity} 
         />
 
@@ -279,7 +296,10 @@ const SpaceExplorer = () => {
               render all celestial objects that turn around the sun 
           // ----------------------------------------------------------------
           */}
-          <SolarSystem celestialObjects={planets} />
+          <SolarSystem 
+            celestialObjects={planets} 
+            cameraControlsRef={cameraControlsRef}
+            />
 
           <AnimationManagement />
 

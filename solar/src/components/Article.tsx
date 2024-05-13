@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Input, Text } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
@@ -7,10 +7,53 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from 'dompurify'; // purify input
 
 
-import { FiSave, FiXCircle  } from 'react-icons/fi';
-import PlanetTitle from './PlanetTitle';
+import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import { Date } from 'mongoose';
 
+async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
+ 
+  // TODO create actual fetch function for article!
+    const articleData = {
+      authorId: userId,
+      isPrivate: isPrivate,
+      title: title,
+      subtitle: '',
+      articleBody: articleBody,
+      associatedPlanets: associatedPlanets,
+    }
+
+    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+
+    try {
+      const response = await fetch(URL + '/api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(articleData),
+      });
+  
+      if (!response.ok) {
+        console.error (`Error!`);
+      }
+  
+      const result = await response.json();
+      return result.data;
+    } catch (err) {
+      console.error('Error creating article:', err);
+      return { success: false, message: err };
+    }
+  }
+
+
+  function getArticleById(articleId?: number) {
+    if (!articleId) return 'no article found...';
+    return 'article dummy!'
+    // TODO create actual fetch function for article!
+  }
 
 
 function getPlanetInfo(planetName: string) {
@@ -20,6 +63,18 @@ function getPlanetInfo(planetName: string) {
     return currentPlanetInfo[0];
   }
 
+
+  type ArticleType = {
+        authorId: 123,
+        isPrivate: true,
+        title: "asdgdafasdfasdfasdfasdfasdfgseghbtgrsh",
+        subtitle?: "",
+        articleBody: "<p>sghstrhbtrnhjrzjnhgfhasdfasdfasdfasdfasdfdfgafgasdfgervdfbgfrhbgf</p>",
+        associatedPlanets?: string[],
+        _id?: string,
+        createdAt?: Date,
+        updatedAt?: Date,
+      }
   
   interface ArticleProps {
     planetName: string;
@@ -28,71 +83,87 @@ function getPlanetInfo(planetName: string) {
   }
 
 const Article = ({planetName, editMode, articleId}:ArticleProps) => {
-  // const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
 
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
 
-  function getArticleById(articleID?: number) {
-    if (!articleId) return 'no article found...';
-    return 'article dummy!'
-    // TODO create actual fetch function for article!
-  }
-
-  let article = getArticleById(articleId);
-
-
+  let firstArticle = getArticleById(articleId);
 
   // STATES: 
-  const [quillText, setQuillText] = useState(article); // quillText -> the text inside of the quill editor.
+  const [quillText, setQuillText] = useState(''); // quillText -> the text inside of the quill editor.
+  const [isArticlePrivate, setIsArticlePrivate] = useState(true); // quillText -> the text inside of the quill editor.
+  const [articleTitle, setArticleTitle] = useState(''); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(editMode); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
+  const [article, setArticle] = useState(firstArticle); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
+  
+
 
   // HANDLERS:
-  function onSaveHandler() { // handle saving the article
-      const purifiedArticle = DOMPurify.sanitize(quillText)  
-      console.log("SAVING BLOG ARTICLE", purifiedArticle)
-      article = quillText;
+  async function onSaveHandler() { // handle saving the article
+      const userId = 123;
+      const purifiedArticle = DOMPurify.sanitize(quillText);
+      const purifiedTitle = DOMPurify.sanitize(articleTitle);
+
+      const newArticle = await createArticle(userId, true, purifiedTitle, purifiedArticle, ['mars']); // TODO set it to the actual planet
+      
+      setArticle(newArticle!.articleBody)
       setBlogEditMode(false);
   }
+
+  function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setArticleTitle(event.target.value);
+    console.log(articleTitle);
+  };
+
+  function handleIsPrivateChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setIsArticlePrivate(!isArticlePrivate);
+  };
 
   return (
     <>
         <Box>
-            <Text size='sm' color='gray'>write something about...</Text>
-            
-            <PlanetTitle planetName={planetName} />
-            
-            {/* SHOW THE DATE ABOVE THE ARTICLE */}
-            {/* TODO SHOW AUTHOR etc. according to the auth data */}
-            {/* TODO make conditional rendering of editor dependent on auth -> if not logged in you can't edit. */}
-            <Text size='sm' color='grey'>{(new Date()).toLocaleDateString()}</Text>
-            
             
             {/* CONDITIONAL RENDERING OF EDITOR ACCORDING TO THE editMode */}
             {
               blogEditMode ? 
               <>
+              <Text size='sm' color='gray'>write something about {planetName}...</Text>
+              <form>
+                <Input type='text' placeholder='My title...' value={articleTitle} onChange={handleTitleChange} ></Input>
+                <Checkbox onChange={handleIsPrivateChange} isChecked> public Article</Checkbox>
+              </form>
+              
+              {/* SHOW THE DATE ABOVE THE ARTICLE */}
+              {/* TODO SHOW AUTHOR etc. according to the auth data */}
+              {/* TODO make conditional rendering of editor dependent on auth -> if not logged in you can't edit. */}
+              {/* <Text size='sm' color='grey' textAlign='right'>{(new Date()).toLocaleDateString()} <br /></Text> */}
               {/* QUILL EDITOR */}
               {/* TODO PUT THE EDITOR ITSELF IN ITS OWN FUNCTION / SUBCOMPONENT */}
-              <Box minHeight='50vh'>
-                <ReactQuill className='blog-editor' 
+              <Box h='500px'>
+                <ReactQuill
+                          className='ql-editor' 
                           theme='snow' 
                           value={quillText} 
                           onChange={setQuillText} 
-                          min-height='250px'/>
+                          min-height='200px'
+                          max-height='300px'
+                />
               </Box>
 
+              {/* UPLOAD IMAGES TO ARTICLE */}
+              <Button leftIcon={ <FiUploadCloud size={24} />} variant='outline' w='100%' h={76}>upload Images to Article</Button>
               {/* CONTROLS */}
               <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
                 <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
                   cancel
                 </Button>
-                <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='ghost'>
+                <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
                   save article
                 </Button>
               </Flex>
             </>
-            : article 
+            : article && <Box dangerouslySetInnerHTML={{ __html: article }} /> 
             }
     
         </Box>
