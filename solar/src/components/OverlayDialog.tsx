@@ -4,7 +4,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { hideDialogOverlay } from '../app/store/overlaySlice';
 import { RootState } from '../app/store/store';
 import Quiz from './Quiz';
-import Article from './Article';
+import Article from './Article/Article';
 // import Article from './Article';
 
 const OverlayDialog: React.FC = () => {
