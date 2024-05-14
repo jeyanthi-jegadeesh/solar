@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Card, CardBody, CloseButton,  Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, CloseButton,  Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -10,7 +10,7 @@ import { RootState } from '@/app/store/store';
 import { showDialogOverlay } from '@/app/store/overlaySlice';
 import { setSelectedContent } from '@/app/store/contentSlice';
 import { setCurrentArticle } from '@/app/store/articleSlice';
-import { FiEdit3 } from 'react-icons/fi';
+import { FiEdit3, FiStar } from 'react-icons/fi';
 import DOMPurify from 'dompurify';
 import { IArticle } from '@/app/utils/types';
 
@@ -111,7 +111,7 @@ return(
           h='100px'
           maxW={{ base: '100%', sm: '200px' }}
           src={article.titleImage || 'https://random.imagecdn.app/250/250'}
-          alt='Caffe Latte'
+          alt={article.title}
         />
         <Stack>         
           <CardBody>            
@@ -120,12 +120,16 @@ return(
                   {article.title}
               </Heading>
               
+              <Box position='absolute' top='12px' right='12px'>
               { // show the date in a small tag
               article.createdAt && 
-              <Tag mb='8px' p='6px' position='absolute' top='12px' right='12px' >
+              <Tag p='6px'  >
                 {new Date(article.createdAt).toLocaleDateString()}
               </Tag>
               } 
+                <FiStar />
+              </Box>
+              
             <Text
               overflow='hidden'
               noOfLines={3} // Adjust the number of lines to display before truncation
