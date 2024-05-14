@@ -55,7 +55,7 @@ export const nextauthOptions: NextAuthOptions = {
   await dbConnect();
   const user = await User.findOne({ email });
   if (!user) {
-    // return null;
+  // return null;
     throw new Error('User not found');
   }
   // TODO write regular expression to sanitize email

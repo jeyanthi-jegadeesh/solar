@@ -1,20 +1,28 @@
 
-'use client'
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { hideLandingOverlay, showLandingOverlay } from '../app/store/overlaySlice';
+
+import React , {useState} from 'react';
+import {useSelector, useDispatch } from 'react-redux';
+import { hideLandingOverlay, showLandingOverlay, showsLogInOverlay } from '../app/store/overlaySlice';
 import { Link, Flex, IconButton, Icon, Box, useColorMode, ChakraProvider } from '@chakra-ui/react';
 import { FiUser, FiSun, FiMoon } from 'react-icons/fi';
+import { redirect } from 'next/navigation';
+import { useToast } from '@chakra-ui/react';
+import LoginSignUpPopover from './LoginSignupPopover';
+// import { getServerSession } from "next-auth";
+// import { nextauthOptions } from "../app/api/auth/[...nextauth]/nextauth";
+// import SignUp from './SignUp';
 import { useRouter } from 'next/navigation';
-import { getServerSession } from "next-auth";
-import { nextauthOptions } from "../app/api/auth/[...nextauth]/nextauth-options"; 
-import SignUp from './SignUp';
+import  { useSession } from 'next-auth/react';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC =  () => {
     const router = useRouter();
+    const toast = useToast();
     const dispatch = useDispatch();
+    const [showPopover, setShowPopover] = useState(false);
     const { colorMode, toggleColorMode } = useColorMode(); //Chakra's useColorMode hook
-
+     const { data: session } = useSession();
+    //  const session = await getServerSession(nextauthOptions);
+    console.log('session: ', session);
     const handleShowOverlay = () => {
         dispatch(showLandingOverlay());
     };
@@ -28,18 +36,13 @@ const Navbar: React.FC = () => {
     };
 
     const handleProfileClick = async () =>{
-        // const session = await getServerSession(nextauthOptions);
-        // let userData = null;
-        // if(session?.user){
-        //   const email = session && session.user && session.user.email;
-        //   if(email){
-        //     router.push('/user');
-        //      console.log('userData ,',userData);
-        //   }
-        // }else{
-        //    <SignUp></SignUp>
-        // }
-        router.push('/user');
+        console.log('handleProfileClick');
+        if (!session) {
+            console.log('User not logged in');
+            dispatch(showsLogInOverlay());     
+        }else {
+            router.push('/user');
+        }
     }
     const handleToggleColorMode = () => {
         console.log('Current color mode:', colorMode);
@@ -82,8 +85,11 @@ const Navbar: React.FC = () => {
                  <Icon as={FiUser} color="white" boxSize={20} />
                 </Box>
             </Flex>
+            <LoginSignUpPopover visible={showPopover} />
         </nav>
+        
     );
+    
 };
 
 export default Navbar;
