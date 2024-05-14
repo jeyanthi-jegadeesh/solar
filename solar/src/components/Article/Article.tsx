@@ -65,19 +65,6 @@ function getPlanetInfo(planetName: string) {
     const currentPlanetInfo = allPlanetInfo.filter(planet => planet.englishName.toLowerCase() === planetName.toLowerCase());
     return currentPlanetInfo[0];
   }
-
-
-  type ArticleType = {
-        authorId: 123,
-        isPrivate: true,
-        title: string,
-        subtitle?: string,
-        articleBody: string,
-        associatedPlanets?: string[],
-        _id?: string,
-        createdAt?: Date,
-        updatedAt?: Date,
-      }
   
   interface ArticleProps {
     planetName: string;

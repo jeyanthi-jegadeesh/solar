@@ -1,8 +1,7 @@
 'use client'
 
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, CloseButton, Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Editable, EditableInput, EditablePreview, Flex, Heading, Image, Input, Spinner, Stack, Tag, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
-import React, { useEffect, useMemo, useState } from 'react';
-import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
+import { Button, Card, CardBody, CloseButton,  Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
 
@@ -13,9 +12,14 @@ import { setSelectedContent } from '@/app/store/contentSlice';
 import { setCurrentArticle } from '@/app/store/articleSlice';
 import { FiEdit3 } from 'react-icons/fi';
 import DOMPurify from 'dompurify';
+import { IArticle } from '@/app/utils/types';
 
+interface ArticleListProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-const ArticleList = ({ isOpen, onClose }) => {
+const ArticleList = ({ isOpen, onClose }:ArticleListProps) => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const [isLoading, setIsLoading] = useState(false)
   const [articles, setArticles] = useState([]);
@@ -39,7 +43,6 @@ const ArticleList = ({ isOpen, onClose }) => {
         return [];
     }
 }
-
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -74,8 +77,11 @@ const ArticleList = ({ isOpen, onClose }) => {
       )
   }
 
+  interface ArticleCardProps {
+    article: IArticle;
+  }
 
-  const ArticleCard = ({article}) => {
+  const ArticleCard = ({article}:ArticleCardProps) => {
     const dispatch = useDispatch();
 
     function handleClick() {
@@ -165,9 +171,9 @@ return(
               {isLoading && <Spinner m='auto'/>}
               {!isLoading && articles &&
             
-              articles.map(article => (          
+              articles.map((article:IArticle) => (          
                       <ArticleCard 
-                        key={article.title} 
+                        key={article._id} 
                         article={article} 
                         // onClick={} 
                       />

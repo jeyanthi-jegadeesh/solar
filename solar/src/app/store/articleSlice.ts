@@ -1,10 +1,11 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IArticle } from '../utils/types';
 
 interface ArticleStateType {
   isEditModeEnabled: boolean;
-  currentArticle: Object | null; // TODO define ArticleType
-  articleList: Object[]; // TODO define ArticleType
+  currentArticle: IArticle | null; // TODO define ArticleType
+  articleList: IArticle[]; // TODO define ArticleType
 }
 
 const initialState:ArticleStateType = {
@@ -25,8 +26,8 @@ const articleSlice = createSlice({
         state.isEditModeEnabled = editMode;
     },
 
-    setCurrentArticle(state, action: PayloadAction<Object | null>) {
-        const currentArticle = action.payload;
+    setCurrentArticle(state, action) {
+        const currentArticle = action?.payload;
         state.currentArticle = currentArticle;
   }
 }})

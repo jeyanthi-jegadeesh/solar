@@ -1,5 +1,4 @@
-//added by Costanza. Feel free to add your own types too. This makes sense in this project but not in a bigger one, where you would have types in the component FOLDER itself.
-
+import { Vector3 } from "three"; // needed for Planet Type
 export interface NewsContent {
   id: number,
   title: string,
@@ -23,4 +22,31 @@ export interface IUser {
   email: string
   password: string
   _id: string
+}
+
+export interface IArticle  {
+  authorId: number | string,
+  isPrivate: true,
+  title: string,
+  titleImage?: string,
+  subtitle?: string,
+  articleBody: string,
+  associatedPlanets?: string[],
+  _id?: string,
+  createdAt?: Date,
+  updatedAt?: Date,
+}
+
+
+
+export interface PlanetType {
+    name: string;
+    color: string;
+    position: Vector3;
+    velocity: number;
+    distance: number;
+    size: number;
+    textureURL?: string;
+    orbitCenter: Vector3;
+    description: string;
 }
