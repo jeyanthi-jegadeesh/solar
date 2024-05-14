@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Date } from 'mongoose';
+import PhotoUpload from './PhotoUpload';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
@@ -67,9 +68,9 @@ function getPlanetInfo(planetName: string) {
   type ArticleType = {
         authorId: 123,
         isPrivate: true,
-        title: "asdgdafasdfasdfasdfasdfasdfgseghbtgrsh",
-        subtitle?: "",
-        articleBody: "<p>sghstrhbtrnhjrzjnhgfhasdfasdfasdfasdfasdfdfgafgasdfgervdfbgfrhbgf</p>",
+        title: string,
+        subtitle?: string,
+        articleBody: string,
         associatedPlanets?: string[],
         _id?: string,
         createdAt?: Date,
@@ -128,11 +129,6 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
             {
               blogEditMode ? 
               <>
-              <Text size='sm' color='gray'>write something about {planetName}...</Text>
-              <form>
-                <Input type='text' placeholder='My title...' value={articleTitle} onChange={handleTitleChange} ></Input>
-                <Checkbox onChange={handleIsPrivateChange} isChecked> public Article</Checkbox>
-              </form>
               
               {/* SHOW THE DATE ABOVE THE ARTICLE */}
               {/* TODO SHOW AUTHOR etc. according to the auth data */}
@@ -141,29 +137,48 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               {/* QUILL EDITOR */}
               {/* TODO PUT THE EDITOR ITSELF IN ITS OWN FUNCTION / SUBCOMPONENT */}
               <Box h='500px'>
-                <ReactQuill
-                          className='ql-editor' 
-                          theme='snow' 
-                          value={quillText} 
-                          onChange={setQuillText} 
-                          min-height='200px'
-                          max-height='300px'
-                />
-              </Box>
+                <Text size='sm' color='gray'>write something about {planetName}...</Text>
+                
+                <form>
+                  <Input type='text' placeholder='My title...' value={articleTitle} onChange={handleTitleChange} ></Input>
+                  
+                </form>
+                  <Box className='ql-editor'>
+
+                    <ReactQuill
+                              className='ql-editor' 
+                              theme='snow' 
+                              value={quillText} 
+                              onChange={setQuillText} 
+                              min-height='200px'
+                              max-height='300px'
+                              />
+
+                  </Box>
 
               {/* UPLOAD IMAGES TO ARTICLE */}
-              <Button leftIcon={ <FiUploadCloud size={24} />} variant='outline' w='100%' h={76}>upload Images to Article</Button>
+              {/* <Button leftIcon={ <FiUploadCloud size={24} />} variant='outline' w='100%' h={76}>upload Images to Article</Button> */}
+              <PhotoUpload />
+              
+              <Checkbox onChange={handleIsPrivateChange}> public Article</Checkbox>
+
+              </Box>
+              
               {/* CONTROLS */}
               <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
+              
                 <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
                   cancel
                 </Button>
+              
                 <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
                   save article
                 </Button>
+              
               </Flex>
             </>
-            : article && <Box dangerouslySetInnerHTML={{ __html: article }} /> 
+            : 
+            article && <Box dangerouslySetInnerHTML={{ __html: article }} /> 
             }
     
         </Box>
