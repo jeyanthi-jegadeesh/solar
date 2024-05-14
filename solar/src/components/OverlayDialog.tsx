@@ -11,7 +11,7 @@ const OverlayDialog: React.FC = () => {
   const dispatch = useDispatch();
   const isVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  const selectedContent = useSelector((state: RootState) => state.content.selectedContent);
+  const selectedContent = useSelector((state: RootState) => state.dialog.selectedContent);
 
   const handleClose = () => {
     dispatch(hideDialogOverlay());

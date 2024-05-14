@@ -1,13 +1,13 @@
 'use client'
 
-import { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 
 // 3D related libraries
 import * as THREE from 'three';
 import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
-import {  CameraControls, OrbitControls, PerspectiveCamera, Stars, Trail } from "@react-three/drei";
+import {  CameraControls,  Environment,  PerspectiveCamera, Stars, Trail } from "@react-three/drei";
 import { Leva, useControls } from "leva"; // CONTROLS
 
 // SOLAR SYSTEM related COMPONENTS
@@ -22,7 +22,7 @@ import { RootState } from "@/app/store/store";
 
 interface SolarSystemProps {
   celestialObjects: PlanetType[];
-  cameraControlsRef: Camera;
+  cameraControlsRef: React.Ref<Camera>;
 }
 
 const AnimationManagement = () => {
@@ -98,7 +98,7 @@ const AnimationManagement = () => {
            // update the planet position
            planetRef.current.position.set(x,y,z);
            // rotate the planet around itself
-           planetRef.current.rotation.y += delta;
+           planetRef.current.rotation.y += delta * 0.3;
          }
     })
   })
@@ -111,6 +111,7 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
     // isHovered is a reference for internal "state management", because references do not
     // rerender the component
      const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
+     const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
      const dispatch = useDispatch()
 
    // TODO USE REF instead of STATE for checking and setting the "isClicked" state!
@@ -118,22 +119,24 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
 
   return (
     celestialObjects.map((planet) => (
+      <React.Fragment key={planet.name}>
       <>
           {/* ORBIT - draw a circle representing the orbit 
               TODO make the orbit elliptical and make the planet follow the path of this object!
           */}
+          {!selectedPlanet ? 
           <Orbit
             orbitCenter={planet.orbitCenter}
             color={planet.color}
             thickness={0.1}
             distanceFromParent={planet.distance}
-          />
+          /> : null}
 
           {/* TRAIL -> a line that follows the planet to show its path... not necessary...*/}
           <Trail
             width={1} 
-            color={'pale'}
-            length={5}
+            color={'white'}
+            length={10}
             decay={3} // How fast the line fades away
             local={true} // Wether to use the target's world or local positions
             stride={0} // Min distance between previous and current point
@@ -156,6 +159,7 @@ function SolarSystem({celestialObjects, cameraControlsRef}: SolarSystemProps) {
 
           </Trail>
       </>
+      </React.Fragment>
     ))
   )
   }
@@ -202,7 +206,7 @@ const SpaceExplorer = () => {
                                         },
   })
 
-  const { showLabels } = useControls({ showLabels: false })
+  const { showLabels } = useControls({ showLabels: true })
 
   // ----------------------------------------------------------------
   // RENDER THE SCENE
@@ -246,6 +250,21 @@ const SpaceExplorer = () => {
           fov={50} // field of view
         />
 
+        {/* SET THE STARMAP AS BACKGROUND -- THIS TAKES A LOT OF RESOURCES! */}
+        <Environment
+          background={true} // can be true, false or "only" (which only sets the background) (default: false)
+          backgroundBlurriness={0.01} // optional blur factor between 0 and 1 (default: 0, only works with three 0.146 and up)
+          backgroundIntensity={0.2} // optional intensity factor (default: 1, only works with three 0.163 and up)
+          backgroundRotation={[1, -Math.PI / 2 , Math.PI]} // optional rotation (default: 0, only works with three 0.163 and up)
+          environmentIntensity={0.2} // optional intensity factor (default: 1, only works with three 0.163 and up)
+          // environmentRotation={[0, Math.PI / 2, 0]} // optional rotation (default: 0, only works with three 0.163 and up)
+          files={['starmap_4k.jpg']}
+          path="textures/"
+          // preset={null}
+          // scene={undefined} // adds the ability to pass a custom THREE.Scene, can also be a ref
+          // encoding={undefined} // adds the ability to pass a custom THREE.TextureEncoding (default: THREE.sRGBEncoding for an array of files and THREE.LinearEncoding for a single texture)
+        />
+
         {/*
         // ----------------------------------------------------------------
             IMPORT THE CAMERA CONTROLS LIBRARY
@@ -257,12 +276,6 @@ const SpaceExplorer = () => {
 
         />
 
-        {/* ORBIT CONTROLS */}
-        <OrbitControls 
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-        />
 
         {/* 
         // ----------------------------------------------------------------
@@ -288,7 +301,7 @@ const SpaceExplorer = () => {
             SET THE LIGHTS
         // ---------------------------------------------------------------- */}
         <ambientLight 
-          color={'yellow'} 
+          color={'white'} 
           intensity={ambientLightIntensity} 
         />
 

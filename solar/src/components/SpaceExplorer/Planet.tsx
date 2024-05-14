@@ -1,5 +1,6 @@
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
 import { Camera, Vector3 } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import { useControls } from "leva";
 import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
@@ -17,7 +18,7 @@ interface PlanetProps {
     color: string,
     orbitingAround?: Vector3 //TODO: later: THREE.Object3D? -> NO make it a  string that later finds it in an array that stores our 
     isHovered: boolean;
-    cameraControlsRef: React.MutableRefObject<CameraControls | null>; // TODO: change to correct type!!
+    cameraControlsRef: React.MutableRefObject<CameraControls>; // TODO: change to correct type!!
   }
   
 // USEFUL FUNCTIONS
@@ -115,18 +116,22 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
 
         // Adjust the camera position to show the planet on the left
         const planetPosition = planetRef.current.position;
-        const offset = new THREE.Vector3(0, scaledDiameter*3, 0); // Adjust the offset value as needed
+        const offset = new THREE.Vector3(0, 0, scaledDiameter*3.4); // Adjust the offset value as needed
+        
+        // 
         const newCameraPosition = planetPosition.clone().add(offset);
+        // cameraControlsRef.current.moveTo(newCameraPosition.x, newCameraPosition.y, newCameraPosition.z,true);
+        // cameraControlsRef.current.setTarget(planetPosition.x, planetPosition.y, planetPosition.z); //
         cameraControlsRef.current.setLookAt(
           newCameraPosition.x,
           newCameraPosition.y,
           newCameraPosition.z,
-          planetPosition.x, // direction to look at needs to be adjusted!!! now they all look towards the sun or something :/
+          planetPosition.x + scaledDiameter, //move the planet to the left (camera to the right)
           planetPosition.y,
           planetPosition.z,
           true
         );
-    
+        cameraControlsRef.current.zoom(-0.01, true);
         // Update the selected planet
         dispatch(updateSelectedPlanet(name));
       }
@@ -164,23 +169,24 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
      /* TODO REPOSITION THE CAMERA AND FACE THE OBJECT WHEN CLICKED */
 
      // TODO: add more shaders for halos and stuff
-      const texturePath = 'textures/' + textureURL
-      const colorMap = useTexture(texturePath)
+      const texturePath = 'textures/' + textureURL;
+      const colorMap = useTexture(texturePath);
+      const colorMapSaturnRing = useTexture('textures/2k_saturn_ring_alpha.png');
   
-    return (<>
+    return (
+    <>
         <mesh 
           ref={planetRef} // reference for the animation 
           onClick={() => (onPlanetClickHandler(name, planetRef))} 
           onPointerEnter={() => (isHovered = true)}
           onPointerLeave={() => (isHovered = false)}
         > 
-
+        
         {/* event.stopPropagation() means that the event is contained only to the mesh and no other element in the application cares about this event. */} 
           {/* A icosahedronGeometry might be more apt performance wise -> less polygons */}
           <icosahedronGeometry 
               args={[scaledDiameter , 12]} 
           />
-                   
                    
           {/*------------------------------------------------ 
              IF IT IS THE SUN -> MAKE IT WOBBLE 
@@ -197,27 +203,28 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                   opacity={0.3}
                 /> 
                 : 
-                <meshStandardMaterial 
+                <meshPhongMaterial 
                   // color={isHovered ? 'orange' : 'lightblue'}
                   map={colorMap} 
                   emissive={'white'} 
-                  emissiveIntensity={0.3}
+                  emissiveIntensity={0.01}
                 />
           } 
-          
-          {/*------------------------------------------------ 
-             GLOW EFFECT
-             TODO FIX THAT THE GLOW IS APPLIED TO EVERYTHING IN THE MESH -> UNTANGLE THE MESH
-          ------------------------------------------------ */
-          /* <EffectComposer>
-            <Bloom 
-              intensity={1} 
-              luminanceThreshold={0} 
-              luminanceSmoothing={1} 
-              height={300}
-            />
-          </EffectComposer> */}
-  
+
+        {/* Atmosphere effect */}
+        
+        <mesh>
+          <sphereGeometry args={[scaledDiameter * 1.07, 32, 32]} />
+          <MeshWobbleMaterial
+            color={'#white'}
+            transparent={true}
+            opacity={0.2}
+            emissive={'#87CEEB'}
+            emissiveIntensity={0.4}
+          />
+        </mesh>
+
+
           {/*------------------------------------------------ 
              PLANET LABEL with conditional rendering (when the Leva control is clicked)
           ------------------------------------------------ */}
@@ -226,7 +233,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                 planetRef={planetRef}
                 labelText={name} 
                 fontSize={labelFontSize}
-                position={position.add(new THREE.Vector3(0,-(scaledDiameter / 2) - 0.5,0))} // new position of the label
+                position={position.add(new THREE.Vector3(0,-(scaledDiameter) - 0.5,0))} // new position of the label
               /> 
               : null
           }
@@ -246,20 +253,32 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                   args={[scaledDiameter, scaledDiameter+3, 32]} 
                 > 
                 <meshStandardMaterial opacity={0} transparent/>
-                <Outlines thickness={0.1} color="white" />
+                <Outlines thickness={0.05} color="white" />
                 </Ring>
 
                 <Ring
                   args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
                 /> 
-                  <meshStandardMaterial color={'white'}/>
+                  <meshStandardMaterial color={'white'} opacity={0.1} />
               </Billboard>
             </mesh>
           : 
             <Outlines thickness={0.1} color="red" />
         }     
+
+         {/*------------------------------------------------ 
+            SATURN'S RING
+          ------------------------------------------------ */}
+          {
+          name.toLowerCase() === 'saturn' && (
+            <mesh rotation={[Math.PI / 2, 0, 0]}>
+              <ringGeometry args={[scaledDiameter * 1.2, scaledDiameter * 2, 64]} />
+              {/* <meshBasicMaterial color="gray" transparent alphaMap={colorMapSaturnRing} opacity={0.6} side={THREE.DoubleSide} /> */}
+              <meshBasicMaterial color="gray" transparent opacity={0.6} side={THREE.DoubleSide} />
+            </mesh>)
+          }
         </mesh>
-        </>
+      </>
     );
   }
 
