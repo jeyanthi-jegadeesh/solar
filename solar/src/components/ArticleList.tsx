@@ -6,18 +6,26 @@ import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
 import "react-quill/dist/quill.snow.css"; 
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
-import Link from 'next/link';
-import { title } from 'process';
-import Image from 'next/image';
+import { showDialogOverlay } from '@/app/store/overlaySlice';
+import { setSelectedContent } from '@/app/store/contentSlice';
 
 
 const ArticleCard = ({article}) => {
+    const dispatch = useDispatch();
+    const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+    const selectedContent = useSelector((state: RootState) => state.dialog.selectedContent);
+
+
+    func handleClick(articleId = 123) {
+        dispatch(setSelectedContent('article'));
+        dispatch(showDialogOverlay());
+    }
 
 return(
    <Card   align='left' 
-           onClick={()=> alert('hello moto')} 
+           onClick={()=> handleClick(article.id)} 
            height='250px'  
            border='1px solid #cccccc'
            padding='8px'
@@ -25,7 +33,8 @@ return(
            _hover={{
                background: "#cccccc",
                color: "teal.500",
-             }}>
+             }}
+           >
 
        <CardHeader>
            <Heading size='sm'>
@@ -44,10 +53,9 @@ return(
            />
        </CardBody>
    </Card>
-
 )}
 
-const ArticleList = ({ articleId}) => {
+const ArticleList = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
 //   let firstArticle = getArticleById(articleId);
 
@@ -89,7 +97,7 @@ const ArticleList = ({ articleId}) => {
             borderBottomWidth='1px' 
             justifyContent='space-between'
           >
-            Articles
+            Community articles on {selectedPlanet}
             <CloseButton onClick={onClose} />
           </DrawerHeader>
           <DrawerBody>

@@ -136,7 +136,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               blogEditMode ? 
               <>
               
-              <ArticleList /> 
+               
               
               {/* SHOW THE DATE ABOVE THE ARTICLE */}
               {/* TODO SHOW AUTHOR etc. according to the auth data */}
@@ -211,6 +211,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
                   save article
                 </Button>
               </Flex>
+
             </>
             : 
             article && <Box dangerouslySetInnerHTML={{ __html: article }} /> 
