@@ -5,7 +5,6 @@ export async function GET(request: Request) {
   
   try {
     const response = await fetch(url);
-    console.log(response);
     const jsonData = await response.json();
     const page = Object.values(jsonData.query.pages)[0]; // Obtiene el primer (y en este caso único) objeto de la propiedad "pages"
     const extract = page.extract; // Obtiene el extracto de la página
