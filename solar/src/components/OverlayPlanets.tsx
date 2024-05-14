@@ -41,21 +41,23 @@ const OverlayPlanets: React.FC = () => {
         <Flex flexDirection='column' overflow='auto' height='100%' pr={10}>
           
           <Flex flexDirection='row' justifyContent='space-between'>
-            <Button onClick={handleClick} variant='unstyled' mb={10} alignSelf='flex-start'>BACK TO SPACE</Button>
-            <Button onClick={handleArticleClick} variant='unstyled' mb={10} alignSelf='flex-start'><FiFeather size={24} /></Button>
-            <Button onClick={handleQuizClick} variant='unstyled' mb={10}>TAKE A QUIZ</Button>
+            <Button onClick={handleClick} variant='unstyled' mb={5} alignSelf='flex-start'>BACK TO SPACE</Button>
+            <Button onClick={handleArticleClick} variant='unstyled' mb={5} alignSelf='flex-start'><FiFeather size={24} /></Button>
+            <Button onClick={handleQuizClick} variant='unstyled' mb={5}>TAKE A QUIZ</Button>
           </Flex>
  
             <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
-
-            <ShortDescPlanet />
-
-            <Box mt={10}>
+            
+            <Box mt={5}>
               <PlanetSpecs />
             </Box>
 
             <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
             {isOverlayVisible && <OverlayDialog />}
+
+            <Box height='500px'>
+              <ShortDescPlanet />
+            </Box>
 
         </Flex>
       </Box>

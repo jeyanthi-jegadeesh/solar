@@ -1,7 +1,11 @@
 export const dynamic = 'force-dynamic' // defaults to auto
  
-export async function GET(request: Request) {
-  const url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=Venus&format=json';
+export async function GET(request: Request, context: any) {
+  // // const planet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  // const planet = 'Jupiter';
+  const { params } = context;
+  const planet = params.planetName
+  const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=${planet}&format=json`;
   
   try {
     const response = await fetch(url);
@@ -28,3 +32,4 @@ export async function GET(request: Request) {
       });
   }
 }
+
