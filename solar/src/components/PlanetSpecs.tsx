@@ -36,7 +36,7 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
     return (
     <TableContainer>
     <Table variant='simple' size='sm' layout='fixed' w='100%' >
-        <TableCaption>Planet Specs</TableCaption>
+        <TableCaption></TableCaption>
         <Tbody>
             <Tr>
                 <Td>Type:</Td>

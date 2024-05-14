@@ -1,6 +1,6 @@
 'use client'
-import { Box, Button, Checkbox, Flex, Input, Text } from '@chakra-ui/react';
-import { useMemo, useState } from 'react';
+import { Box, Button, Checkbox, Editable, EditableInput, EditablePreview, Flex, Input, Text, Tooltip } from '@chakra-ui/react';
+import React, { useMemo, useState } from 'react';
 import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -121,7 +121,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
     setIsArticlePrivate(!isArticlePrivate);
   };
 
-  return (
+ return (
     <>
         <Box>
             
@@ -136,37 +136,65 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               {/* <Text size='sm' color='grey' textAlign='right'>{(new Date()).toLocaleDateString()} <br /></Text> */}
               {/* QUILL EDITOR */}
               {/* TODO PUT THE EDITOR ITSELF IN ITS OWN FUNCTION / SUBCOMPONENT */}
-              <Box h='500px'>
-                <Text size='sm' color='gray'>write something about {planetName}...</Text>
+              <Box h='500px'display="flex" flexDirection="column">
+                <Text 
+                  size='sm' 
+                  color='gray'
+                  marginBottom={15}
+                  >
+                    write something about {planetName}...
+                </Text>
                 
                 <form>
-                  <Input type='text' placeholder='My title...' value={articleTitle} onChange={handleTitleChange} ></Input>
+
+                <Editable 
+                  defaultValue='Click to edit title...' 
+                  fontSize='x-large'
+                  fontWeight={600}
+                >
+                  <EditablePreview />
+                  <EditableInput 
+                    type='text' 
+                    value={articleTitle} 
+                    onChange={handleTitleChange} 
+                    marginBottom={15} 
+                  />
+                </Editable>
                   
                 </form>
-                  <Box className='ql-editor'>
+                  <Box 
+                    height='auto'
+                    overflowY='hidden'
+                    marginBottom={15}
+                  >
 
                     <ReactQuill
-                              className='ql-editor' 
                               theme='snow' 
                               value={quillText} 
                               onChange={setQuillText} 
-                              min-height='200px'
-                              max-height='300px'
-                              />
+                              style={{ height: '300px', 
+                                       display: 'flex', 
+                                       flexDirection: 'column' 
+                                    }}
+                    />
 
                   </Box>
 
               {/* UPLOAD IMAGES TO ARTICLE */}
               {/* <Button leftIcon={ <FiUploadCloud size={24} />} variant='outline' w='100%' h={76}>upload Images to Article</Button> */}
               <PhotoUpload />
-              
-              <Checkbox onChange={handleIsPrivateChange}> public Article</Checkbox>
 
               </Box>
               
               {/* CONTROLS */}
               <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
               
+                <Tooltip label='checking this box will make your article visible to our community' hasArrow aria-label='A tooltip'>
+                  <Checkbox onChange={handleIsPrivateChange}> 
+                    make this article public
+                  </Checkbox>
+                </Tooltip>
+
                 <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
                   cancel
                 </Button>
