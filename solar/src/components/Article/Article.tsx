@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Checkbox, Editable, EditableInput, EditablePreview, Flex, Heading, Input, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Editable, EditableInput, EditablePreview, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
 
@@ -13,10 +13,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Date } from 'mongoose';
 import PhotoUpload from '../PhotoUpload';
-import ArticleList from './ArticleList';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
+  const associatedPlanetsLower = associatedPlanets.map(planet => planet.toLowerCase());
+
   // TODO create actual fetch function for article!
     const articleData = {
       authorId: userId,
@@ -24,7 +25,7 @@ async function createArticle(userId: number, isPrivate: boolean = true, title: s
       title: title,
       subtitle: '',
       articleBody: articleBody,
-      associatedPlanets: associatedPlanets,
+      associatedPlanets: associatedPlanetsLower,
     }
 
     const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
@@ -175,6 +176,7 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                     <EditableInput 
                       type='text' 
                       value={articleTitle} 
+                      defaultValue={planetName + ' Observations'} 
                       onChange={handleTitleChange} 
                       marginBottom={15} 
                     />
@@ -232,14 +234,31 @@ const Article = ({planetName, articleId}:ArticleProps) => {
               </>
               : 
               currentArticle && 
-              <Box p='8px'> 
+              <>
+              <Box p='8px' overflowY='auto' maxH='80vh'> 
               <Heading as='h1' size='md'>{currentArticle.title}</Heading>
-              {currentArticle.subtitle && <Heading as='h2' size='xxs' color='#cccccc'>{currentArticle.subtitle}</Heading>}
-              {currentArticle.titleImage && <img src={article.titleImage} width='100%'></img>}
-              <Text pt='8px' pb='16px' dangerouslySetInnerHTML={{ __html: currentArticle.articleBody }} />
-              <Button onClick={() => (setBlogEditMode(true))} >edit article</Button>
-              </Box>
+              
+              {currentArticle.subtitle && 
+                <Heading 
+                  as='h2' 
+                  size='xxs' 
+                  color='#cccccc'>
+                    {currentArticle.subtitle}
+                </Heading>
+              }
+              
+              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'} width='100%' alt={currentArticle.title} mt='12px' mb='12px'/>
+              
+              <Text 
+                pt='8px' 
+                pb='16px' 
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(currentArticle.articleBody) }} 
+                overflowY='scroll'
+              />
 
+              </Box>
+              <Button onClick={() => (setBlogEditMode(true))} >edit article</Button>
+              </>
               }
               
           </Box>

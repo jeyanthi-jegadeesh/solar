@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, CloseButton, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Editable, EditableInput, EditablePreview, Flex, Heading, Image, Input, Spinner, Stack, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, CloseButton, Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Editable, EditableInput, EditablePreview, Flex, Heading, Image, Input, Spinner, Stack, Tag, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
 
@@ -12,6 +12,7 @@ import { showDialogOverlay } from '@/app/store/overlaySlice';
 import { setSelectedContent } from '@/app/store/contentSlice';
 import { setCurrentArticle } from '@/app/store/articleSlice';
 import { FiEdit3 } from 'react-icons/fi';
+import DOMPurify from 'dompurify';
 
 
 const ArticleList = ({ isOpen, onClose }) => {
@@ -100,21 +101,30 @@ return(
            >
         <Image
           objectFit='cover'
+          w='100px'
+          h='100px'
           maxW={{ base: '100%', sm: '200px' }}
           src={article.titleImage || 'https://random.imagecdn.app/250/250'}
           alt='Caffe Latte'
         />
-        <Stack>
-          <CardHeader>
-              <Heading size='sm'>
+        <Stack>         
+          <CardBody>            
+              
+              <Heading size='sm' mb='8px'>
                   {article.title}
               </Heading>
-          </CardHeader>
-          
-          <CardBody textOverflow='ellipsis' 
-                  overflow='hidden'>
               
-              { article.type === 'article' && <Text>{article.content}</Text> }
+              { // show the date in a small tag
+              article.createdAt && 
+              <Tag mb='8px' p='6px' position='absolute' top='12px' right='12px' >
+                {new Date(article.createdAt).toLocaleDateString()}
+              </Tag>
+              } 
+            <Text
+              overflow='hidden'
+              noOfLines={3} // Adjust the number of lines to display before truncation
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.articleBody) }}
+            />
           </CardBody>
        </Stack>
    </Card>
@@ -144,15 +154,15 @@ return(
           
             <CloseButton onClick={onClose} />
 
-            learn about {selectedPlanet}
-          
+            <Heading as='h1' size='md'>learn about {selectedPlanet}</Heading>
+        
           </DrawerHeader>
           
           <DrawerBody>
-            
-              <NewArticleButton />
-            
-              {isLoading && <Spinner />}
+              
+             <NewArticleButton />
+              <br />
+              {isLoading && <Spinner m='auto'/>}
               {!isLoading && articles &&
             
               articles.map(article => (          
