@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';
@@ -23,10 +23,7 @@ const ShortDescPlanet = () => {
   },[]);
 
   return (
-    <Box height='300px' overflow='auto' bg='blue.50' color='blue.900' border='2px' borderColor='blue.900' borderRadius='5' p='5'>
-      {/* <Text>{planet}</Text> */}
-      <div dangerouslySetInnerHTML={{ __html: description }} />
-    </Box>
+    <Box height='100%' overflow='auto' bg='blue.50' color='blue.900' border='2px' borderColor='blue.900' borderRadius='5' p='5' dangerouslySetInnerHTML={{ __html: description }} /> 
   )
 }
 

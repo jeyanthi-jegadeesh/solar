@@ -31,7 +31,7 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
   <Flex
     direction={isSmallScreen ? "row" : "column"}
     alignItems={isSmallScreen ? "flex-start" : "center"}
-    mb={isSmallScreen ? 12 : 24}
+    mb={isSmallScreen ? 12 : 12}
     position="relative"
   >
     {!isSmallScreen && (
