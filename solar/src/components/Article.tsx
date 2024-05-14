@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Date } from 'mongoose';
 import PhotoUpload from './PhotoUpload';
+import ArticleList from './ArticleList';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
@@ -106,7 +107,12 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
       const purifiedArticle = DOMPurify.sanitize(quillText);
       const purifiedTitle = DOMPurify.sanitize(articleTitle);
 
-      const newArticle = await createArticle(userId, true, purifiedTitle, purifiedArticle, ['mars']); // TODO set it to the actual planet
+      const newArticle = await createArticle( userId, 
+                                              true, 
+                                              purifiedTitle, 
+                                              purifiedArticle, 
+                                              selectedPlanet ? [selectedPlanet] : []
+                                            ); 
       
       setArticle(newArticle!.articleBody)
       setBlogEditMode(false);
@@ -129,6 +135,8 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
             {
               blogEditMode ? 
               <>
+              
+              <ArticleList /> 
               
               {/* SHOW THE DATE ABOVE THE ARTICLE */}
               {/* TODO SHOW AUTHOR etc. according to the auth data */}
@@ -188,7 +196,7 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
               
               {/* CONTROLS */}
               <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
-              
+      
                 <Tooltip label='checking this box will make your article visible to our community' hasArrow aria-label='A tooltip'>
                   <Checkbox onChange={handleIsPrivateChange}> 
                     make this article public
@@ -202,7 +210,6 @@ const Article = ({planetName, editMode, articleId}:ArticleProps) => {
                 <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
                   save article
                 </Button>
-              
               </Flex>
             </>
             : 
