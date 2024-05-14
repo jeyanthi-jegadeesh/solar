@@ -7,6 +7,7 @@ const articleSchema = new mongoose.Schema({
     isPrivate: { type: Boolean, default: false },
     title: { type: String, required: true },
     subtitle: { type: String },
+    titleImage: { type: String },
     articleBody: { type: String, required: true },
     associatedPlanets: [{ type: String, ref: 'Planet' }],
 }, { timestamps: true });

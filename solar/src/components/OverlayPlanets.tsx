@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store/store';
-import { Box, Button, Flex} from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure} from "@chakra-ui/react";
 import PlanetTimeline from "./Timeline";
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 import PlanetSpecs from './PlanetSpecs';
@@ -13,12 +13,12 @@ import { setSelectedContent } from '@/app/store/contentSlice';
 import { showDialogOverlay } from '@/app/store/overlaySlice';
 import OverlayDialog from '@/components/OverlayDialog';
 import { FiFeather } from 'react-icons/fi';
-import ArticleList from './ArticleList';
+import ArticleList from './Article/ArticleList';
 
 const OverlayPlanets: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const isOverlayVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
-  const [isArticleListVisible, setIsArticleListVisible] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const OverlayPlanets: React.FC = () => {
   };
 
   const handleArticleClick = () => {
-    setIsArticleListVisible(!isArticleListVisible)
+    onOpen();
   };
 
   return (
@@ -60,7 +60,7 @@ const OverlayPlanets: React.FC = () => {
               <ShortDescPlanet />
             </Box>
 
-            {isArticleListVisible && <ArticleList />}
+            <ArticleList isOpen={isOpen} onClose={onClose} />
 
         </Flex>
       </Box>

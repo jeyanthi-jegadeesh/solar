@@ -5,6 +5,7 @@ import overlayReducer from "./overlaySlice";
 import contentReducer from "./carouselSlice"; //Costanza imported her slice
 import fullNewsReducer from "./fullNewsSlice";
 import dialogReducer from "./contentSlice";
+import articleReducer from "./articleSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     overlay: overlayReducer, // Add the overlay slice to the store
     content: contentReducer, //Costanza added her reducer
     fullNews: fullNewsReducer, // Included the fullNewsSlice reducer
+    article: articleReducer, 
   },
 });
 
