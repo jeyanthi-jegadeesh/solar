@@ -370,3 +370,31 @@ strong {
     background-position: 180px;
   }
 }
+
+/* Styling carousel card button */
+.card_button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #1a365d;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  font-family: inherit;
+  border-top-right-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  box-shadow: inset 0 0 10px #ebf8ff, 0 0 9px 3px #1a365d;
+}
+
+.card_button:hover {
+  color: #1a365d;
+  box-shadow: inset 0 0 10px #1a365d, 0 0 9px 3px #ebf8ff;
+}
+
+.card_button:hover:before {
+  transform: translateX(15em);
+}
