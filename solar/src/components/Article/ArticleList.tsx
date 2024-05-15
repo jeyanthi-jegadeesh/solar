@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, CardBody,  Container,  Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text, Tooltip, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text, Tooltip } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -12,7 +12,6 @@ import { setSelectedContent } from '@/app/store/contentSlice';
 import { addArticleToFavs, removeArticleFromFavs, setCurrentArticle } from '@/app/store/articleSlice';
 import DOMPurify from 'dompurify';
 import { IArticle } from '@/app/utils/types';
-import { getServerSession } from 'next-auth';
 import { FiLock, FiStar } from 'react-icons/fi';
 
 interface ArticleListProps {
@@ -78,10 +77,8 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
       console.log('clicked on', article);
       if (isAlreadyFav) {
           dispatch(removeArticleFromFavs(newFavArticle));
-          console.log('Removed article from FAVS:', newFavArticle);
       } else {
           dispatch(addArticleToFavs(newFavArticle));
-          console.log('Added article to FAVS:', newFavArticle);
       }
   }
     
@@ -110,7 +107,8 @@ return(
           <Stack>         
             <CardBody>            
 
-              <Box position='absolute' top='12px' right='12px' >
+              <Box position='absolute' top='12px' right='12px' justifyContent='space-between'>
+                  
                   {article.isPrivate && 
                     <Tooltip 
                       label='this article is private' 
@@ -121,16 +119,16 @@ return(
                       </Tag>
                     </Tooltip>
                   }
-                
                 <Tooltip 
                   label='add to favorites' 
                   hasArrow aria-label='A tooltip'
-                >
+                  >
                   <Tag onClick={()=> handleFavClick(article)}>
                       <FiStar /> {/*TODO onclick -> addtofavourites */}
                   </Tag>
                 </Tooltip> 
 
+                  <br/>
                   { // show the date in a small tag
                     article.createdAt && 
                       <Tag p='6px'  >
