@@ -223,7 +223,12 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                 </Heading>
               }
               
-              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'} width='100%' alt={currentArticle.title} mt='12px' mb='12px'/>
+              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'}
+                     width='100%'
+                     alt={currentArticle.title} 
+                     mt='12px' 
+                     mb='12px'
+              />
               
               <Text 
                 pt='8px' 
