@@ -13,13 +13,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Date } from 'mongoose';
 import PhotoUpload from '../PhotoUpload';
+import { IArticle } from '@/app/utils/types';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
   const associatedPlanetsLower = associatedPlanets.map(planet => planet.toLowerCase());
 
   // TODO create actual fetch function for article!
-    const articleData = {
+    const articleData:IArticle = {
       authorId: userId,
       isPrivate: isPrivate,
       title: title,

@@ -1,11 +1,13 @@
 import React from 'react';
 import './userStyles.css';
+import { Box, Flex } from '@chakra-ui/react';
+import ArticleList from '../Article/ArticleList';
 
 const ArticlesCarousel = () => {
   return (
-    <div className="articles-carousel">
-      <h2>Recent Articles</h2>
-    </div>
+    <Flex direction='row' gap='2'>
+      <ArticleList />
+    </Flex>
   );
 };
 

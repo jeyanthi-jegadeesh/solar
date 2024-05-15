@@ -27,7 +27,7 @@ export interface IUser {
 
 export interface IArticle  {
   authorId: number | string,
-  isPrivate: true,
+  isPrivate: boolean,
   title: string,
   titleImage?: string,
   subtitle?: string,
