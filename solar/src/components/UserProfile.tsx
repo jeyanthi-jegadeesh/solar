@@ -1,10 +1,10 @@
 "use client";
 
 interface User {
-    email: string;
+    _id: string;
     firstName: string;
     lastName: string;
-    _id: string;
+    email: string;
 };
 
 interface Props {
@@ -12,8 +12,6 @@ interface Props {
 };
 
 export default function UserProfile({ user }: Props) {
-    console.log("from user profile")
-    console.log(user);
     return (
         <div>
             <h2>User Profile</h2>

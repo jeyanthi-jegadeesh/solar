@@ -18,7 +18,6 @@ export default function LogIn() {
     password: '',
   });
 
-  // const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

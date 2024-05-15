@@ -29,21 +29,20 @@ export default async function Page() {
   if(session?.user){
     const email = session && session.user && session.user.email;
     if(email){
-        userData = await getUserData(email); // Await the getUserData function
-        console.log('userData ,',userData);
+        userData = await getUserData(email); 
+        // TODO: check the possibility to get all user data from session and avoid the above db call
+       // userData = session.user;
+       
     }
 
   }
   if(!userData){
     redirect('/');
-    // Session provider in layout and useSession in navbar
-    // Show Toast component with message to login
-    // redirect to login page. in loginpage (client component) dispatch showsLogInOverlay action
   }
   return (
     <> 
       {userData ? (
-        <UserProfile user={userData}/> // Pass userData directly
+        <UserProfile user={userData}/> // Pass userData to the UserProfile component
       ) : (
         <h1>You have to login to view this page</h1>
 
