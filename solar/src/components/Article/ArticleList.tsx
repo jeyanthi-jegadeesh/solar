@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text, Toast, Tooltip, useToast } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -77,8 +77,22 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
       console.log('clicked on', article);
       if (isAlreadyFav) {
           dispatch(removeArticleFromFavs(newFavArticle));
+          useToast({
+            title: 'Article removed from favs',
+            description: newFavArticle.title,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
       } else {
           dispatch(addArticleToFavs(newFavArticle));
+          useToast({
+            title: 'Article added to favs',
+            description: newFavArticle.title,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
       }
   }
     
