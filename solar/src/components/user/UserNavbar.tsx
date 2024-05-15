@@ -20,13 +20,15 @@ const UserNavbar: React.FC = () => {
 
     return (
         <div className="user-navbar">
-            <a href="/home" className="nav-link"><FaHome /> Home</a>
-            <a href="/favorites" className="nav-link"><FaStar /> Favorites</a>
-            <button onClick={toggleTheme} className="theme-toggle">
-                {theme === 'light' ? <FaMoon /> : <FaSun />}
-            </button>
-            <div className="settings-icon">
-                <FaCog />
+            <a href="/home" className="nav-link"><FaHome /><span>Home</span></a>
+            <a href="/favorites" className="nav-link"><FaStar /><span>Favorites</span></a>
+            <div className="right-section">
+                <button onClick={toggleTheme} className="theme-toggle">
+                    {theme === 'light' ? <FaMoon /> : <FaSun />}
+                </button>
+                <div className="settings-icon">
+                    <FaCog />
+                </div>
             </div>
         </div>
     );

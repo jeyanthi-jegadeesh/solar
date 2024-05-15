@@ -10,11 +10,9 @@ interface UserInfoProps {
 const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
     return (
         <div className="user-info">
-            <div className="profile-icon">
-                <img src={imageUrl} alt="User" className="user-image"/>
-            </div>
-            <h2 className="user-name">{name}</h2>
-            <p className="user-email">{email}</p>
+            <img src={imageUrl} alt="User"/>
+            <h2>{name}</h2>
+            <p>{email}</p>
         </div>
     );
 };
