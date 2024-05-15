@@ -1,46 +1,35 @@
-//struggling with imports
-
-import React from "react";
-import { Box, Image, Button } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux"; // Import useSelector and useDispatch
-// Import addImage action from slice import { addImage } from "@app/store/carouselSlice"; import { ImageContent } from "@app/utils/types";
-
+import React, { useState } from "react";
+import { CardBody, Image, Button } from "@chakra-ui/react";
 import { ImageContent } from "../app/utils/types";
-import { addImage } from "../app/store/carouselSlice";
-
-const selectImages = (state: { images: any }) => state.images;
-
-
+import { useDispatch } from "react-redux";
+import ModalImage from "./ModalImage";
+//importing type from types.ts
 interface ImageProps {
   content: ImageContent;
 }
 
 const ImageComponent: React.FC<ImageProps> = ({ content }) => {
   const dispatch = useDispatch();
-  const images = useSelector(selectImages);
-
-  console.log("Image content:", content);
-  console.log("Images from Redux store:", images);
-
-  const addImageToStore = (image: ImageContent) => {
-    console.log("Adding image to store:", image);
-    dispatch(addImage(image)); // Dispatch addImage action
-  };
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // /When we click on the image itself, the modal with a bigger version opens
   return (
-    <Box width="400px" height="300px" overflow="hidden">
+    <>
       <Image
         src={content.imageUrl}
         alt="Carousel Image"
         width="100%"
         height="100%"
         objectFit="cover"
-        onClick={() => addImageToStore(content)} // Image click handler to add image to store
         cursor="pointer"
+        borderRadius='lg'
+        onClick={() => setIsModalOpen(true)}
       />
-      <Button onClick={() => addImageToStore(content)}>Add to Store</Button>
-      {/* Button for adding image to the store */}
-    </Box>
+      <ModalImage
+        imageUrl={content.imageUrl}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 

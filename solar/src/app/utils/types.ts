@@ -38,6 +38,12 @@ export interface IArticle  {
   updatedAt?: Date,
 }
 
+export interface ModalImageProps {
+  imageUrl: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export interface PlanetType {
     name: string;
     color: string;
