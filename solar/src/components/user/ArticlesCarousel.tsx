@@ -6,7 +6,7 @@ import ArticleList from '../Article/ArticleList';
 const ArticlesCarousel = () => {
   return (
     <Box>
-      <Heading as='h2' size='md'>
+      <Heading as='h2' size='md' mb='1rem' >
         Your Articles
       </Heading>
       

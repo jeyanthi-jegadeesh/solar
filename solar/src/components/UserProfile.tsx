@@ -3,7 +3,6 @@
 import React from 'react';
 import { Box, Button, Flex, VStack } from '@chakra-ui/react';
 import UserInfo from '../components/user/UserInfo';
-// import ArticleEditor from '../components/user/ArticleEditor';
 import ImageUpload from '../components/user/ImageUpload';
 import UserNavbar from '../components/user/UserNavbar';
 import QuizResults from '../components/user/QuizResults';
@@ -42,9 +41,9 @@ export default function UserProfile({ user }: Props) {
                 </Box>
             </Flex>
             <Box className="main-content">
-                <Box className="quiz-results">
+
                     <QuizResults />
-                </Box>
+
                 <Box className="favorites-carousel">
                     <FavoritesCarousel />
                 </Box>

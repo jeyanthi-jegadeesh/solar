@@ -6,11 +6,11 @@ import ArticleList from '../Article/ArticleList';
 const FavoritesCarousel = () => {
   return (
     <Box>
-      <Heading as='h2' size='md'>
+      <Heading as='h2' size='md' mb='1rem'>
         your saved Articles
       </Heading>
       
-      <Flex direction='row' gap='4' overflowX='auto'>
+      <Flex direction='row' gap='4' overflowX='auto' >
         <ArticleList favList />
       </Flex>
     </Box>
