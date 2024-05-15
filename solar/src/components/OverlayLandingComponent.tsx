@@ -16,7 +16,19 @@ const OverlayLanding: React.FC = () => {
   const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 
   return (
-    <Box position="absolute" height='100vh' overflow='auto' zIndex={10}  top={2.5} left={2.5} m={5}  display={isOverlayVisible ? 'block' : 'none'}>
+    <Box position="absolute" 
+         height='100vh' 
+         overflow='auto' 
+         zIndex={10}  
+         top={2.5} 
+         left={2.5} 
+         m={5}  
+         display={isOverlayVisible ? 'block' : 'none'}
+         sx={{
+          '::-webkit-scrollbar': { display: 'none' }, // For Chrome, Safari, and Opera
+          scrollbarWidth: 'none' // For Firefox
+        }}
+    >
       <Flex flexDirection='row'>
         <Box flex='1' p='5'>
           
