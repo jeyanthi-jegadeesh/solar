@@ -1,8 +1,9 @@
 "use client";
 
 import React from 'react';
+import { Box, Button, Flex, VStack } from '@chakra-ui/react';
 import UserInfo from '../components/user/UserInfo';
-import ArticleEditor from '../components/user/ArticleEditor';
+// import ArticleEditor from '../components/user/ArticleEditor';
 import ImageUpload from '../components/user/ImageUpload';
 import UserNavbar from '../components/user/UserNavbar';
 import QuizResults from '../components/user/QuizResults';
@@ -31,22 +32,36 @@ export default function UserProfile({ user }: Props) {
     const isOverlayVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
 
     return (
-        <div className="user-page-container">
-            <UserNavbar />
-            <div className="sidebar">
-                <UserInfo name={`${user.firstName} ${user.lastName}`} email={user.email} imageUrl="/path/to/image.jpg" />
-            </div>
-            <div className="main-content">
-                <QuizResults />
-                <FavoritesCarousel />
-                <ArticlesCarousel />
+        <Box className="user-page-container">
+            <Box className="user-navbar">
+                <UserNavbar />
+            </Box>
+            <Flex className="sidebar">
+                <Box className="user-info">
+                    <UserInfo name={`${user.firstName} ${user.lastName}`} email={user.email} imageUrl="/path/to/image.jpg" />
+                </Box>
+            </Flex>
+            <Box className="main-content">
+                <Box className="quiz-results">
+                    <QuizResults />
+                </Box>
+                <Box className="favorites-carousel">
+                    <FavoritesCarousel />
+                </Box>
+                <Box className="articles-carousel">
+                    <ArticlesCarousel />
                 {isOverlayVisible && <OverlayDialog />}
 
-                <div className="actions-row">
-                    <button className="image-upload-button">Image Upload...</button>
-                    <button className="new-article-button" onClick={() => { alert("Navigating to new article page!"); }}>New Article</button>
-                </div>
-            </div>
-        </div>
+                </Box>
+                <Flex className="actions-row">
+                    <Button className="image-upload-button">
+                        Image Upload...
+                    </Button>
+                    <Button className="new-article-button" onClick={() => { alert("Navigating to new article page!"); }}>
+                        New Article
+                    </Button>
+                </Flex>
+            </Box>
+        </Box>
     );
 }
