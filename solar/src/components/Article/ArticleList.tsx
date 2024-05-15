@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text, Toast, Tooltip, useToast } from '@chakra-ui/react';
+import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text,  Tooltip  } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -65,7 +65,6 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
 
   const ArticleCard = ({article}:ArticleCardProps) => {
     const dispatch = useDispatch();
-    const toast = useToast(); // chakra toast component :)
 
     function handleClick() {
         dispatch(setCurrentArticle(article));
@@ -80,13 +79,6 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
           dispatch(removeArticleFromFavs(newFavArticle));
       } else {
           dispatch(addArticleToFavs(newFavArticle));
-          useToast({
-            title: 'Article added to favs',
-            description: newFavArticle.title,
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-          });
       }
   }
     
@@ -131,16 +123,7 @@ return(
                   label='add to favorites' 
                   hasArrow aria-label='A tooltip'
                   >
-                  <Tag onClick={()=> {handleFavClick(article); 
-                                        toast({
-                                        title: 'Article removed from favs',
-                                        description: article.title,
-                                        status: 'success',
-                                        duration: 3000,
-                                        isClosable: true,
-                                        })
-                                      }}
-                    >
+                  <Tag onClick={()=> {handleFavClick(article)}}>
                       <FiStar /> {/*TODO onclick -> addtofavourites */}
                   </Tag>
                 </Tooltip> 

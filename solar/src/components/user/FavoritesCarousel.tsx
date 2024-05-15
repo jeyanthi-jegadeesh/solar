@@ -17,4 +17,4 @@ const FavoritesCarousel = () => {
   );
 };
 
-// export default FavoritesCarousel;
+export default FavoritesCarousel;

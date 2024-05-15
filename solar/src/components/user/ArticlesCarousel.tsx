@@ -17,4 +17,4 @@ const ArticlesCarousel = () => {
   );
 };
 
-// export default ArticlesCarousel;
+export default ArticlesCarousel;
