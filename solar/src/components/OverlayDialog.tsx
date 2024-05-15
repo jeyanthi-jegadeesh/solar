@@ -21,7 +21,7 @@ const OverlayDialog: React.FC = () => {
   if (selectedContent === 'quiz') {
     content = selectedPlanet ? <Quiz planetName={selectedPlanet} /> : <Quiz planetName="Mars" />;
   } else {
-    content = selectedPlanet ? <Article planetName={selectedPlanet} editMode={true} /> : null;
+    content = selectedPlanet ? <Article /> : null;
   }
 
   return (
