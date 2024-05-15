@@ -111,32 +111,80 @@ a {
 /* Styles for the Navbar */
 .navbar {
   background: linear-gradient(to top, #1a365d, #000000);
-  padding: 1rem;
+  padding: 0.1rem;
   position: fixed;
   top: 0;
-  width: 100%; 
-  z-index: 1000; 
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-
 
 .nav-list {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
-  align-items: center; 
-  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-item {
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 
 .nav-link {
-  color: white; 
+  color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem; 
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.nav-link span {
+  margin-left: 8px;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transform: scale(1.1);
+}
+
+.navbar .chakra-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.navbar .chakra-button {
+  font-size: 14px;
+  padding: 0.4rem 0.8rem;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.theme-toggle, .settings-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+
+
 
 /* Styling of "EXPLORE" button */
 .btn {

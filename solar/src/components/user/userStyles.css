@@ -1,0 +1,333 @@
+@import '../../app/globals.css';
+
+.user-navbar {
+    background: linear-gradient(to top, #1a365d, #000000);
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; 
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.user-navbar a, .settings-icon {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem; 
+    display: flex; 
+    align-items: center; 
+}
+
+.settings-icon {
+    margin-left: auto; 
+    padding-right: 2rem; 
+}
+
+.user-navbar a:hover, .settings-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px; 
+}
+
+
+.user-info {
+    grid-area: info;
+    font-family: var(--font-mono);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 3px; 
+    height: 90%;
+    justify-content: space-between;
+}
+
+body[data-theme="dark"] .user-info {
+    background: rgba(0, 0, 0, 0.85);
+    color: #FFF; 
+}
+
+.user-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.user-page-container {
+    display: grid;
+    grid-area: sidebar;
+    grid-template-columns: 300px auto; 
+    grid-template-rows: auto;
+    grid-template-areas:
+        "sidebar main";
+    gap: 20px;
+    padding: 20px;
+    padding-top: 100px; 
+    height: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.user-content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; 
+}
+
+
+.user-content textarea, .user-content button {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    border: 1px solid #ccc; 
+}
+
+.user-content button {
+    background: linear-gradient(to bottom, #1a365d, #000000); 
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.user-content button:hover {
+    background: linear-gradient(to bottom, #163d5d, #000000); 
+}
+
+
+.article-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05); 
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+.article-title-input, .article-textarea {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+}
+
+.article-textarea {
+    height: 300px; 
+    resize: none; 
+}
+
+.editor-buttons {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 10px; 
+}
+
+.icon-button {
+    background: none;
+    border: 1px solid #ccc;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #007BFF; 
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.font-size-selector, .text-color-picker {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    margin: 0 5px;
+}
+
+.text-color-picker {
+    width: 40px; 
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+
+:root {
+    --background-color-light: #FFFFFF; 
+    --background-color-dark: #121212; 
+}
+
+body[data-theme="light"] {
+    background-color: var(--background-color-light);
+}
+
+body[data-theme="dark"] {
+    background-color: var(--background-color-dark);
+}
+
+.main-content {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.utility-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.new-article-button {
+    background: linear-gradient(to bottom, #1a365d, #000000);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+}
+
+.new-article-button:hover {
+    background: linear-gradient(to bottom, #163d5d, #000000);
+}
+
+.quiz-results, .favorites-carousel, .articles-carousel, .actions-row {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="dark"] .quiz-results,
+body[data-theme="dark"] .favorites-carousel,
+body[data-theme="dark"] .articles-carousel,
+body[data-theme="dark"] .actions-row {
+    background: rgba(0, 0, 0, 0.6);
+    color: #FFF;
+}
+
+
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0; 
+}
+
+
+.image-upload-button, .new-article-button {
+    background: linear-gradient(to bottom, #1a365d, #000000);
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px; 
+    border-radius: 4px;
+    text-align: center;
+    width: auto; 
+    display: inline-block; 
+}
+
+.image-upload-button:hover, .new-article-button:hover {
+    background: linear-gradient(to bottom, #163d5d, #000000);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+
+.nav-link span {
+    margin-left: 8px;
+}
+
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.theme-toggle, .settings-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.theme-toggle, .settings-icon, .nav-link {
+    font-size: 1.25rem;
+}
+
+
+.user-info h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.user-info p {
+    margin: 0;
+    color: #718096;
+}
