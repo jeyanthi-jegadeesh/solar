@@ -25,6 +25,7 @@ const OverlayPlanets: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
+    dispatch(updateSelectedPlanet(''));
     dispatch(hidePlanetsOverlay());
   };
 
