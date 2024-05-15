@@ -25,5 +25,8 @@
     "react-quill": "^2.0.0",
     "three": "^0.164.1",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2"
   }
 }
