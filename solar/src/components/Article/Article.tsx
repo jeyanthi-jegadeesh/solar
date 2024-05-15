@@ -51,14 +51,6 @@ async function createArticle(userId: number, isPrivate: boolean = true, title: s
     }
   }
 
-
-  function getArticleById(articleId?: number) {
-    if (!articleId) return 'no article found...';
-    return 'article dummy!'
-    // TODO create actual fetch function for article!
-  }
-
-
 function getPlanetInfo(planetName: string) {
     if (!planetName) return undefined;
     
@@ -79,14 +71,11 @@ const Article = ({planetName, articleId}:ArticleProps) => {
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
 
-  let firstArticle = getArticleById(articleId);
-
   // STATES: 
   const [quillText, setQuillText] = useState(''); // quillText -> the text inside of the quill editor.
   const [isArticlePrivate, setIsArticlePrivate] = useState(true); // quillText -> the text inside of the quill editor.
   const [articleTitle, setArticleTitle] = useState(''); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(false); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
-  const [article, setArticle] = useState(firstArticle); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
   
   useEffect(() => {
     if (currentArticle) {
@@ -234,7 +223,12 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                 </Heading>
               }
               
-              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'} width='100%' alt={currentArticle.title} mt='12px' mb='12px'/>
+              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'}
+                     width='100%'
+                     alt={currentArticle.title} 
+                     mt='12px' 
+                     mb='12px'
+              />
               
               <Text 
                 pt='8px' 
