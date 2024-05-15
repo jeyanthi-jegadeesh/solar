@@ -22,7 +22,7 @@ import { RootState } from "@/app/store/store";
 
 interface SolarSystemProps {
   celestialObjects: PlanetType[];
-  cameraControlsRef: React.Ref<Camera>;
+  cameraControlsRef: React.MutableRefObject<CameraControls | null>;
 }
 
 const AnimationManagement = () => {
@@ -214,7 +214,7 @@ const SpaceExplorer = () => {
   
 
   // Take care of camera controls
-  const cameraControlsRef = useRef()
+  const cameraControlsRef = useRef<CameraControls | null>(null);
 
   // const { camera } = useThree()
 
