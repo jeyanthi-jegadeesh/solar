@@ -14,6 +14,7 @@ import { showDialogOverlay } from '@/app/store/overlaySlice';
 import OverlayDialog from '@/components/OverlayDialog';
 import { FiFeather } from 'react-icons/fi';
 import ArticleList from './Article/ArticleList';
+import ArticleDrawer from './Article/ArticleDrawer';
 
 const OverlayPlanets: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
@@ -67,7 +68,7 @@ const OverlayPlanets: React.FC = () => {
             <ShortDescPlanet />
           </Box>
 
-            <ArticleList isOpen={isOpen} onClose={onClose} />
+            <ArticleDrawer isOpen={isOpen} onClose={onClose} />
 
         </Flex>
       </Box>

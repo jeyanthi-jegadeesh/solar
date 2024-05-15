@@ -246,7 +246,7 @@ const SpaceExplorer = () => {
         <PerspectiveCamera 
           ref={cameraRef}
           makeDefault // !!!
-          position={[0, 0, 200]}
+          position={[0, -250, 100]}
           fov={50} // field of view
         />
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Card, CardBody,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, CloseButton,  Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
@@ -13,42 +13,39 @@ import { setCurrentArticle } from '@/app/store/articleSlice';
 import { FiEdit3, FiStar } from 'react-icons/fi';
 import DOMPurify from 'dompurify';
 import { IArticle } from '@/app/utils/types';
+import ArticleList from './ArticleList';
 
-const ArticleList = () => {
-  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  const [isLoading, setIsLoading] = useState(false)
-  const [articles, setArticles] = useState([]);
-  
-
-  async function getArticlesByPlanet (planetName: string) {
-    const URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:3000";
-    
-    if (!planetName) return [];
-    
-    try {
-        const response = await fetch(URL + '/api/articles/planet/' + planetName);
-        console.log(URL + '/api/articles/planet/' + planetName)
-        const articleRes = await response.json();
-
-        console.log(articleRes.data);
-        return articleRes.data;
-    } catch (err) {
-        console.error(err);
-        return [];
-    }
+interface ArticleDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      setIsLoading(true);
-      const fetchedArticles = await getArticlesByPlanet(selectedPlanet || 'earth');
-      setArticles(fetchedArticles);
-      setIsLoading(false);
-      console.log(fetchedArticles);
-    };
+const ArticleDrawer = ({ isOpen, onClose }:ArticleDrawerProps) => {
+  const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
+  const dispatch = useDispatch();
+  
 
-    fetchArticles();
-  }, [selectedPlanet]);
+
+  const NewArticleButton = () => {
+      
+    function handleClick() {
+      dispatch(setCurrentArticle(null));
+      dispatch(setSelectedContent('article'));
+      dispatch(showDialogOverlay());
+    }
+    
+    return (
+
+      <Button 
+        leftIcon={<FiEdit3 />} 
+        variant='solid' 
+        onClick={()=> handleClick()}
+        marginBottom={10}
+      >
+        write a new article
+      </Button>
+      )
+  }
 
   interface ArticleCardProps {
     article: IArticle;
@@ -115,18 +112,42 @@ return(
 
  return (
     <>
-              {isLoading && <Spinner m='auto'/>}
-              {!isLoading && articles &&
-            
-              articles.map((article:IArticle) => (          
-                      <ArticleCard 
-                        key={article._id} 
-                        article={article} 
-                      />
-              ))
-              }
+      
+      <Drawer 
+        placement='right' 
+        onClose={onClose} 
+        isOpen={isOpen} 
+        size='xl'
+      >
+        <DrawerOverlay />
+        <DrawerContent
+          bgGradient='linear(to-t, blue.700, black)' 
+          opacity={0.9} 
+          w='100%' 
+          color='white' 
+          padding="5" 
+        >
+          <DrawerHeader 
+            borderBottomWidth='1px' 
+            justifyContent='space-between'
+          >
+          
+            <CloseButton onClick={onClose} />
+
+            <Heading as='h1' size='md'>learn about {selectedPlanet}</Heading>
+        
+          </DrawerHeader>
+          
+          <DrawerBody>
+              
+             <NewArticleButton />
+            <ArticleList />
+          
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
 
-export default ArticleList;
+export default ArticleDrawer;
