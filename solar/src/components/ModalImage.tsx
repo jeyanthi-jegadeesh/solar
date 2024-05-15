@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  ModalHeader,
   Image,
 } from "@chakra-ui/react";
 import { ModalImageProps } from "../app/utils/types"; //importing modal type
@@ -17,9 +18,14 @@ const ModalImage: React.FC<ModalImageProps> = ({
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <ModalOverlay />
+      <ModalOverlay
+      bg='blackAlpha.800'
+      backdropFilter='blur(10px) hue-rotate(90deg)'
+      />
       <ModalContent>
-        <ModalCloseButton color="white" margin-left="10px" />
+        <ModalHeader>
+          <ModalCloseButton />
+        </ModalHeader>
         <ModalBody>
           <Image src={imageUrl} alt="Large Image" />
         </ModalBody>
