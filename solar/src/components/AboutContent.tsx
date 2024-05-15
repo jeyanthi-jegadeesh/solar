@@ -1,5 +1,4 @@
 import { Box, Heading, Text, Link, Button } from '@chakra-ui/react';
-import NextLink from 'next/link'; // Next.js link component for routing
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay } from '../app/store/overlaySlice';
 
@@ -20,9 +19,20 @@ const About = () => {
       </Text> 
 
       <Box display="flex" justifyContent="flex-end">
-          <Link href="#" fontSize="lg" fontWeight="bold" color="white" onClick={handleExploreClick}>
+          {/* <Link href="#" fontSize="lg" fontWeight="bold" color="white" onClick={handleExploreClick}>
             EXPLORE
-          </Link>
+          </Link> */}
+          <button className="btn" type="button" onClick={handleExploreClick}>
+            <strong>EXPLORE</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+
+            <div id="glow">
+              <div className="circle"></div>
+              <div className="circle"></div>
+            </div>
+          </button>
       </Box>
     </Box>
   );

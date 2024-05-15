@@ -1,9 +1,9 @@
-//added by Costanza. Feel free to add your own types too
-
+import { Vector3 } from "three"; // needed for Planet Type
 export interface NewsContent {
-  h1: string;
-  h2: string;
-  p: string;
+  id: number,
+  title: string,
+  url: string,
+  summary: string
 }
 
 export interface ImageContent {
@@ -11,6 +11,7 @@ export interface ImageContent {
 }
 
 export interface RootState {
+  fullNews: any;
   carouselSlice: any;
   images: ImageContent[];
   news: NewsContent[];
@@ -22,4 +23,31 @@ export interface IUser {
   password: string
   _id: string
   imageUrl: string;
+}
+
+export interface IArticle  {
+  authorId: number | string,
+  isPrivate: true,
+  title: string,
+  titleImage?: string,
+  subtitle?: string,
+  articleBody: string,
+  associatedPlanets?: string[],
+  _id?: string,
+  createdAt?: Date,
+  updatedAt?: Date,
+}
+
+
+
+export interface PlanetType {
+    name: string;
+    color: string;
+    position: Vector3;
+    velocity: number;
+    distance: number;
+    size: number;
+    textureURL?: string;
+    orbitCenter: Vector3;
+    description: string;
 }

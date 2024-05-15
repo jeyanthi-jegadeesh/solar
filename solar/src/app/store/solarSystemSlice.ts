@@ -49,6 +49,7 @@ const solarSystemSlice = createSlice({
     updateSelectedPlanet(state, action: PayloadAction<string | null>) {
       const planetName:string | null = action.payload;
       state.selectedPlanet = planetName;
+      console.log(typeof state.selectedPlanet);
       console.log('selected Planet', state.selectedPlanet)
     },
 

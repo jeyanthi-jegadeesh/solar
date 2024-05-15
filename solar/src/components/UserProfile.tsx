@@ -11,10 +11,10 @@ import ArticlesCarousel from '../components/user/ArticlesCarousel';
 import '../components/user/userStyles.css';
 
 interface User {
-    email: string;
+    _id: string;
     firstName: string;
     lastName: string;
-    _id: string;
+    email: string;
 };
 
 interface Props {

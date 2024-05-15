@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store/store';
-import { Box, Button, Flex} from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure} from "@chakra-ui/react";
 import PlanetTimeline from "./Timeline";
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 import PlanetSpecs from './PlanetSpecs';
@@ -13,10 +13,12 @@ import { setSelectedContent } from '@/app/store/contentSlice';
 import { showDialogOverlay } from '@/app/store/overlaySlice';
 import OverlayDialog from '@/components/OverlayDialog';
 import { FiFeather } from 'react-icons/fi';
+import ArticleList from './Article/ArticleList';
 
 const OverlayPlanets: React.FC = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const isOverlayVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useDispatch();
 
@@ -30,8 +32,7 @@ const OverlayPlanets: React.FC = () => {
   };
 
   const handleArticleClick = () => {
-    dispatch(setSelectedContent('article'));
-    dispatch(showDialogOverlay());
+    onOpen();
   };
 
   return (
@@ -40,22 +41,33 @@ const OverlayPlanets: React.FC = () => {
        
         <Flex flexDirection='column' overflow='auto' height='100%' pr={10}>
           
-          <Flex flexDirection='row' justifyContent='space-between'>
-            <Button onClick={handleClick} variant='unstyled' mb={10} alignSelf='flex-start'>BACK TO SPACE</Button>
-            <Button onClick={handleArticleClick} variant='unstyled' mb={10} alignSelf='flex-start'><FiFeather size={24} /></Button>
-            <Button onClick={handleQuizClick} variant='unstyled' mb={10}>TAKE A QUIZ</Button>
-          </Flex>
+          {/* <Flex flexDirection='row' justifyContent='space-between'>
+            <Button onClick={handleClick} variant='unstyled' mb={5} alignSelf='flex-start'>BACK TO SPACE</Button>
+            <Button onClick={handleArticleClick} variant='unstyled' mb={5} alignSelf='flex-start'><FiFeather size={24} /></Button>
+            <Button onClick={handleQuizClick} variant='unstyled' mb={5}>TAKE A QUIZ</Button>
+          </Flex> */}
+          <Box pt='40px' pl='70px'>
+            <Flex flexDirection='row' justifyContent='space-between'>
+                <button type='button' className="btn-shine" onClick={handleClick} >BACK TO SPACE</button>
+                <button type='button' className="btn-shine" onClick={handleQuizClick} >TAKE A QUIZ</button>
+                <button type='button' className="btn-shine" onClick={handleArticleClick} ><FiFeather size={24} /></button>
+            </Flex>
+          </Box>
  
-            <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
+          <PlanetTitle planetName={selectedPlanet ? selectedPlanet : ''} />
+          
+          <Box mt={5}>
+            <PlanetSpecs />
+          </Box>
 
+          <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
+          {isOverlayVisible && <OverlayDialog />}
+
+          <Box height='500px'>
             <ShortDescPlanet />
+          </Box>
 
-            <Box mt={10}>
-              <PlanetSpecs />
-            </Box>
-
-            <PlanetTimeline planetName={selectedPlanet ? selectedPlanet : ''} />
-            {isOverlayVisible && <OverlayDialog />}
+            <ArticleList isOpen={isOpen} onClose={onClose} />
 
         </Flex>
       </Box>

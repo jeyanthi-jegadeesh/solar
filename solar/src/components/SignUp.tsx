@@ -49,7 +49,6 @@ export default function SignUp() {
       });
 
       const user = await respUserExists.json();
-      console.log(respUserExists)
       if (user) {
         toast({
           title: 'User already exists.',
@@ -75,7 +74,7 @@ export default function SignUp() {
 
       if (res.ok) {
        // TODO : reset form to clear fields and 
-       // after registration user user session is empty so we need to login again
+       // after registration user session is empty so we need to login again
        // check the possibility to display user profile without login
        // Toster component to display successfull registration
       

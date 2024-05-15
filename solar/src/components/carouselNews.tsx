@@ -1,56 +1,26 @@
-//struggling with imports
+// NewsComponent.tsx
 
 import React from "react";
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
-import { addNews } from "../app/store/carouselSlice";
-import { NewsContent } from "../app/utils/types";
-
-// Define a selector function to extract news from the Redux store
-const selectNews = (state: { content: { news: NewsContent[] } }) =>
-  state.content.news;
+import { Box, Text, Button } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { addFullNews } from "../app/store/fullNewsSlice";
+import { NewsApiItem } from '../app/store/newsApiSlice';
 
 interface NewsProps {
-  content: NewsContent;
+  content: NewsApiItem;
 }
 
 const NewsComponent: React.FC<NewsProps> = ({ content }) => {
   const dispatch = useDispatch();
-  const news = useSelector(selectNews);
 
-  // console.log("News content:", content); // Log the content prop
-  // console.log("News from Redux store:", news); // Log the news from the Redux store
-
-  const addNewsToStore = (news: NewsContent) => {
-    console.log("Adding news to store:", news); // Log the news being added to the store
-    dispatch(addNews(news)); // Dispatch addNews action from the slice
+  const addFullNewsToStore = (content: NewsApiItem) => {
+    dispatch(addFullNews(content));
   };
 
   return (
-    <Box>
-      {/* TITLE */}
-      <Heading as="h1" size="sm" mb={4}>
-        {content.h1}
-      </Heading>
-
-      {/* SUBTITLE */}
-      <Heading as="h2" size="xs" mb={2} color='grey'>
-        {content.h2}
-      </Heading>
-
-      {/* PREVIEW TEXT */}
-      <Text whiteSpace="nowrap"
-            overflow="hidden"
-            textOverflow="ellipsis" 
-            p="4" 
-            size='xs'
-      >
-        {content.p}
-      </Text>
-      
-      <Button onClick={() => addNewsToStore(content)} size='xs'>
-        Read more
-      </Button>
+    <Box pb='25px'>
+      <Text p="4">{content.title}</Text>
+      <button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</button>
     </Box>
   );
 };
