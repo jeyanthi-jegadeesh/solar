@@ -20,7 +20,7 @@ const NewsComponent: React.FC<NewsProps> = ({ content }) => {
   return (
     <Box>
       <Text p="4">{content.title}</Text>
-      <Button onClick={() => addFullNewsToStore(content)}>Read more</Button>
+      <Button onClick={() => addFullNewsToStore(content)} position="absolute" left="0" bottom="0">Read more</Button>
     </Box>
   );
 };

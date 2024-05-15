@@ -1,17 +1,33 @@
 export const dynamic = 'force-dynamic' // defaults to auto
- 
+
+interface WikipediaPage {
+  pageid: number;
+  ns: number;
+  title: string;
+  extract: string;
+  [key: string]: any; // Allow for other properties that might be included
+}
+
+interface WikipediaResponse {
+  batchcomplete?: string;
+  query: {
+    pages: {
+      [pageid: string]: WikipediaPage;
+    };
+  };
+}
+
 export async function GET(request: Request, context: any) {
-  // // const planet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-  // const planet = 'Jupiter';
+  
   const { params } = context;
   const planet = params.planetName
   const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=${planet}&format=json`;
   
   try {
     const response = await fetch(url);
-    const jsonData = await response.json();
-    const page = Object.values(jsonData.query.pages)[0]; // Obtiene el primer (y en este caso único) objeto de la propiedad "pages"
-    const extract = page.extract; // Obtiene el extracto de la página
+    const jsonData:WikipediaResponse = await response.json();
+    const page = Object.values(jsonData.query.pages)[0]; 
+    const extract = page.extract; 
 
     return new Response(extract, {
     status: 200,
