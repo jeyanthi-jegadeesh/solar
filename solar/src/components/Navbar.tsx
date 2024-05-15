@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay, showLandingOverlay, showsLogInOverlay } from '../app/store/overlaySlice';
 import { Link, Flex, IconButton, Box, useColorMode } from '@chakra-ui/react';
-import { FaHome, FaSignOutAlt, FaUser, FaCompass, FaQuestion } from 'react-icons/fa';
+import { FaHome, FaSignOutAlt, FaUser, FaCompass, } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { GiEarthAmerica } from 'react-icons/gi';
 
 const Navbar: React.FC = () => {
     const router = useRouter();
@@ -36,7 +37,7 @@ const Navbar: React.FC = () => {
                 <ul className="nav-list" style={{ marginRight: 'auto' }}>
                     <li className="nav-item">
                         <Link href="#" className="nav-link" onClick={handleShowOverlay}>
-                            <FaHome /><span>Home</span>
+                            <GiEarthAmerica /><span>Home</span>
                         </Link>
                     </li>
                     <li className="nav-item">
