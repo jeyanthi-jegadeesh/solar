@@ -38,8 +38,6 @@ export interface IArticle  {
   updatedAt?: Date,
 }
 
-
-
 export interface PlanetType {
     name: string;
     color: string;

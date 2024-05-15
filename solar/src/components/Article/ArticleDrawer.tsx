@@ -24,8 +24,6 @@ const ArticleDrawer = ({ isOpen, onClose }:ArticleDrawerProps) => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const dispatch = useDispatch();
   
-
-
   const NewArticleButton = () => {
       
     function handleClick() {
@@ -133,16 +131,15 @@ return(
           >
           
             <CloseButton onClick={onClose} />
-
-            <Heading as='h1' size='md'>learn about {selectedPlanet}</Heading>
+            
+            <Heading as='h1' size='md'>
+                learn about {selectedPlanet}
+            </Heading>
         
-          </DrawerHeader>
-          
-          <DrawerBody>
-              
-             <NewArticleButton />
+          </DrawerHeader>       
+          <DrawerBody>  
+            <NewArticleButton /> 
             <ArticleList />
-          
           </DrawerBody>
         </DrawerContent>
       </Drawer>

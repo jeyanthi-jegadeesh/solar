@@ -4,14 +4,16 @@ import { IArticle } from '../utils/types';
 
 interface ArticleStateType {
   isEditModeEnabled: boolean;
-  currentArticle: IArticle | null; // TODO define ArticleType
-  articleList: IArticle[]; // TODO define ArticleType
+  currentArticle: IArticle | null;
+  articleList: IArticle[]; 
+  favouriteArticles: IArticle[]; 
 }
 
 const initialState:ArticleStateType = {
     isEditModeEnabled: false,
     currentArticle: null,
-    articleList: []
+    articleList: [],
+    favouriteArticles: []
     }
 
 const articleSlice = createSlice({
@@ -26,12 +28,22 @@ const articleSlice = createSlice({
         state.isEditModeEnabled = editMode;
     },
 
-    setCurrentArticle(state, action) {
+    setCurrentArticle(state, action:PayloadAction<IArticle>) {
         const currentArticle = action?.payload;
         state.currentArticle = currentArticle;
-  }
+    },
+
+    addArticleToFavs(state, action: PayloadAction<IArticle>) {
+      const newFavArticle = action.payload;
+      state.favouriteArticles.push(newFavArticle);
+    },
+
+    removeArticleFromFavs(state, action: PayloadAction<IArticle>) {
+      const articleToRemove = action.payload;
+      state.favouriteArticles = state.favouriteArticles.filter(article => article === articleToRemove);
+    }
 }})
 
-export const { toggleEditMode, setCurrentArticle } = articleSlice.actions
+export const { toggleEditMode, setCurrentArticle, removeArticleFromFavs, addArticleToFavs } = articleSlice.actions
 export default articleSlice.reducer
 
