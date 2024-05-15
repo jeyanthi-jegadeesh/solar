@@ -2,6 +2,7 @@
 
 import { Box, Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import planetsData from '../../public/timeline/planetsData.json';
+import Image from 'next/image';
 
 interface Event {
   date: string;
@@ -37,7 +38,7 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
     {!isSmallScreen && (
       <Box mb={4} width="100px" height="100px">
         {event.image ? (
-          <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100px', minHeight: '100px' }} />
+          <Image src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100px', minHeight: '100px' }} />
         ) : (
           <Box width="100px" height="100px" />
         )}
@@ -68,7 +69,7 @@ const TimelineEvent = ({ event, index, isSmallScreen }: TimelineEventProps) => (
         />
         <Box mr={4} width="100px" height="100px">
           {event.image ? (
-            <img src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100%', height: '100px' }} />
+            <Image src={event.image} alt={`Event ${index}`} style={{ maxWidth: '100%', height: '100px' }} />
           ) : (
             <Box width="100px" height="100px" />
           )}
