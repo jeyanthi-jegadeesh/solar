@@ -4,6 +4,8 @@ import { CldUploadButton } from 'next-cloudinary';
 import React, { useState } from 'react';
 import connectDB from '@/lib/dbConnect';
 import mongoose from 'mongoose';
+import Image from 'next/image';
+
 
 const PhotoUpload: React.FC = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -73,7 +75,7 @@ const PhotoUpload: React.FC = () => {
       {uploadedImage && (
         <div>
           <h3>Uploaded Image:</h3>
-          <img src={uploadedImage} alt="Uploaded" width="300" height="250" crop="fill" />
+          <Image src={uploadedImage} alt="Uploaded" width="300" height="250" />
           <button onClick={handleDelete}>Delete</button>
         </div>
       )}
