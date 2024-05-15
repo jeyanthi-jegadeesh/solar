@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, CardBody, Card } from "@chakra-ui/react"; // study relative paths
+import { Box, Flex, Card } from "@chakra-ui/react"; // study relative paths
 import NewsComponent from "./carouselNews";
 import ImageComponent from "./carouselImage";
 import { mockImageData } from "../app/data/mockData";
@@ -28,9 +28,9 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
   // getting data from redux store
   const newsData = useSelector( (state: RootState) => state.news.news);
   
-  const [content, setContent] = useState<(NewsApiItem[] | ImageContent)[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
+  const [content, setContent] = useState<(NewsApiItem[] | ImageContent[] | string[])>([]);
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  // const itemsPerPage = 3;
 
   useEffect(() => {
     setContent(contentType === "news" ? newsData : mockImageData);
@@ -54,9 +54,10 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
               .map((item, index) => (
                 <Card key={index} flex="1 0 33.33%" mx="1" p="4" bg='blue.50' color='blue.900'>
                   {contentType === "news" ? (
-                    <NewsComponent content={item} />
+                    <NewsComponent content={item as NewsApiItem} />
                       ) : (
-                        <ImageComponent content={{ imageUrl: item }} />
+                        <ImageComponent content={{ imageUrl: item } as ImageContent} />
+
                   )}
                 </Card>
               ))}
