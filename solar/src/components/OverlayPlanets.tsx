@@ -12,7 +12,7 @@ import PlanetTitle from './PlanetTitle';
 import { setSelectedContent } from '@/app/store/contentSlice';
 import { showDialogOverlay, hidePlanetsOverlay } from '@/app/store/overlaySlice';
 import OverlayDialog from '@/components/OverlayDialog';
-import { FiFeather } from 'react-icons/fi';
+import { FiFeather, FiInfo } from 'react-icons/fi';
 import ArticleList from './Article/ArticleList';
 import ArticleDrawer from './Article/ArticleDrawer';
 
@@ -53,7 +53,7 @@ const OverlayPlanets: React.FC = () => {
             <Flex flexDirection='row' justifyContent='space-between'>
                 <button type='button' className="btn-shine" onClick={handleClick} >BACK TO SPACE</button>
                 <button type='button' className="btn-shine" onClick={handleQuizClick} >TAKE A QUIZ</button>
-                <button type='button' className="btn-shine" onClick={handleArticleClick} ><FiFeather size={24} /></button>
+                <button type='button' className="btn-shine" onClick={handleArticleClick} >DISCOVER</button>
             </Flex>
           </Box>
  

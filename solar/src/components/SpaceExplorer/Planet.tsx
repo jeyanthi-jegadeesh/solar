@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlanetRef, updateSelectedPlanet } from "../../app/store/solarSystemSlice";
-import { showPlanetsOverlay } from "../../app/store/overlaySlice";
+import { hidePlanetsOverlay, showPlanetsOverlay } from "../../app/store/overlaySlice";
 import { RootState } from "@/app/store/store";
 
 
@@ -104,6 +104,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
         if (selectedPlanet) {
           cameraControlsRef.current.setLookAt(0, 0, 250, 0, 0, 0, true);
           dispatch(updateSelectedPlanet(null));
+          dispatch(hidePlanetsOverlay());
           return;
         }
     

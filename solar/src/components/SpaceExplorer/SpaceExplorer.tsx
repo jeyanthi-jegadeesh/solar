@@ -16,7 +16,7 @@ import Orbit from "./Orbit";
 import getAllCelestialObjects from "./fetchPlanets"; // API functionality goes here
 
 // TYPE DEFINITIONS
-import { PlanetType } from "./planet_def";
+import { PlanetType } from "@/app/utils/types";
 import { RootState } from "@/app/store/store";
 
 
@@ -35,11 +35,12 @@ const AnimationManagement = () => {
   
   // LEVA CONTROLS
   // set constants for scaling etc.
-  let { systemScale } = useControls({systemScale: {
-                                        value: 0.1,
-                                        min: 0.1,
-                                        max: 1
-                                      }}); // factor for scaling of sizes
+  const systemScale = 0.1;
+  // let { systemScale } = useControls({systemScale: {
+  //                                       value: 0.1,
+  //                                       min: 0.1,
+  //                                       max: 1
+  //                                     }}); // factor for scaling of sizes
       
   const { speedFactorBIG } = useControls({speedFactorBIG: {
                                             value: 1,
