@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FaHome, FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
 import { Box, Flex, Link, Button, Spacer } from '@chakra-ui/react';
 import './userStyles.css';
+import { signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import  { useSession } from 'next-auth/react';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
+    const { data: session } = useSession();
+    const router = useRouter();
 
     useEffect(() => {
         const currentTheme = localStorage.getItem('theme') ?? 'light';
@@ -17,6 +22,17 @@ const UserNavbar: React.FC = () => {
         setTheme(newTheme);
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+    };
+
+    const handleLogout = async () => {
+        const response = await signOut({ redirect: false, callbackUrl: '/' });
+        if (!response) {
+          console.error('Sign out error:', response);
+        } else {
+          console.log('session after signout : ',session)
+          console.log('Signed out successfully');
+          router.push('/');
+        }
     };
 
     return (
@@ -47,7 +63,7 @@ const UserNavbar: React.FC = () => {
                     <Box className="settings-icon">
                         <FaCog />
                     </Box>
-                    <Link href="/signout" className="nav-link">
+                    <Link href="/signout" className="nav-link" onClick={handleLogout}>
                         <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
                     </Link>
                 </Flex>
