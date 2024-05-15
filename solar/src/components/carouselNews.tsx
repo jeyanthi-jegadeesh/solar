@@ -18,9 +18,9 @@ const NewsComponent: React.FC<NewsProps> = ({ content }) => {
   };
 
   return (
-    <Box>
+    <Box pb='25px'>
       <Text p="4">{content.title}</Text>
-      <Button onClick={() => addFullNewsToStore(content)} position="absolute" left="0" bottom="0">Read more</Button>
+      <button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</button>
     </Box>
   );
 };
