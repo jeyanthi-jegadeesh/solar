@@ -36,23 +36,23 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
     setContent(contentType === "news" ? newsData : mockImageData);
   }, [contentType, newsData]);
   
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => Math.max(0, prevIndex - itemsPerPage));
-  };
+  // const goToPrevious = () => {
+  //   setCurrentIndex((prevIndex) => Math.max(0, prevIndex - itemsPerPage));
+  // };
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(content.length - itemsPerPage, prevIndex + itemsPerPage));
-  };
+  // const goToNext = () => {
+  //   setCurrentIndex((prevIndex) => Math.min(content.length - itemsPerPage, prevIndex + itemsPerPage));
+  // };
 
   return (
   
-      <Flex direction="column" alignItems="center">
-        <Box p="4" width="100%" overflow="hidden">
-          <Flex>
+      <Flex direction="column" alignItems="center" mt='10px' mb='10px'>
+        <Box width="100%" overflow="hidden">
+          <Flex width="100%" overflow="auto">
             {content
-              .slice(currentIndex, currentIndex + 3)
+              // .slice(currentIndex, currentIndex + 3)
               .map((item, index) => (
-                <Card key={index} flex="1 0 33.33%" mx="1" p="4">
+                <Card key={index} flex="1 0 33.33%" mx="1" p="4" bg='blue.50' color='blue.900'>
                   {contentType === "news" ? (
                     <NewsComponent content={item} />
                       ) : (
@@ -62,7 +62,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
               ))}
           </Flex>
         </Box>
-        <Flex justifyContent="center" mt={4}>
+        {/* <Flex justifyContent="center" mt={4}>
           <Button onClick={goToPrevious} disabled={currentIndex === 0}>
             Previous
           </Button>
@@ -73,7 +73,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
           >
             Next
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
   );
 };
