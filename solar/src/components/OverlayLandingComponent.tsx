@@ -23,7 +23,8 @@ const OverlayLanding: React.FC = () => {
           <AboutContent />
           
           {/* CarouselSection */}
-          <Box  bgGradient='linear(to-t, blue.700, black)' opacity={0.9} w='100%' color='white' padding="5" maxW="3xl" margin="auto">
+          {/* <Box  bgGradient='linear(to-t, blue.700, black)' opacity={0.9} w='100%' color='white' padding="5" maxW="3xl" margin="auto"> */}
+          <Box w='100%' color='white' padding="5" maxW="3xl" margin="auto">
             
             {/* NEWS FROM SPACE */}
             <Heading as='h2' size='md'>latest news from space</Heading>
