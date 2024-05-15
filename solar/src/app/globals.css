@@ -111,7 +111,7 @@ a {
 /* Styles for the Navbar */
 .navbar {
   background: linear-gradient(to top, #1a365d, #000000);
-  padding: 1rem;
+  padding: 0.1rem;
   position: fixed;
   top: 0;
   width: 100%;
