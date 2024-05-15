@@ -65,6 +65,7 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
 
   const ArticleCard = ({article}:ArticleCardProps) => {
     const dispatch = useDispatch();
+    const toast = useToast(); // chakra toast component :)
 
     function handleClick() {
         dispatch(setCurrentArticle(article));
@@ -77,13 +78,6 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
       console.log('clicked on', article);
       if (isAlreadyFav) {
           dispatch(removeArticleFromFavs(newFavArticle));
-          useToast({
-            title: 'Article removed from favs',
-            description: newFavArticle.title,
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-          });
       } else {
           dispatch(addArticleToFavs(newFavArticle));
           useToast({
@@ -137,7 +131,16 @@ return(
                   label='add to favorites' 
                   hasArrow aria-label='A tooltip'
                   >
-                  <Tag onClick={()=> handleFavClick(article)}>
+                  <Tag onClick={()=> {handleFavClick(article); 
+                                        toast({
+                                        title: 'Article removed from favs',
+                                        description: article.title,
+                                        status: 'success',
+                                        duration: 3000,
+                                        isClosable: true,
+                                        })
+                                      }}
+                    >
                       <FiStar /> {/*TODO onclick -> addtofavourites */}
                   </Tag>
                 </Tooltip> 
