@@ -1,9 +1,12 @@
 
 //import IUser from '../utils/types'; 
-import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options"; 
+import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options";
 import { getServerSession } from "next-auth";
 import UserProfile from '../../components/UserProfile';
 import React, { useState, useEffect } from 'react';
+import { redirect } from 'next/navigation';
+import { showsSignOverlay , showsLogInOverlay } from '@/app/store/overlaySlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const getUserData = async (email: string) =>{
   const url = `${process.env.URL}/api/userProfile?email=${email}`;
@@ -19,23 +22,30 @@ const getUserData = async (email: string) =>{
    }
    return userData;
 }
-export default async function page() {
+export default async function Page() {
+
   const session = await getServerSession(nextauthOptions);
   let userData = null;
   if(session?.user){
     const email = session && session.user && session.user.email;
     if(email){
-        userData = await getUserData(email); // Await the getUserData function
-        console.log('userData ,',userData);
+        userData = await getUserData(email); 
+        // TODO: check the possibility to get all user data from session and avoid the above db call
+       // userData = session.user;
+       
     }
-  }
 
+  }
+  if(!userData){
+    redirect('/');
+  }
   return (
     <> 
       {userData ? (
-        <UserProfile user={userData}/> // Pass userData directly
+        <UserProfile user={userData}/> // Pass userData to the UserProfile component
       ) : (
         <h1>You have to login to view this page</h1>
+
       )} 
     </>
   );

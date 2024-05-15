@@ -5,6 +5,7 @@ import User from "../../../../../lib/models/user.model";
 import bcrypt from "bcrypt";
 
 export const nextauthOptions: NextAuthOptions = {
+   //TODO: Remove this code after complete implementaion
   // secret: process.env.NEXTAUTH_SECRET,
   // pages: {
   //   signIn: "/", // app/signin
@@ -30,21 +31,27 @@ export const nextauthOptions: NextAuthOptions = {
       }
     })
   ],
-  // TODO : REMOVE THIS CODE AFTER COMPLETE IMPLEMENTATION
+        // TODO: This code sets the user id in the session object and commenting it out for now
   // callbacks: {
-  //   async jwt({ token, trigger, profile, user, session }) {
-  //   if(token && user){
-  //     token.user = user;
-  //   }
-  //   console.log('token .........', token);
-  //   return token;
+  //     async jwt({ token, trigger, profile, user, session }) {
+  //     if(token && user){  
+  //       token.user = user;
+  //     }
+  //     return token;
   //   },
   //   async session({ session, user, token }) {
-  //     if (token && token.user) {    
-  //     // Set the updated user object in the session
-  //     return { ...session, user: token.user };
-  //     }
-     
+
+      // if (token && token.user) { 
+      //   const sanitizesUser = sanitizeUserFromToken(token.user);
+      //   return { ...session,
+      //     user: { ...session.user,
+      //       id: sanitizesUser._id,
+      //       email: sanitizesUser.email,
+      //       firstName: sanitizesUser.firstName,
+      //       lastName: sanitizesUser.lastName
+      //     }
+      //   }
+      // }    
   //     return session;
   //   },
   // },
@@ -55,16 +62,27 @@ export const nextauthOptions: NextAuthOptions = {
   await dbConnect();
   const user = await User.findOne({ email });
   if (!user) {
-    // return null;
     throw new Error('User not found');
   }
-  // TODO write regular expression to sanitize email
   const sanitizedPassword = password.replace(/[$/(){}]/g, '');
   const passwordsMatch = await bcrypt.compare(sanitizedPassword, user.password);
   if (!passwordsMatch) {
     console.log("Passwords do not match");
-    //return null;
     throw new Error('Passwords do not match');
   }
   return user;
+}
+
+
+
+function sanitizeUserFromToken(user: any) {
+  const { email, _id, firstName, lastName} = user;
+ // Create a sanitized user object without the password field
+  const sanitizedUser = {
+    _id,
+    firstName,
+    lastName,
+    email,
+  };
+  return sanitizedUser;
 }
