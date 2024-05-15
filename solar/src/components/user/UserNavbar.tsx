@@ -5,11 +5,15 @@ import './userStyles.css';
 import { signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import  { useSession } from 'next-auth/react';
+import {hideLogInOverlay } from '../../app/store/overlaySlice';
+import { useDispatch } from 'react-redux';
+
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
     const { data: session } = useSession();
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const currentTheme = localStorage.getItem('theme') ?? 'light';
@@ -25,16 +29,24 @@ const UserNavbar: React.FC = () => {
     };
 
     const handleLogout = async () => {
-        const response = await signOut({ redirect: false, callbackUrl: '/' });
-        if (!response) {
-          console.error('Sign out error:', response);
-        } else {
-          console.log('session after signout : ',session)
-          console.log('Signed out successfully');
-          router.push('/');
+        try {
+            await signOut({ redirect: false, callbackUrl: '/' });
+            console.log('Signed out successfully');
+            dispatch(hideLogInOverlay());
+            router.push('/'); // Redirect to the home page
+        } catch (error) {
+            console.error('Sign out error:', error);
         }
     };
-
+    const handleHomeClick = async () => {
+        try {
+            console.log('Home Click event');
+            dispatch(hideLogInOverlay());
+            router.push('/'); // Redirect to the home page
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    };
     return (
         <Box
             className="user-navbar"
@@ -48,7 +60,7 @@ const UserNavbar: React.FC = () => {
         >
             <Flex alignItems="center">
                 <Flex>
-                    <Link href="/home" className="nav-link">
+                    <Link href="#" className="nav-link" onClick={handleHomeClick}>
                         <FaHome /><span style={{ marginLeft: '8px' }}>Home</span>
                     </Link>
                     <Link href="/favorites" className="nav-link">
@@ -63,7 +75,10 @@ const UserNavbar: React.FC = () => {
                     <Box className="settings-icon">
                         <FaCog />
                     </Box>
-                    <Link href="/signout" className="nav-link" onClick={handleLogout}>
+                    {/* <Box onClick={handleLogout} cursor="pointer">
+                        <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
+                    </Box> */}
+                    <Link href='#' className="nav-link" onClick={handleLogout}>
                         <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
                     </Link>
                 </Flex>
