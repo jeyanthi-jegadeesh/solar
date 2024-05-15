@@ -23,12 +23,14 @@ const overlaySlice = createSlice({
   reducers: {
     showLandingOverlay(state) {
       state.landingIsVisible = true;
+      state.planetsIsVisible = false;
     },
     hideLandingOverlay(state) {
       state.landingIsVisible = false;
     },
     showPlanetsOverlay(state) {
       state.planetsIsVisible = true;
+      state.landingIsVisible = false;
     },
     hidePlanetsOverlay(state) {
       state.planetsIsVisible = false;

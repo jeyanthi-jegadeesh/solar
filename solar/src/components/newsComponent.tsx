@@ -11,8 +11,6 @@ const NewsSection: React.FC = () => {
   if ( !fullNews ) {
     return null;
   }
-  // Check if fullNews is still loading or if it's empty
-  // const isLoading = fullNews === undefined || fullNews === null;
 
   return (
     <Flex 
