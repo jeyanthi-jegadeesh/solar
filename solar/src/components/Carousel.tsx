@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Button, Card } from "@chakra-ui/react"; // study relative paths
+import { Box, Flex, CardBody, Card } from "@chakra-ui/react"; // study relative paths
 import NewsComponent from "./carouselNews";
 import ImageComponent from "./carouselImage";
 import { mockImageData } from "../app/data/mockData";
@@ -56,7 +56,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({ contentType }) => {
                   {contentType === "news" ? (
                     <NewsComponent content={item} />
                       ) : (
-                    <ImageComponent content={{ imageUrl: item }} />
+                        <ImageComponent content={{ imageUrl: item }} />
                   )}
                 </Card>
               ))}

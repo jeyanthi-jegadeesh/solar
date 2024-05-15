@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import React, {  Reference, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlanetRef, updateSelectedPlanet } from "../../app/store/solarSystemSlice";
+import { showPlanetsOverlay } from "../../app/store/overlaySlice";
 import { RootState } from "@/app/store/store";
 
 
@@ -134,6 +135,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
         cameraControlsRef.current.zoom(-0.01, true);
         // Update the selected planet
         dispatch(updateSelectedPlanet(name));
+        dispatch(showPlanetsOverlay());
       }
     };
 
