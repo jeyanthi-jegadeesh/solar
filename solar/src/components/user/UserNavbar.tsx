@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import  { useSession } from 'next-auth/react';
 import {hideLogInOverlay } from '../../app/store/overlaySlice';
 import { useDispatch } from 'react-redux';
-
+import { GiEarthAmerica } from 'react-icons/gi';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
@@ -72,14 +72,11 @@ const UserNavbar: React.FC = () => {
                     <Button onClick={toggleTheme} className="theme-toggle">
                         {theme === 'light' ? <FaMoon /> : <FaSun />}
                     </Button>
-                    <Box className="settings-icon">
+                    <Link href="/settings" className="nav-link settings-icon">
                         <FaCog />
-                    </Box>
-                    {/* <Box onClick={handleLogout} cursor="pointer">
-                        <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
-                    </Box> */}
-                    <Link href='#' className="nav-link" onClick={handleLogout}>
-                        <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
+                    </Link>
+                    <Link href="/signout" className="nav-link signout-link" onClick={handleLogout}>
+                        <FaSignOutAlt /><span>Sign Out</span>
                     </Link>
                 </Flex>
             </Flex>
@@ -88,3 +85,4 @@ const UserNavbar: React.FC = () => {
 };
 
 export default UserNavbar;
+

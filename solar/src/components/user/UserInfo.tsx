@@ -5,10 +5,12 @@ import './userStyles.css';
 interface UserInfoProps {
     name: string;
     email: string;
-    imageUrl: string;
+    imageUrl?: string;
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
+    const defaultImageUrl = '/images/UserImage.webp';
+
     return (
         <Box
             className="user-info"
@@ -26,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
             justifyContent="space-between"
         >
             <Image
-                src={imageUrl}
+                src={imageUrl || defaultImageUrl}
                 alt="User"
                 width="150px"
                 height="150px"

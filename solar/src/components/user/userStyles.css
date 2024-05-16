@@ -2,11 +2,10 @@
 
 .user-navbar {
     background: linear-gradient(to top, #1a365d, #000000);
-    padding: 1rem;
+    padding: 0.1rem;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0; 
+    width: 100%;
     z-index: 2000;
     display: flex;
     align-items: center;
@@ -14,24 +13,57 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.user-navbar a, .settings-icon {
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
     color: white;
     text-decoration: none;
-    padding: 0.75rem 1.5rem; 
-    display: flex; 
-    align-items: center; 
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.settings-icon {
-    margin-left: auto; 
-    padding-right: 2rem; 
+.nav-link span {
+    margin-left: 8px;
 }
 
-.user-navbar a:hover, .settings-icon:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
-    border-radius: 10px; 
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transform: scale(1.1);
 }
 
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 15px;
+}
+
+.theme-toggle, .settings-icon, .signout-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+
+.theme-toggle:hover, .settings-icon:hover, .signout-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
 
 .user-info {
     grid-area: info;
@@ -61,7 +93,6 @@ body[data-theme="dark"] .user-info {
     object-fit: cover;
 }
 
-
 .user-page-container {
     display: grid;
     grid-area: sidebar;
@@ -90,7 +121,6 @@ body[data-theme="dark"] .user-info {
     align-items: center; 
 }
 
-
 .user-content textarea, .user-content button {
     width: 100%;
     padding: 10px;
@@ -109,7 +139,6 @@ body[data-theme="dark"] .user-info {
 .user-content button:hover {
     background: linear-gradient(to bottom, #163d5d, #000000); 
 }
-
 
 .article-editor {
     display: flex;
@@ -192,24 +221,6 @@ body[data-theme="dark"] .user-info {
     width: 40px; 
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-}
-
-.theme-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-}
-
-
 :root {
     --background-color-light: #FFFFFF; 
     --background-color-dark: #121212; 
@@ -265,13 +276,11 @@ body[data-theme="dark"] .actions-row {
     color: #FFF;
 }
 
-
 .actions-row {
     display: flex;
     justify-content: space-between;
     padding: 10px 0; 
 }
-
 
 .image-upload-button, .new-article-button {
     background: linear-gradient(to bottom, #1a365d, #000000);
@@ -296,31 +305,25 @@ body[data-theme="dark"] .actions-row {
     margin-left: 8px;
 }
 
-
 .right-section {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-right: 35px;
 }
 
-
-.theme-toggle, .settings-icon {
+.theme-toggle, .settings-icon, .signout-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
     cursor: pointer;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover, .settings-icon:hover, .signout-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
-
-.theme-toggle, .settings-icon, .nav-link {
-    font-size: 1.25rem;
-}
-
 
 .user-info h2 {
     margin: 0;
