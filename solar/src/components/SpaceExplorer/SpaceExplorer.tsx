@@ -35,11 +35,12 @@ const AnimationManagement = () => {
   
   // LEVA CONTROLS
   // set constants for scaling etc.
-  let { systemScale } = useControls({systemScale: {
-                                        value: 0.1,
-                                        min: 0.1,
-                                        max: 1
-                                      }}); // factor for scaling of sizes
+  const systemScale = 0.1;
+  // let { systemScale } = useControls({systemScale: {
+  //                                       value: 0.1,
+  //                                       min: 0.1,
+  //                                       max: 1
+  //                                     }}); // factor for scaling of sizes
       
   const { speedFactorBIG } = useControls({speedFactorBIG: {
                                             value: 1,
@@ -246,7 +247,7 @@ const SpaceExplorer = () => {
         <PerspectiveCamera 
           ref={cameraRef}
           makeDefault // !!!
-          position={[0, 0, 200]}
+          position={[0, -250, 100]}
           fov={50} // field of view
         />
 

@@ -22,11 +22,12 @@ export interface IUser {
   email: string
   password: string
   _id: string
+  imageUrl: string;
 }
 
 export interface IArticle  {
   authorId: number | string,
-  isPrivate: true,
+  isPrivate: boolean,
   title: string,
   titleImage?: string,
   subtitle?: string,

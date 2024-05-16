@@ -6,20 +6,19 @@ import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
 import "react-quill/dist/quill.snow.css"; 
 import DOMPurify from 'dompurify'; // purify input
 
-
 import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
-import { Date } from 'mongoose';
 import PhotoUpload from '../PhotoUpload';
+import { IArticle } from '@/app/utils/types';
 
 async function createArticle(userId: number, isPrivate: boolean = true, title: string, articleBody: string, associatedPlanets : string[] ) {
  
   const associatedPlanetsLower = associatedPlanets.map(planet => planet.toLowerCase());
 
   // TODO create actual fetch function for article!
-    const articleData = {
+    const articleData:IArticle = {
       authorId: userId,
       isPrivate: isPrivate,
       title: title,
@@ -51,14 +50,6 @@ async function createArticle(userId: number, isPrivate: boolean = true, title: s
     }
   }
 
-
-  function getArticleById(articleId?: number) {
-    if (!articleId) return 'no article found...';
-    return 'article dummy!'
-    // TODO create actual fetch function for article!
-  }
-
-
 function getPlanetInfo(planetName: string) {
     if (!planetName) return undefined;
     
@@ -66,27 +57,21 @@ function getPlanetInfo(planetName: string) {
     return currentPlanetInfo[0];
   }
   
-  interface ArticleProps {
-    planetName: string;
-    editMode: boolean;
-    articleId?: number | undefined;
-  }
 
-const Article = ({planetName, articleId}:ArticleProps) => {
+const Article = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const currentArticle = useSelector((state: RootState) => state.article.currentArticle);
 
+  const planetName = selectedPlanet;
+
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
-
-  let firstArticle = getArticleById(articleId);
 
   // STATES: 
   const [quillText, setQuillText] = useState(''); // quillText -> the text inside of the quill editor.
   const [isArticlePrivate, setIsArticlePrivate] = useState(true); // quillText -> the text inside of the quill editor.
   const [articleTitle, setArticleTitle] = useState(''); // quillText -> the text inside of the quill editor.
   const [blogEditMode, setBlogEditMode] = useState(false); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
-  const [article, setArticle] = useState(firstArticle); // if edit Mode is set to true, then the article will be opened inside quill, if not, it is shown as dangerouslysetinnerhtml...
   
   useEffect(() => {
     if (currentArticle) {
@@ -112,7 +97,6 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                                               selectedPlanet ? [selectedPlanet] : []
                                             ); 
       
-      setArticle(newArticle!.articleBody)
       setBlogEditMode(false);
   }
 
@@ -197,7 +181,9 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                 </Box>
                 
                 {/* CONTROLS */}
-                <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
+                <Flex flexDirection='row' mb='0.5rem' 
+                      justifyContent='space-between'
+                >
         
                   <Tooltip 
                     label='checking this box will make your article visible to our community' 
@@ -210,11 +196,17 @@ const Article = ({planetName, articleId}:ArticleProps) => {
 
                   </Tooltip>
 
-                  <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
+                  <Button leftIcon={ <FiXCircle size={24} />}  
+                          onClick={() => { setBlogEditMode(false) }} 
+                          variant='ghost'
+                  >
                     cancel
                   </Button>
                 
-                  <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
+                  <Button leftIcon={ <FiSave size={24} />}  
+                          onClick={onSaveHandler} 
+                          variant='solid'
+                  >
                     save article
                   </Button>
                 </Flex>
@@ -222,8 +214,15 @@ const Article = ({planetName, articleId}:ArticleProps) => {
               : 
               currentArticle && 
               <>
-              <Box p='8px' overflowY='auto' maxH='80vh'> 
-              <Heading as='h1' size='md'>{currentArticle.title}</Heading>
+              <Box p='8px' 
+                  overflowY='auto' 
+                  maxH='80vh'
+              > 
+              <Heading as='h1' 
+                      size='md'
+              >
+                {currentArticle.title}
+              </Heading>
               
               {currentArticle.subtitle && 
                 <Heading 
@@ -234,7 +233,12 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                 </Heading>
               }
               
-              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'} width='100%' alt={currentArticle.title} mt='12px' mb='12px'/>
+              <Image src={currentArticle.titleImage || 'https://random.imagecdn.app/500/300'}
+                     width='100%'
+                     alt={currentArticle.title} 
+                     mt='12px' 
+                     mb='12px'
+              />
               
               <Text 
                 pt='8px' 

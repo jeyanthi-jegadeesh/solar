@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import UserProfile from '../../components/UserProfile';
 import React from 'react';
 import { redirect } from 'next/navigation';
-
+import { ChakraProvider } from "@chakra-ui/react";
 
 const getUserData = async (email: string) =>{
   const url = `${process.env.URL}/api/userProfile?email=${email}`;
@@ -40,12 +40,14 @@ export default async function Page() {
   }
   return (
     <> 
+      <ChakraProvider>
       {userData ? (
         <UserProfile user={userData}/> // Pass userData to the UserProfile component
       ) : (
         <h1>You have to login to view this page</h1>
 
       )} 
+      </ChakraProvider>
     </>
   );
 
