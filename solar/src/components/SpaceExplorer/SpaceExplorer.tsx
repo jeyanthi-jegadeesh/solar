@@ -16,7 +16,7 @@ import Orbit from "./Orbit";
 import getAllCelestialObjects from "./fetchPlanets"; // API functionality goes here
 
 // TYPE DEFINITIONS
-import { PlanetType } from "./planet_def";
+import { PlanetType } from "@/app/utils/types";
 import { RootState } from "@/app/store/store";
 
 
