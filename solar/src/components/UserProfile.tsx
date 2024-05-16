@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { Box, Button, Flex, VStack } from '@chakra-ui/react';
-import UserInfo from './user/UserInfo';
-import UserNavbar from './user/UserNavbar';
-import QuizResults from './user/QuizResults';
-import FavoritesCarousel from './user/FavoritesCarousel';
-import ArticlesCarousel from './user/ArticlesCarousel';
+import UserInfo from '../components/user/UserInfo';
+import ImageUpload from '../components/user/ImageUpload';
+import UserNavbar from '../components/user/UserNavbar';
+import QuizResults from '../components/user/QuizResults';
+import FavoritesCarousel from '../components/user/FavoritesCarousel';
+import ArticlesCarousel from '../components/user/ArticlesCarousel';
 import OverlayDialog from '@/components/OverlayDialog';
 
-
-import './user/userStyles.css';
+import '../components/user/userStyles.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@react-three/fiber';
 import { FiEdit, FiPenTool, FiUploadCloud } from 'react-icons/fi';
@@ -41,16 +41,15 @@ export default function UserProfile({ user }: Props) {
                 </Box>
             </Flex>
             <Box className="main-content">
-
+                <Box className="quiz-results">
                     <QuizResults />
-
+                </Box>
                 <Box className="favorites-carousel">
                     <FavoritesCarousel />
                 </Box>
                 <Box className="articles-carousel">
                     <ArticlesCarousel />
-                {isOverlayVisible && <OverlayDialog />}
-
+                    {isOverlayVisible && <OverlayDialog />}
                 </Box>
                 <Flex className="actions-row">
                     <Button leftIcon={<FiUploadCloud />} 
@@ -68,3 +67,4 @@ export default function UserProfile({ user }: Props) {
         </Box>
     );
 }
+

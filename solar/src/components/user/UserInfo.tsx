@@ -9,7 +9,7 @@ interface UserInfoProps {
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
-    const defaultImageUrl = '/images/UserImage.webp';
+    const defaultImageUrl = '../images/UserImage.jpg';
 
     return (
         <Box
@@ -28,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
             justifyContent="space-between"
         >
             <Image
-                src={imageUrl || defaultImageUrl}
+                src='../images/UserImage.jpg'
                 alt="User"
                 width="150px"
                 height="150px"

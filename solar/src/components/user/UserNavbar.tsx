@@ -8,9 +8,18 @@ import  { useSession } from 'next-auth/react';
 import {hideLogInOverlay } from '../../app/store/overlaySlice';
 import { useDispatch } from 'react-redux';
 import { GiEarthAmerica } from 'react-icons/gi';
+import { signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import  { useSession } from 'next-auth/react';
+import {hideLogInOverlay } from '../../app/store/overlaySlice';
+import { useDispatch } from 'react-redux';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
+    const { data: session } = useSession();
+    const router = useRouter();
+    const dispatch = useDispatch();
+
     const { data: session } = useSession();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -47,28 +56,26 @@ const UserNavbar: React.FC = () => {
             console.error('Sign out error:', error);
         }
     };
+
+    
+
     return (
-        <Box
-            className="user-navbar"
-            padding="1rem"
-            position="fixed"
-            top={0}
-            left={0}
-            right={0}
-            zIndex={2000}
-            boxShadow="0 2px 4px rgba(0,0,0,0.2)"
-        >
-            <Flex alignItems="center">
-                <Flex>
-                    <Link href="#" className="nav-link" onClick={handleHomeClick}>
-                        <FaHome /><span style={{ marginLeft: '8px' }}>Home</span>
-                    </Link>
-                    <Link href="/favorites" className="nav-link">
-                        <FaStar /><span style={{ marginLeft: '8px' }}>Favorites</span>
-                    </Link>
-                </Flex>
-                <Spacer />
-                <Flex alignItems="center" className="right-section">
+        <Box className="user-navbar">
+            <Flex align="center" width="100%">
+                <ul className="nav-list" style={{ marginRight: 'auto' }}>
+                    <li className="nav-item">
+                        <Link href="#" className="nav-link" onClick={handleHomeClick}>
+                            <GiEarthAmerica /><span>Home</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/favorites" className="nav-link">
+                            <FaStar /><span>Favorites</span>
+                        </Link>
+                    </li>
+                </ul>
+                <Flex className="right-section">
+
                     <Button onClick={toggleTheme} className="theme-toggle">
                         {theme === 'light' ? <FaMoon /> : <FaSun />}
                     </Button>
@@ -85,4 +92,3 @@ const UserNavbar: React.FC = () => {
 };
 
 export default UserNavbar;
-
