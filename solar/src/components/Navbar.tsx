@@ -1,16 +1,18 @@
-import React , {useState} from 'react';
-import {useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { hideLandingOverlay, showLandingOverlay, showsLogInOverlay } from '../app/store/overlaySlice';
-import { Link, Flex, IconButton, Icon, Box, useColorMode, ChakraProvider } from '@chakra-ui/react';
-import { FiUser, FiSun, FiMoon } from 'react-icons/fi';
+import { Link, Flex, IconButton, Box, useColorMode } from '@chakra-ui/react';
+import { FaHome, FaSignOutAlt, FaUser, FaCompass, } from 'react-icons/fa';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
-import  { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { GiEarthAmerica } from 'react-icons/gi';
 
-const Navbar: React.FC =  () => {
+const Navbar: React.FC = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const { colorMode, toggleColorMode } = useColorMode(); //Chakra's useColorMode hook
     const { data: session } = useSession();
+
     const handleShowOverlay = () => {
         dispatch(showLandingOverlay());
     };
@@ -19,63 +21,44 @@ const Navbar: React.FC =  () => {
         dispatch(hideLandingOverlay());
     };
 
-    const handleQuizClick = () => {
-        //quiz button click logic here
-    };
 
-    const handleProfileClick = async () =>{
+    const handleProfileClick = async () => {
         if (!session) {
-            dispatch(showsLogInOverlay());     
-        }else {
+            dispatch(showsLogInOverlay());
+        } else {
             router.push('/user');
         }
-    }
-    const handleToggleColorMode = () => {
-        console.log('Current color mode:', colorMode);
-        toggleColorMode();
-        console.log('Color mode after toggle:', colorMode);
     };
-    
+
 
     return (
         <nav className="navbar">
-            <Flex align="center">
+            <Flex align="center" width="100%">
                 <ul className="nav-list" style={{ marginRight: 'auto' }}>
                     <li className="nav-item">
-                        <Link href="#" fontSize="lg" fontWeight="bold" color="white" onClick={handleShowOverlay}>
-                            Home
+                        <Link href="#" className="nav-link" onClick={handleShowOverlay}>
+                            <GiEarthAmerica /><span>Home</span>
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="#" fontSize="lg" fontWeight="bold" color="white" onClick={handleHideOverlay}>
-                            Explore
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link href="#" fontSize="lg" fontWeight="bold" color="white" onClick={handleQuizClick}>
-                            Quiz
+                        <Link href="#" className="nav-link" onClick={handleHideOverlay}>
+                            <FaCompass /><span>Explore</span>
                         </Link>
                     </li>
                 </ul>
-                <Box mr={20}>
-                    <IconButton
-                        aria-label="Toggle dark mode"
-                        icon={colorMode === 'dark' ? <Icon as={FiSun} /> : <Icon as={FiMoon} />}
-                        onClick={toggleColorMode}
-                        color="white"
-                        variant="ghost"
-                        size="sm"
-                    />
-                </Box>
-                <Box onClick={handleProfileClick} cursor="pointer">
-                 <Icon as={FiUser} color="white" boxSize={20} />
-                </Box>
+                <Flex className="right-section">
+                    <Box onClick={handleProfileClick} cursor="pointer">
+                        <FaUser color="white" size="24px" />
+                    </Box>
+                    {session && (
+                        <Link href="/signout" className="nav-link">
+                            <FaSignOutAlt /><span>Sign Out</span>
+                        </Link>
+                    )}
+                </Flex>
             </Flex>
         </nav>
-        
     );
-    
 };
 
 export default Navbar;
-
