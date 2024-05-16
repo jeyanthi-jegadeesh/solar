@@ -3,10 +3,9 @@
 import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options";
 import { getServerSession } from "next-auth";
 import UserProfile from '../../components/UserProfile';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { redirect } from 'next/navigation';
-import { showsSignOverlay , showsLogInOverlay } from '@/app/store/overlaySlice';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 const getUserData = async (email: string) =>{
   const url = `${process.env.URL}/api/userProfile?email=${email}`;
