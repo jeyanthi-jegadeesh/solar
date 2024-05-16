@@ -7,7 +7,7 @@ const FavoritesCarousel = () => {
   return (
     <Box>
       <Heading as='h2' size='md' mb='1rem'>
-        your saved Articles
+        Your Saved Articles
       </Heading>
       
       <Flex direction='row' gap='4' overflowX='auto' >
