@@ -7,21 +7,16 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { GiEarthAmerica } from 'react-icons/gi';
-
 const Navbar: React.FC = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { data: session } = useSession();
-
     const handleShowOverlay = () => {
         dispatch(showLandingOverlay());
     };
-
     const handleHideOverlay = () => {
         dispatch(hideLandingOverlay());
     };
-
-
     const handleProfileClick = async () => {
         if (!session) {
             dispatch(showsLogInOverlay());
@@ -29,8 +24,6 @@ const Navbar: React.FC = () => {
             router.push('/user');
         }
     };
-
-
     return (
         <nav className="navbar">
             <Flex align="center" width="100%">
@@ -50,15 +43,14 @@ const Navbar: React.FC = () => {
                     <Box onClick={handleProfileClick} cursor="pointer">
                         <FaUser color="white" size="24px" />
                     </Box>
-                    {session && (
+                    {/* {session && (
                         <Link href="/signout" className="nav-link">
                             <FaSignOutAlt /><span>Sign Out</span>
                         </Link>
-                    )}
+                    )} */}
                 </Flex>
             </Flex>
         </nav>
     );
 };
-
 export default Navbar;
