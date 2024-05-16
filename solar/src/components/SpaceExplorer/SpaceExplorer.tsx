@@ -177,7 +177,7 @@ const SpaceExplorer = () => {
   // REFERENCES 
   // -> needed for updating all celestial objects from a central function (have to write it yet)
   // ----------------------------------------------------------------
-  const cameraRef = useRef<THREE.Camera>();
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 
      // TODO REFACTOR STORING REFS from Redux to Context to handle all planetRefs
      // const planetRefContext = createContext({}); 
