@@ -75,7 +75,7 @@ const UserNavbar: React.FC = () => {
                     <Link href="/settings" className="nav-link settings-icon">
                         <FaCog />
                     </Link>
-                    <Link href="/signout" className="nav-link signout-link" onClick={handleLogout}>
+                    <Link href="#" className="nav-link signout-link" onClick={handleLogout}>
                         <FaSignOutAlt /><span>Sign Out</span>
                     </Link>
                 </Flex>
