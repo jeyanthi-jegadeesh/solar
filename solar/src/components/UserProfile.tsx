@@ -12,7 +12,7 @@ import OverlayDialog from '@/components/OverlayDialog';
 
 import '../components/user/userStyles.css';
 import { useSelector } from 'react-redux';
-import { RootState } from '@react-three/fiber';
+import { RootState } from '../app/store/store';
 import { FiEdit, FiPenTool, FiUploadCloud } from 'react-icons/fi';
 
 interface User {

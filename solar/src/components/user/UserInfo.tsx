@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Image, Heading, Text } from '@chakra-ui/react';
 import './userStyles.css';
 
-interface UserInfoProps {
+export interface UserInfoProps {
     name: string;
     email: string;
     imageUrl?: string;

@@ -28,7 +28,7 @@ const articleSlice = createSlice({
         state.isEditModeEnabled = editMode;
     },
 
-    setCurrentArticle(state, action:PayloadAction<IArticle>) {
+    setCurrentArticle(state, action:PayloadAction<IArticle | null>) {
         const currentArticle = action?.payload;
         state.currentArticle = currentArticle;
     },
