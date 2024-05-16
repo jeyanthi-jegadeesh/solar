@@ -1,3 +1,5 @@
+'use client'
+
 import { Accordion, Box, Button, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';

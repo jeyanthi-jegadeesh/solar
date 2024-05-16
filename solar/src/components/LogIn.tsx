@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import { HStack, VStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';

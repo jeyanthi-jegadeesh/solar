@@ -1,11 +1,12 @@
 'use client'
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+// import { Provider } from 'react-redux';
+// import { store } from './store/store';
+import Provider  from './StoreProvider';
 import { SessionProvider } from "next-auth/react";
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -17,7 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Provider store={store}>
+    <Provider>
+    {/* // <Provider store={store}> */}
       <html lang="en">
         <body className={inter.className}>
           <SessionProvider>
@@ -27,6 +29,7 @@ export default function RootLayout({
         </body>
         
       </html>
+    {/* // </Provider> */}
     </Provider>
   );
 }

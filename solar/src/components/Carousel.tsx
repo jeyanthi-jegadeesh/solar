@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Card } from "@chakra-ui/react"; // study relative paths
 import NewsComponent from "./carouselNews";

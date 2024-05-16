@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Heading, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store/store';

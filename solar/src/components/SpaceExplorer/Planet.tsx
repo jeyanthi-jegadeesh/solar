@@ -1,3 +1,4 @@
+'use client'
 import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
 import { Camera, Vector3 } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
