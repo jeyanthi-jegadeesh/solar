@@ -15,7 +15,7 @@ const QuizResults = () => {
         </CircularProgressLabel>
       </CircularProgress>
       <Text>
-        You've completed 
+        You have completed 
         <Tag ml='0.5rem' mr='0.5rem'>16</Tag>
         quizzes and 
         <Tag ml='0.5rem' mr='0.5rem'>80</Tag> 
