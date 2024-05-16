@@ -57,7 +57,7 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
       };
       fetchArticles();
     }
-  }, [selectedPlanet, favouriteArticles]);
+  }, [favList, selectedPlanet, favouriteArticles]);
 
   interface ArticleCardProps {
     article: IArticle;
