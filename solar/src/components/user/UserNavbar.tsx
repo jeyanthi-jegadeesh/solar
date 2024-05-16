@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaHome, FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
 import { Box, Flex, Link, Button, Spacer } from '@chakra-ui/react';
 import './userStyles.css';
+import { GiEarthAmerica } from 'react-icons/gi';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
@@ -20,35 +21,29 @@ const UserNavbar: React.FC = () => {
     };
 
     return (
-        <Box
-            className="user-navbar"
-            padding="1rem"
-            position="fixed"
-            top={0}
-            left={0}
-            right={0}
-            zIndex={2000}
-            boxShadow="0 2px 4px rgba(0,0,0,0.2)"
-        >
-            <Flex alignItems="center">
-                <Flex>
-                    <Link href="/home" className="nav-link">
-                        <FaHome /><span style={{ marginLeft: '8px' }}>Home</span>
-                    </Link>
-                    <Link href="/favorites" className="nav-link">
-                        <FaStar /><span style={{ marginLeft: '8px' }}>Favorites</span>
-                    </Link>
-                </Flex>
-                <Spacer />
-                <Flex alignItems="center" className="right-section">
+        <Box className="user-navbar">
+            <Flex align="center" width="100%">
+                <ul className="nav-list" style={{ marginRight: 'auto' }}>
+                    <li className="nav-item">
+                        <Link href="/home" className="nav-link">
+                            <GiEarthAmerica /><span>Home</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/favorites" className="nav-link">
+                            <FaStar /><span>Favorites</span>
+                        </Link>
+                    </li>
+                </ul>
+                <Flex className="right-section">
                     <Button onClick={toggleTheme} className="theme-toggle">
                         {theme === 'light' ? <FaMoon /> : <FaSun />}
                     </Button>
-                    <Box className="settings-icon">
+                    <Link href="/settings" className="nav-link settings-icon">
                         <FaCog />
-                    </Box>
-                    <Link href="/signout" className="nav-link">
-                        <FaSignOutAlt /><span style={{ marginLeft: '8px' }}>Sign Out</span>
+                    </Link>
+                    <Link href="/signout" className="nav-link signout-link">
+                        <FaSignOutAlt /><span>Sign Out</span>
                     </Link>
                 </Flex>
             </Flex>
@@ -57,3 +52,4 @@ const UserNavbar: React.FC = () => {
 };
 
 export default UserNavbar;
+
