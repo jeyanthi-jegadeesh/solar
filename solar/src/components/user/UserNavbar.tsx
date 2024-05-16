@@ -3,9 +3,18 @@ import { FaHome, FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/
 import { Box, Flex, Link, Button, Spacer } from '@chakra-ui/react';
 import './userStyles.css';
 import { GiEarthAmerica } from 'react-icons/gi';
+import { signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import  { useSession } from 'next-auth/react';
+import {hideLogInOverlay } from '../../app/store/overlaySlice';
+import { useDispatch } from 'react-redux';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
+
+    const { data: session } = useSession();
+    const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const currentTheme = localStorage.getItem('theme') ?? 'light';
@@ -20,12 +29,33 @@ const UserNavbar: React.FC = () => {
         localStorage.setItem('theme', newTheme);
     };
 
+    const handleLogout = async () => {
+        try {
+            await signOut({ redirect: false, callbackUrl: '/' });
+            console.log('Signed out successfully');
+            dispatch(hideLogInOverlay());
+            router.push('/'); // Redirect to the home page
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    };
+    const handleHomeClick = async () => {
+        try {
+            console.log('Home Click event');
+            dispatch(hideLogInOverlay());
+            router.push('/'); // Redirect to the home page
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    };
+    
+
     return (
         <Box className="user-navbar">
             <Flex align="center" width="100%">
                 <ul className="nav-list" style={{ marginRight: 'auto' }}>
                     <li className="nav-item">
-                        <Link href="/home" className="nav-link">
+                        <Link href="#" className="nav-link" onClick={handleHomeClick}>
                             <GiEarthAmerica /><span>Home</span>
                         </Link>
                     </li>
@@ -42,7 +72,7 @@ const UserNavbar: React.FC = () => {
                     <Link href="/settings" className="nav-link settings-icon">
                         <FaCog />
                     </Link>
-                    <Link href="/signout" className="nav-link signout-link">
+                    <Link href="#" className="nav-link signout-link" onClick={handleLogout}>
                         <FaSignOutAlt /><span>Sign Out</span>
                     </Link>
                 </Flex>
@@ -52,4 +82,3 @@ const UserNavbar: React.FC = () => {
 };
 
 export default UserNavbar;
-

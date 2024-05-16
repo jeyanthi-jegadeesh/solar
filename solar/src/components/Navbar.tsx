@@ -50,11 +50,11 @@ const Navbar: React.FC = () => {
                     <Box onClick={handleProfileClick} cursor="pointer">
                         <FaUser color="white" size="24px" />
                     </Box>
-                    {session && (
+                    {/* {session && (
                         <Link href="/signout" className="nav-link">
                             <FaSignOutAlt /><span>Sign Out</span>
                         </Link>
-                    )}
+                    )} */}
                 </Flex>
             </Flex>
         </nav>
