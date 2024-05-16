@@ -6,12 +6,10 @@ import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
 import "react-quill/dist/quill.snow.css"; 
 import DOMPurify from 'dompurify'; // purify input
 
-
 import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
-import { Date } from 'mongoose';
 import PhotoUpload from '../PhotoUpload';
 import { IArticle } from '@/app/utils/types';
 
@@ -59,15 +57,12 @@ function getPlanetInfo(planetName: string) {
     return currentPlanetInfo[0];
   }
   
-  interface ArticleProps {
-    planetName: string;
-    editMode: boolean;
-    articleId?: number | undefined;
-  }
 
-const Article = ({planetName, articleId}:ArticleProps) => {
+const Article = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const currentArticle = useSelector((state: RootState) => state.article.currentArticle);
+
+  const planetName = selectedPlanet;
 
   // import ReactQuill right here to avoid the document no defined error. -> see https://stackoverflow.com/questions/73047747/error-referenceerror-document-is-not-defined-nextjs
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]); // RTF Editor
@@ -102,7 +97,6 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                                               selectedPlanet ? [selectedPlanet] : []
                                             ); 
       
-      setArticle(newArticle!.articleBody)
       setBlogEditMode(false);
   }
 
@@ -187,7 +181,9 @@ const Article = ({planetName, articleId}:ArticleProps) => {
                 </Box>
                 
                 {/* CONTROLS */}
-                <Flex flexDirection='row' mb='0.5rem' justifyContent='space-between'>
+                <Flex flexDirection='row' mb='0.5rem' 
+                      justifyContent='space-between'
+                >
         
                   <Tooltip 
                     label='checking this box will make your article visible to our community' 
@@ -200,11 +196,17 @@ const Article = ({planetName, articleId}:ArticleProps) => {
 
                   </Tooltip>
 
-                  <Button leftIcon={ <FiXCircle size={24} />}  onClick={() => { setBlogEditMode(false) }} variant='ghost'>
+                  <Button leftIcon={ <FiXCircle size={24} />}  
+                          onClick={() => { setBlogEditMode(false) }} 
+                          variant='ghost'
+                  >
                     cancel
                   </Button>
                 
-                  <Button leftIcon={ <FiSave size={24} />}  onClick={onSaveHandler} variant='solid'>
+                  <Button leftIcon={ <FiSave size={24} />}  
+                          onClick={onSaveHandler} 
+                          variant='solid'
+                  >
                     save article
                   </Button>
                 </Flex>
@@ -212,8 +214,15 @@ const Article = ({planetName, articleId}:ArticleProps) => {
               : 
               currentArticle && 
               <>
-              <Box p='8px' overflowY='auto' maxH='80vh'> 
-              <Heading as='h1' size='md'>{currentArticle.title}</Heading>
+              <Box p='8px' 
+                  overflowY='auto' 
+                  maxH='80vh'
+              > 
+              <Heading as='h1' 
+                      size='md'
+              >
+                {currentArticle.title}
+              </Heading>
               
               {currentArticle.subtitle && 
                 <Heading 

@@ -2,18 +2,18 @@
 
 import React from 'react';
 import { Box, Button, Flex, VStack } from '@chakra-ui/react';
-import UserInfo from '../components/user/UserInfo';
-import ImageUpload from '../components/user/ImageUpload';
-import UserNavbar from '../components/user/UserNavbar';
-import QuizResults from '../components/user/QuizResults';
-import FavoritesCarousel from '../components/user/FavoritesCarousel';
-import ArticlesCarousel from '../components/user/ArticlesCarousel';
+import UserInfo from './user/UserInfo';
+import UserNavbar from './user/UserNavbar';
+import QuizResults from './user/QuizResults';
+import FavoritesCarousel from './user/FavoritesCarousel';
+import ArticlesCarousel from './user/ArticlesCarousel';
 import OverlayDialog from '@/components/OverlayDialog';
 
 
-import '../components/user/userStyles.css';
+import './user/userStyles.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@react-three/fiber';
+import { FiEdit, FiPenTool, FiUploadCloud } from 'react-icons/fi';
 
 interface User {
     _id: string;
@@ -53,11 +53,15 @@ export default function UserProfile({ user }: Props) {
 
                 </Box>
                 <Flex className="actions-row">
-                    <Button className="image-upload-button">
-                        Image Upload...
+                    <Button leftIcon={<FiUploadCloud />} 
+                            className="image-upload-button">
+                        upload Image
                     </Button>
-                    <Button className="new-article-button" onClick={() => { alert("Navigating to new article page!"); }}>
-                        New Article
+
+                    <Button leftIcon={<FiEdit />} 
+                            className="new-article-button" 
+                            onClick={() => { alert("Navigating to new article page!"); }}>
+                         new Article
                     </Button>
                 </Flex>
             </Box>

@@ -129,6 +129,8 @@ return(
                 </Tooltip> 
 
                   <br/>
+                  </Box>
+                  <Box position='absolute' bottom='12px' left='12px'>
                   { // show the date in a small tag
                     article.createdAt && 
                       <Tag p='6px'  >
