@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { FaHome, FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
 import { Box, Flex, Link, Button, Spacer } from '@chakra-ui/react';
 import './userStyles.css';
+import { signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import  { useSession } from 'next-auth/react';
+import {hideLogInOverlay } from '../../app/store/overlaySlice';
+import { useDispatch } from 'react-redux';
 import { GiEarthAmerica } from 'react-icons/gi';
 import { signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
@@ -11,6 +16,9 @@ import { useDispatch } from 'react-redux';
 
 const UserNavbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
+    const { data: session } = useSession();
+    const router = useRouter();
+    const dispatch = useDispatch();
 
     const { data: session } = useSession();
     const router = useRouter();
@@ -48,6 +56,7 @@ const UserNavbar: React.FC = () => {
             console.error('Sign out error:', error);
         }
     };
+
     
 
     return (
@@ -66,6 +75,7 @@ const UserNavbar: React.FC = () => {
                     </li>
                 </ul>
                 <Flex className="right-section">
+
                     <Button onClick={toggleTheme} className="theme-toggle">
                         {theme === 'light' ? <FaMoon /> : <FaSun />}
                     </Button>
