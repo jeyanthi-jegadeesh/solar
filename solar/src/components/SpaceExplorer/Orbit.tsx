@@ -9,9 +9,9 @@ interface OrbitProps {
     color: string
 }
 
-const Orbit = ({planetName, orbitCenter, distanceFromParent, thickness, color}: OrbitProps) => {
+const Orbit = ({planetName, orbitsAround, distanceFromParent, thickness, color}: OrbitProps) => {
 
-    const systemScale = 0.1; {/*take this from the state!*/}
+    const systemScale = 0.1; {/*TODO move to state*/}
 
     return (
         <mesh>

@@ -70,37 +70,18 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
   
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
   
-    // work with the selectedPlanet 
-
     const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
-
-
-    // Add the redux dispatcher
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); // redux dispatcher
     
     // create a planetRef 
     const planetRef = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[], THREE.Object3DEventMap> | null>(null); 
     const planetRefs = useSelector((state:RootState) => state.solarSystem.planetRefs);
 
-    // refactor to have the planetRef in the context
+    // TODO refactor to have the planetRef in the context
     
-        // onPlanetClick -> move the cam to the planet and update the selected planet
-        // TODO move this to separate function for reusablility
-    // function onPlanetClickHandler(name: string, planetRef: React.RefObject<THREE.Mesh>) {
-    //   if (planetRef.current && cameraControlsRef.current) {
-        
-    //     cameraControlsRef.current.fitToBox(planetRef.current, true);
-        
-    //     // TODO SET THE ORBIT  TO THE 
-    //     // cameraControlsRef.current.setOrbitPoint(planetRef.current.position.x, planetRef.current.position.y, planetRef.current.position.z);
-        
-    //     //update planet name
-    //     dispatch(updateSelectedPlanet(name));
-    //   }
-    // };
-
     const onPlanetClickHandler = (name: string, planetRef: React.RefObject<THREE.Mesh>) => {
       if (cameraControlsRef.current && planetRef.current) {
+
         // If a planet is already selected, release the lock and reset the view
         if (selectedPlanet) {
           cameraControlsRef.current.setLookAt(0, 0, 250, 0, 0, 0, true);
@@ -115,28 +96,27 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
           paddingRight: -1,
         });
     
-        // alternative: use .fitToBox or fitToSphere, but that also only places the mesh in the middle and not on the left where we want it :(
-
         // Adjust the camera position to show the planet on the left
         const planetPosition = planetRef.current.position;
         const offset = new THREE.Vector3(0, 0, scaledDiameter*3.4); // Adjust the offset value as needed
         
-        // 
         const newCameraPosition = planetPosition.clone().add(offset);
-        // cameraControlsRef.current.moveTo(newCameraPosition.x, newCameraPosition.y, newCameraPosition.z,true);
-        // cameraControlsRef.current.setTarget(planetPosition.x, planetPosition.y, planetPosition.z); //
+
         cameraControlsRef.current.setLookAt(
           newCameraPosition.x,
           newCameraPosition.y,
           newCameraPosition.z,
-          planetPosition.x + scaledDiameter, //move the planet to the left (camera to the right)
+          planetPosition.x + scaledDiameter, //move the planet to the left of the viewport (means moving camera to the right by one planet diameter)
           planetPosition.y,
           planetPosition.z,
           true
         );
+
         cameraControlsRef.current.zoom(-0.01, true);
+
         // Update the selected planet
         dispatch(updateSelectedPlanet(name));
+        // show the overlay with planet information
         dispatch(showPlanetsOverlay());
       }
     };
@@ -160,7 +140,6 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
       step: 0.2,
     }});
     
-   
     // set the position it is circling around according to the orbitingAround-prop
     // if no orbitingAround is defined set center to be the sun.
     
@@ -168,14 +147,10 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
     // planet passed in the orbitingAround property. planet should be a THREE.Object3D object
     
     let position = new THREE.Vector3(0, 0, 0);
-    // if (!orbitingAround ) position = new THREE.Vector3(0, distance * systemScale, 0)
 
-     /* TODO REPOSITION THE CAMERA AND FACE THE OBJECT WHEN CLICKED */
-
-     // TODO: add more shaders for halos and stuff
+      // initialize textures
       const texturePath = 'textures/' + textureURL;
       const colorMap = useTexture(texturePath);
-      const colorMapSaturnRing = useTexture('textures/2k_saturn_ring_alpha.png');
   
     return (
     <>
@@ -185,9 +160,7 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
           onPointerEnter={() => (isHovered = true)}
           onPointerLeave={() => (isHovered = false)}
         > 
-        
-        {/* event.stopPropagation() means that the event is contained only to the mesh and no other element in the application cares about this event. */} 
-          {/* A icosahedronGeometry might be more apt performance wise -> less polygons */}
+      
           <icosahedronGeometry 
               args={[scaledDiameter , 12]} 
           />
@@ -215,10 +188,12 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
                 />
           } 
 
-        {/* Atmosphere effect */}
+        {/* Atmosphere effect -> second semitransparent sphere
+            TODO: add property "hasAtmosphere" for conditional rendering
+        */}
         
         <mesh>
-          <sphereGeometry args={[scaledDiameter * 1.07, 32, 32]} />
+          <sphereGeometry args={[scaledDiameter * 1.07, 32, 32]} /> {/* Atmosphere has 7% the size of planets diameter. */}
           <MeshWobbleMaterial
             color={'white'}
             transparent={true}
@@ -230,23 +205,20 @@ const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetPro
 
 
           {/*------------------------------------------------ 
-             PLANET LABEL with conditional rendering (when the Leva control is clicked)
+             PLANET LABEL with conditional rendering toggled in LEVA controls
           ------------------------------------------------ */}
-          {showLabels ? 
+          {showLabels &&
               <PlanetLabel
                 planetRef={planetRef}
                 labelText={name} 
                 fontSize={labelFontSize}
                 position={position.add(new THREE.Vector3(0,-(scaledDiameter) - 0.5,0))} // new position of the label
               /> 
-              : null
           }
   
         {/*------------------------------------------------ 
           A RING THAT ACTS AS A BOUNDING BOX 
-          TODO give it a transparent material and make it the clickable bounding box 
-          TODO {give it the DREI Outline effect} 
-          TODO MAKE IT A SEPARATE COMPONENT
+          TODO move to separate component
           ------------------------------------------------*/}
         {
         name.toLowerCase() !== 'sun' ? 

@@ -32,16 +32,10 @@ const AnimationManagement = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const isHovered = useSelector((state: RootState) => state.solarSystem.isPlanetHovered);
 
-  
-  // LEVA CONTROLS
-  // set constants for scaling etc.
+  // scaling factor for the solar system
   const systemScale = 0.1;
-  // let { systemScale } = useControls({systemScale: {
-  //                                       value: 0.1,
-  //                                       min: 0.1,
-  //                                       max: 1
-  //                                     }}); // factor for scaling of sizes
-      
+
+  // LEVA Controls
   const { speedFactorBIG } = useControls({speedFactorBIG: {
                                             value: 1,
                                             min: 0.1,
@@ -171,7 +165,6 @@ const SpaceExplorer = () => {
   // ----------------------------------------------------------------
   // STATE MANAGEMENT
   // ----------------------------------------------------------------
-
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet)
 
   // ----------------------------------------------------------------
@@ -181,9 +174,8 @@ const SpaceExplorer = () => {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 
      // TODO REFACTOR STORING REFS from Redux to Context to handle all planetRefs
+     // because redux won't take non-serializable data.
      // const planetRefContext = createContext({}); 
-
-  // TODO create a Map of planets and celestial objects with their respective ref
 
   // get planets -> turn this into an api call / fetch from the server
   const planets = getAllCelestialObjects(); // TODO figure out how to make this async etc...
@@ -236,8 +228,7 @@ const SpaceExplorer = () => {
         >
           <Leva collapsed={true} fill />
         </Box>
-      
-      
+            
       {/*  
       // ----------------------------------------------------------------
          R3F CANVAS
@@ -251,20 +242,16 @@ const SpaceExplorer = () => {
           fov={50} // field of view
         />
 
-        {/* SET THE STARMAP AS BACKGROUND -- THIS TAKES A LOT OF RESOURCES! */}
+        {/* SET THE STARMAP AS BACKGROUND */}
         <Environment
-          background={true} // can be true, false or "only" (which only sets the background) (default: false)
-          backgroundBlurriness={0.01} // optional blur factor between 0 and 1 (default: 0, only works with three 0.146 and up)
-          backgroundIntensity={0.2} // optional intensity factor (default: 1, only works with three 0.163 and up)
-          backgroundRotation={[1, -Math.PI / 2 , Math.PI]} // optional rotation (default: 0, only works with three 0.163 and up)
-          environmentIntensity={0.2} // optional intensity factor (default: 1, only works with three 0.163 and up)
-          // environmentRotation={[0, Math.PI / 2, 0]} // optional rotation (default: 0, only works with three 0.163 and up)
+          background={true} 
+          backgroundBlurriness={0.01}
+          backgroundIntensity={0.2} 
+          backgroundRotation={[1, -Math.PI / 2 , Math.PI]} // just the positioning
+          environmentIntensity={0.2} 
           files={['starmap_4k.jpg']}
-          path="textures/"
-          // preset={null}
-          // scene={undefined} // adds the ability to pass a custom THREE.Scene, can also be a ref
-          // encoding={undefined} // adds the ability to pass a custom THREE.TextureEncoding (default: THREE.sRGBEncoding for an array of files and THREE.LinearEncoding for a single texture)
-        />
+          path='textures/'
+          />
 
         {/*
         // ----------------------------------------------------------------
@@ -276,16 +263,6 @@ const SpaceExplorer = () => {
           enabled={true}
 
         />
-
-
-        {/* 
-        // ----------------------------------------------------------------
-            TODO ADD "Presentation controls" that can be toggled using LEVA
-            They later should be activated when a planet is focused
-            presentation controls limit the ability of users to fly around etc...
-            https://github.com/pmndrs/drei?tab=readme-ov-file#presentationcontrols
-        // ----------------------------------------------------------------
-        */}
 
         {/* ADD STARS (NATIVE DREI COMPONENT) */}
         <Stars 
