@@ -41,7 +41,6 @@ const UserNavbar: React.FC = () => {
     };
     const handleHomeClick = async () => {
         try {
-            console.log('Home Click event');
             dispatch(hideLogInOverlay());
             router.push('/'); // Redirect to the home page
         } catch (error) {

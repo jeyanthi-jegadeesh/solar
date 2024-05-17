@@ -1,5 +1,5 @@
-import  dbConnect  from "../../../../lib/db";
-import User from "../../../../lib/models/user.model";
+import  dbConnect  from "@/lib/dbConnect";
+import User from "@/lib/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 export async function POST(req : NextRequest) {
@@ -10,7 +10,6 @@ export async function POST(req : NextRequest) {
     await User.create({ firstName, lastName, email, password: hashedPassword });
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false });
   }
 }

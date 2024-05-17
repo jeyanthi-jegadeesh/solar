@@ -58,7 +58,6 @@ export const nextauthOptions: NextAuthOptions = {
   const sanitizedPassword = password.replace(/[$/(){}]/g, '');
   const passwordsMatch = await bcrypt.compare(sanitizedPassword, user.password);
   if (!passwordsMatch) {
-    console.log("Passwords do not match");
     throw new Error('Passwords do not match');
   }
   return user;

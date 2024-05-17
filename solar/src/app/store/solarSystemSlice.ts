@@ -32,7 +32,6 @@ const solarSystemSlice = createSlice({
       const planetName = action.payload.name;
       const planetRef = action.payload.ref;
       state.planetRefs = {...state.planetRefs, [planetName]:planetRef};
-      console.log(state.planetRefs)
     },
 
     toggleControls(state, action: PayloadAction<boolean>) {
@@ -42,15 +41,12 @@ const solarSystemSlice = createSlice({
 
     toggleIsPlanetHovered(state) {
       state.isPlanetHovered = !state.isPlanetHovered ;
-      console.log('hovered? ', state.isPlanetHovered)
     },
 
     // deselect planet -> set it to null
     updateSelectedPlanet(state, action: PayloadAction<string | null>) {
       const planetName:string | null = action.payload;
       state.selectedPlanet = planetName;
-      console.log(typeof state.selectedPlanet);
-      console.log('selected Planet', state.selectedPlanet)
     },
 
     startMovement(state) {

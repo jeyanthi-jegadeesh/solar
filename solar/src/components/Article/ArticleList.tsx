@@ -32,10 +32,8 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
     
     try {
         const response = await fetch(URL + '/api/articles/planet/' + planetName);
-        console.log(URL + '/api/articles/planet/' + planetName)
         const articleRes = await response.json();
 
-        console.log(articleRes.data);
         return articleRes.data;
     } catch (err) {
         console.error(err);
@@ -46,14 +44,12 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
   useEffect(() => {
     if (favList) {
       setArticles(favouriteArticles);
-      console.log(favouriteArticles);
     } else {  
       const fetchArticles = async () => {
         setIsLoading(true);
         const fetchedArticles = await getArticlesByPlanet(selectedPlanet || 'earth');
         setArticles(fetchedArticles);
         setIsLoading(false);
-        console.log(fetchedArticles);
       };
       fetchArticles();
     }

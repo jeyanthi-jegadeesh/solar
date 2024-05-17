@@ -12,7 +12,6 @@ export async function GET(req : NextRequest) {
     const user = await User.findOne({ email }).select("-password");
     return NextResponse.json(user);
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false });
   }
 }

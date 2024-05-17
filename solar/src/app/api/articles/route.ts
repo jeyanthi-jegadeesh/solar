@@ -7,7 +7,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
   try {
     const articles = await Article.find({}); // find all the data in our database
-    console.log(articles);
     return NextResponse.json({ success: true, data: articles });
   } catch (error) {
     return NextResponse.json({ success: false });
@@ -23,7 +22,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const article = await Article.create(body); // create a new model in the database
     return NextResponse.json({ success: true, data: article });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false });
   }
 }

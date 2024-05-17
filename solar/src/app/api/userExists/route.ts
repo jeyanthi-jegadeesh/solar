@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
-import  dbConnect  from "../../../../lib/db";
-import User from "../../../../lib/models/user.model";
+import  dbConnect  from "@/lib/dbConnect";
+import User from "@/lib/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req : NextRequest) {
@@ -12,7 +12,6 @@ export async function GET(req : NextRequest) {
     const user = await User.findOne({ email });
     return NextResponse.json(user);
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false });
   }
 }

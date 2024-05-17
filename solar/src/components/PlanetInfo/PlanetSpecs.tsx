@@ -22,7 +22,6 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
     // define a function that jumps to the moon when clicked on
     const dispatch = useDispatch();
     const handleMoonClick = (moonName: string) => {
-        console.log('JUMPING TO MOON:', moonName)
         dispatch(updateSelectedPlanet(moonName));
     }
     

@@ -1,4 +1,4 @@
-import connectDB from "../../../lib/dbConnect";
+import connectDB from "@/lib/dbConnect";
 import Planet from "@/lib/models/planet.model";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +7,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
   try {
     const planets = await Planet.find({}); // find all the data in our database
-    console.log(planets);
     return NextResponse.json({ success: true, data: planets });
   } catch (error) {
     return NextResponse.json({ success: false });

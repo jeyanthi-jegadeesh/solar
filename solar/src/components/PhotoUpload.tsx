@@ -14,7 +14,6 @@ const PhotoUpload: React.FC = () => {
   const handleUpload = async (result: any) => {
     setUploadedImage(result.info.secure_url);
     setPublicId(result.info.public_id);
-    console.log(result.info.public_id);
 
     try {
       await connectDB();
@@ -28,8 +27,6 @@ const PhotoUpload: React.FC = () => {
       };
 
       await collection.insertOne(imageData);
-      console.log(imageData);
-      console.log('Image data saved to the database');
     } catch (error) {
       console.error('Error saving image data to the database:', error);
     }

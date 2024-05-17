@@ -8,7 +8,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
   try {
     const images = await Image.find({}); // find all the data in our database
-    console.log(images);
     return NextResponse.json({ success: true, data: images });
   } catch (error) {
     return NextResponse.json({ success: false });

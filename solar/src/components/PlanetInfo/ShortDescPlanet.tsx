@@ -13,7 +13,6 @@ const ShortDescPlanet = () => {
     const fetchDescription = async() => {
       try {
         const response = await fetch('/api/planetDescription/'+planet);
-        console.log(response);
         const planetDescription = await response.text();
         setDescription(planetDescription);
       } catch (error) {
