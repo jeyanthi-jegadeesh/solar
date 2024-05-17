@@ -106,25 +106,27 @@ return(
               <Box position='absolute' top='12px' right='12px' justifyContent='space-between'>
                   
                   {article.isPrivate && 
-                    <Tooltip 
+                    <Tooltip
                       label='this article is private' 
-                      hasArrow aria-label='A tooltip'
+                      hasArrow 
+                      aria-label='this article is private'
                     >
                       <Tag>
                         <FiLock />
                       </Tag>
                     </Tooltip>
                   }
-                <Tooltip 
+
+                <Tooltip
                   label='add to favorites' 
-                  hasArrow aria-label='A tooltip'
+                  hasArrow 
+                  aria-label='add to favorites'
                   >
                   <Tag onClick={()=> {handleFavClick(article)}}>
-                      <FiStar /> {/*TODO onclick -> addtofavourites */}
+                      <FiStar />
                   </Tag>
                 </Tooltip> 
 
-                  <br/>
                   </Box>
                   <Box position='absolute' bottom='12px' left='12px'>
                   { // show the date in a small tag
