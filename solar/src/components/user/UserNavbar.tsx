@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
 import { Box, Flex, Link, Button } from '@chakra-ui/react';

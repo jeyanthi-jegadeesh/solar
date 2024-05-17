@@ -43,7 +43,7 @@ const PlanetTitle = ({ planetName }:PlanetTitleProps) => {
     return (
       <Box>
         <Heading as="h2" size="lg" fontWeight="bold" marginBottom={'1.5rem'}>
-          <Text dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(symbol) }} /> {name}
+          <Text dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(symbol + ' ' + name) }} /> 
         </Heading>
       </Box>
     );
