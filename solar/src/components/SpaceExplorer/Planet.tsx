@@ -1,14 +1,19 @@
 'use client'
-import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
-import { Camera, Vector3 } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing"
-import { useControls } from "leva";
-import * as THREE from 'three';
+
+// REACT, NEXT + REDUX
 import React, {  Reference, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
+
+// SLICES
 import { addPlanetRef, updateSelectedPlanet } from "../../app/store/solarSystemSlice";
 import { hidePlanetsOverlay, showPlanetsOverlay } from "../../app/store/overlaySlice";
-import { RootState } from "@/app/store/store";
+
+// 3D imports
+import * as THREE from 'three';
+import { useControls } from "leva";
+import {  Vector3 } from "@react-three/fiber";
+import { Billboard, MeshWobbleMaterial, Outlines, Ring, Text, useTexture, CameraControls } from "@react-three/drei";
 
 
 interface PlanetProps {
@@ -18,15 +23,12 @@ interface PlanetProps {
     size: number,
     textureURL?: string,
     color: string,
-    orbitingAround?: Vector3 //TODO: later: THREE.Object3D? -> NO make it a  string that later finds it in an array that stores our 
+    orbitingAround?: Vector3  
     isHovered: boolean;
-    cameraControlsRef: React.MutableRefObject<CameraControls | null>; // TODO: change to correct type!!
+    cameraControlsRef: React.MutableRefObject<CameraControls | null>; 
   }
   
 // USEFUL FUNCTIONS
-// -> useHelper function from drei
-// TODO: use Leva to change speed and stuff -> animation control -> https://youtu.be/vTfMjI4rVSI?si=GhXC8vnDlvnhjLi_&t=3756
-// TODO get textures from https://planetpixelemporium.com/earth.html OR https://www.solarsystemscope.com/textures/ and make planets look like planets :)
 // TODO create earth: https://matiasgf.dev/experiments/earth
 // TODO https://github.com/matiasngf/portfolio/tree/main/packages/experiments/earth
 // TODO use Detailed from drei to render according to distance
@@ -55,18 +57,16 @@ return (
           anchorX="center"
         >
           {labelText}
-        </Text> 
+        </Text>
       </Billboard>
     </mesh>
   )
 }
 
-
-
 // --------------------------------
 // RENDER ONE PLANET / CELESTIAL OBJECT
 // --------------------------------
-const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isHovered, cameraControlsRef}:PlanetProps) => {
+const Planet = ({name, textureURL, size, isHovered, cameraControlsRef}:PlanetProps) => {
   
     const scaledDiameter = size / 100000; // scale the planet to a smaller size
   
@@ -220,7 +220,7 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
         <mesh>
           <sphereGeometry args={[scaledDiameter * 1.07, 32, 32]} />
           <MeshWobbleMaterial
-            color={'#white'}
+            color={'white'}
             transparent={true}
             opacity={0.2}
             emissive={'#87CEEB'}
@@ -255,14 +255,13 @@ const Planet = ({name, textureURL, velocity, size, distance, orbitingAround, isH
                 {/* WHITE RING FOR VISUAL INDICATION */}
                 <Ring
                   args={[scaledDiameter, scaledDiameter+3, 32]} 
-                > 
+                >
                 <meshStandardMaterial opacity={0} transparent/>
                 <Outlines thickness={0.05} color="white" />
                 </Ring>
-
                 <Ring
                   args={[scaledDiameter+2.8, scaledDiameter+3, 32]} 
-                /> 
+                />
                   <meshStandardMaterial color={'white'} opacity={0.1} />
               </Billboard>
             </mesh>
