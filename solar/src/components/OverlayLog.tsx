@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { hideLogInOverlay } from '@/app/store/overlaySlice';
 import { RootState } from '@/app/store/store';
-import LogIn from './LogIn';
+import LogIn from './Auth/LogIn';
 
 const OverlayLog: React.FC = () => {
   const dispatch = useDispatch();

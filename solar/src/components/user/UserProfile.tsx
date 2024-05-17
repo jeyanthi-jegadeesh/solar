@@ -2,17 +2,17 @@
 
 import React from 'react';
 import { Box, Button, Flex, VStack } from '@chakra-ui/react';
-import UserInfo from '../components/user/UserInfo';
-import ImageUpload from '../components/user/ImageUpload';
-import UserNavbar from '../components/user/UserNavbar';
-import QuizResults from '../components/user/QuizResults';
-import FavoritesCarousel from '../components/user/FavoritesCarousel';
-import ArticlesCarousel from '../components/user/ArticlesCarousel';
+import UserInfo from './UserInfo';
+import ImageUpload from './ImageUpload';
+import UserNavbar from './UserNavbar';
+import QuizResults from './QuizResults';
+import FavoritesCarousel from './FavoritesCarousel';
+import ArticlesCarousel from './ArticlesCarousel';
 import OverlayDialog from '@/components/OverlayDialog';
 
-import '../components/user/userStyles.css';
+import '@/components/user/userStyles.css';
 import { useSelector } from 'react-redux';
-import { RootState } from '../app/store/store';
+import { RootState } from '../../app/store/store';
 import { FiEdit, FiPenTool, FiUploadCloud } from 'react-icons/fi';
 
 interface User {

@@ -8,7 +8,7 @@ import NewsSection from './newsComponent';
 import JoinSection from './JoinSection';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
-import CarouselComponent from './Carousel';
+import CarouselComponent from './Carousel/Carousel';
 
 
 const OverlayLanding: React.FC = () => {

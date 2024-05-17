@@ -2,7 +2,7 @@
 import { Box } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../app/store/store';
+import { RootState } from '../../app/store/store';
 
 const ShortDescPlanet = () => {
   const [description, setDescription] = useState('');

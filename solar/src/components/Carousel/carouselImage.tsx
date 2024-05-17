@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { CardBody, Image, Button } from "@chakra-ui/react";
-import { ImageContent } from "../app/utils/types";
+import { ImageContent } from "../../app/utils/types";
 import { useDispatch } from "react-redux";
-import ModalImage from "./ModalImage";
+import ModalImage from "../ModalImage";
 //importing type from types.ts
 interface ImageProps {
   content: ImageContent;

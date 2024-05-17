@@ -2,7 +2,7 @@
 
 import { Box, Heading, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../app/store/store';
+import { RootState } from '../../app/store/store';
 
 function getPlanetSymbol(planetName: string): { symbol: string; name: string } {
     const planetSymbols : { [key: string]: string } = {

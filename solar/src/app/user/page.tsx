@@ -4,7 +4,7 @@ export const fetchCache = "force-no-store";
 // import IUser from '../utils/types'; 
 import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options";
 import { getServerSession } from "next-auth";
-import UserProfile from '../../components/UserProfile';
+import UserProfile from '../../components/user/UserProfile';
 import React from 'react';
 import { redirect } from 'next/navigation';
 import { ChakraProvider } from "@chakra-ui/react";

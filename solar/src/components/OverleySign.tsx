@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { hideSignOverlay } from '@/app/store/overlaySlice';
 import { RootState } from '@/app/store/store';
-import SignUp from './SignUp';
+import SignUp from './Auth/SignUp';
 
 const OverlaySign: React.FC = () => {
   const dispatch = useDispatch();

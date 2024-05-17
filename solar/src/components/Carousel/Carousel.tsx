@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Box, Flex, Card } from "@chakra-ui/react"; // study relative paths
 import NewsComponent from "./carouselNews";
 import ImageComponent from "./carouselImage";
-import { mockImageData } from "../app/data/mockData";
+import { mockImageData } from "../../app/data/mockData";
 import { useDispatch, useSelector } from "react-redux";
-import { addApiNews, fetchData, NewsApiItem } from '../app/store/newsApiSlice';
+import { addApiNews, fetchData, NewsApiItem } from '../../app/store/newsApiSlice';
 import { ImageContent } from "@/app/utils/types"; // Import types for NewsContent and ImageContent
-import { RootState } from "../app/store/store";
+import { RootState } from "../../app/store/store";
 
 interface CarouselProps {
   contentType: "news" | "image";

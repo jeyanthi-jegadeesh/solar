@@ -1,8 +1,7 @@
 'use client'
 
-import { Box, Flex, Text, useMediaQuery } from '@chakra-ui/react';
-import planetsData from '../../public/timeline/planetsData.json';
-import Image from 'next/image';
+import { Box, Flex, Image, Text, useMediaQuery } from '@chakra-ui/react';
+import planetsData from '@/../public/timeline/planetsData.json';
 
 interface Event {
   date: string;

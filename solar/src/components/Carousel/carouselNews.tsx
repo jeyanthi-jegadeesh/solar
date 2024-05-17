@@ -3,8 +3,8 @@
 import React from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { addFullNews } from "../app/store/fullNewsSlice";
-import { NewsApiItem } from '../app/store/newsApiSlice';
+import { addFullNews } from "../../app/store/fullNewsSlice";
+import { NewsApiItem } from '../../app/store/newsApiSlice';
 
 interface NewsProps {
   content: NewsApiItem;

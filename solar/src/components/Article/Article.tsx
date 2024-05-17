@@ -1,7 +1,7 @@
 'use client'
 import { Box, Button, Checkbox, Editable, EditableInput, EditablePreview, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import React, { useEffect, useMemo, useState } from 'react';
-import { allPlanetInfo } from '../SpaceExplorer/mock_planetInfo';
+import { allPlanetInfo } from '../../app/data/mock_planetInfo';
 
 import "react-quill/dist/quill.snow.css"; 
 import DOMPurify from 'dompurify'; // purify input

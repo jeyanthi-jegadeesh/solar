@@ -2,9 +2,9 @@
 
 import { Accordion, Box, Button, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../app/store/store';
+import { RootState } from '../../app/store/store';
 import PlanetTitle from './PlanetTitle';
-import { allPlanetInfo } from './SpaceExplorer/mock_planetInfo';
+import { allPlanetInfo } from '../../app/data/mock_planetInfo';
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 
 function getPlanetInfo(planetName: string) {
