@@ -40,11 +40,11 @@ const OverlayLanding = () => {
             
             {/* NEWS FROM SPACE */}
             <Heading as='h2' size='md'>latest news from space</Heading>
-            <CarouselComponent key="news-carousel" contentType="news"></CarouselComponent>
+            <CarouselComponent contentType="news" />
             
             {/* FROM THE COMMUNITY */}
             <Heading as='h2' size='md'>community picks</Heading>
-            <CarouselComponent key="image-carousel" contentType="image"></CarouselComponent>
+            <CarouselComponent contentType="image" />
           </Box>
           
           <JoinSection/>

@@ -20,7 +20,7 @@ const NewsComponent = ({ content }:NewsProps) => {
   return (
     <Box pb='25px'>
       <Text p="4">{content.title}</Text>
-      <Button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</Button>
+      <button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</button>
     </Box>
   );
 };
