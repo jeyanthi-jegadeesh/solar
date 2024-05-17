@@ -42,8 +42,6 @@
     "three": "^0.164.1"
   },
   "devDependencies": {
-    "@storybook/react": "^8.1.1",
-    "@storybook/test": "^8.1.1",
     "@types/dompurify": "^3.0.5",
     "@types/node": "^20.12.10",
     "@types/react": "^18.3.1",

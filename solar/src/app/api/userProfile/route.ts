@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
-import  dbConnect  from "../../../../lib/db";
-import User from "../../../../lib/models/user.model";
+import  dbConnect  from "@/lib/dbConnect";
+import User from "@/lib/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req : NextRequest) {

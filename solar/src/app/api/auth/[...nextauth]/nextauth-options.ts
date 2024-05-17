@@ -1,19 +1,10 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
-import  dbConnect  from "../../../../../lib/db";
-import User from "../../../../../lib/models/user.model";
+import  connectDB  from "@/lib/dbConnect";
+import User from "@/lib/models/user.model";
 import bcrypt from "bcrypt";
 
 export const nextauthOptions: NextAuthOptions = {
-   //TODO: Remove this code after complete implementaion
-  // secret: process.env.NEXTAUTH_SECRET,
-  // pages: {
-  //   signIn: "/", // app/signin
-  //   error: "/error", // app/error
-  // },
-  // session: {
-  //   strategy: "jwt",
-  // },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -59,7 +50,7 @@ export const nextauthOptions: NextAuthOptions = {
 }
 
  async function getUserByEmail(email : string, password : string) {
-  await dbConnect();
+  await connectDB();
   const user = await User.findOne({ email });
   if (!user) {
     throw new Error('User not found');
@@ -72,8 +63,6 @@ export const nextauthOptions: NextAuthOptions = {
   }
   return user;
 }
-
-
 
 function sanitizeUserFromToken(user: any) {
   const { email, _id, firstName, lastName} = user;
