@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Button, Card, CardBody, CloseButton,  Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,  Heading, Image,  Spinner, Stack, Tag, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import "react-quill/dist/quill.snow.css"; 
 

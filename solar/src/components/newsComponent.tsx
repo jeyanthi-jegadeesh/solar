@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Flex, Heading, Text, Link } from "@chakra-ui/react";
 import { RootState } from '../app/store/store';
 
-const NewsSection: React.FC = () => {
+const NewsSection = () => {
   // Selector to access the fullNews slice from the Redux store
   // Full news article selected in the news carousel
   const fullNews = useSelector((state: RootState) => state.fullNews.fullNews);

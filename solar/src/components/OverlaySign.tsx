@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton } from '@chakra-ui/react';
 import { hideSignOverlay } from '@/app/store/overlaySlice';
 import { RootState } from '@/app/store/store';
 import SignUp from './Auth/SignUp';
 
-const OverlaySign: React.FC = () => {
+const OverlaySign = () => {
   const dispatch = useDispatch();
   const isVisible = useSelector((state: RootState) => state.overlay.signIsVisible);
 

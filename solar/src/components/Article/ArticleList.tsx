@@ -1,16 +1,17 @@
 'use client'
 
-import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text,  Tooltip  } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-
-import "react-quill/dist/quill.snow.css"; 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
+import { Box, Card, CardBody, Heading, Image,  SimpleGrid,  Spinner, Stack, Tag, Text,  Tooltip  } from '@chakra-ui/react';
+
+import { addArticleToFavs, removeArticleFromFavs, setCurrentArticle } from '@/app/store/articleSlice';
 import { showDialogOverlay } from '@/app/store/overlaySlice';
 import { setSelectedContent } from '@/app/store/contentSlice';
-import { addArticleToFavs, removeArticleFromFavs, setCurrentArticle } from '@/app/store/articleSlice';
+
 import DOMPurify from 'dompurify';
+
+import "react-quill/dist/quill.snow.css"; 
 import { IArticle } from '@/app/utils/types';
 import { FiLock, FiStar } from 'react-icons/fi';
 

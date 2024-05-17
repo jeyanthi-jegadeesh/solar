@@ -1,9 +1,10 @@
 'use client'
 import { useState } from 'react';
-import { HStack, VStack } from '@chakra-ui/react'
+import { HStack } from '@chakra-ui/react'
 import { signIn } from 'next-auth/react';
-import { useSelector, useDispatch } from 'react-redux';
-import { showsSignOverlay , showsLogInOverlay, hideLogInOverlay } from '@/app/store/overlaySlice';import { Box,Link,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { showsSignOverlay , showsLogInOverlay, hideLogInOverlay } from '@/app/store/overlaySlice';
+import { Box,Text, Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@chakra-ui/react';
 interface LogInForm {

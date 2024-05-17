@@ -16,7 +16,7 @@ import { FiFeather, FiInfo } from 'react-icons/fi';
 import ArticleList from './Article/ArticleList';
 import ArticleDrawer from './Article/ArticleDrawer';
 
-const OverlayPlanets: React.FC = () => {
+const OverlayPlanets = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
   const isPlanetOverlayVisible = useSelector((state: RootState) => state.overlay.planetsIsVisible);
   const isOverlayVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);

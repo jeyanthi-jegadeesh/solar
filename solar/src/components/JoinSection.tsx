@@ -2,9 +2,8 @@
 import { HStack, VStack } from '@chakra-ui/react'
 import { Box, Text , Button, Link} from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react'
-import NextLink from 'next/link';
 import { showsSignOverlay , showsLogInOverlay } from '@/app/store/overlaySlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function JoinSection () {
 
@@ -46,9 +45,7 @@ function JoinSection () {
 
                         </HStack>
                     </VStack>
-
                     
-
                     </VStack>
                 </GridItem>
             </Grid>

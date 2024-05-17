@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { CardBody, Image, Button } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { ImageContent } from "../../app/utils/types";
 import { useDispatch } from "react-redux";
 import ModalImage from "../ModalImage";
-//importing type from types.ts
 interface ImageProps {
   content: ImageContent;
 }
 
-const ImageComponent: React.FC<ImageProps> = ({ content }) => {
+const ImageComponent = ({ content }:ImageProps) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   // /When we click on the image itself, the modal with a bigger version opens

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './userStyles.css';
 
-const ImageUpload: React.FC = () => {
+const ImageUpload = () => {
     const [file, setFile] = useState<File | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -6,7 +6,7 @@ import { hideLogInOverlay } from '@/app/store/overlaySlice';
 import { RootState } from '@/app/store/store';
 import LogIn from './Auth/LogIn';
 
-const OverlayLog: React.FC = () => {
+const OverlayLog = () => {
   const dispatch = useDispatch();
   const isVisible = useSelector((state: RootState) => state.overlay.logInIsVisible);
 

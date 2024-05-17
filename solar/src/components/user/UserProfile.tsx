@@ -3,7 +3,6 @@
 import React from 'react';
 import { Box, Button, Flex, VStack } from '@chakra-ui/react';
 import UserInfo from './UserInfo';
-import ImageUpload from './ImageUpload';
 import UserNavbar from './UserNavbar';
 import QuizResults from './QuizResults';
 import FavoritesCarousel from './FavoritesCarousel';
@@ -13,7 +12,7 @@ import OverlayDialog from '@/components/OverlayDialog';
 import '@/components/user/userStyles.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store/store';
-import { FiEdit, FiPenTool, FiUploadCloud } from 'react-icons/fi';
+import { FiEdit, FiUploadCloud } from 'react-icons/fi';
 
 interface User {
     _id: string;

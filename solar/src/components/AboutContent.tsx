@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Link, Button, Image } from '@chakra-ui/react';
+import { Box, Text, Image } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay } from '../app/store/overlaySlice';
 

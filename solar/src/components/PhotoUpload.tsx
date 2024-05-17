@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import Image from 'next/image';
 
 
-const PhotoUpload: React.FC = () => {
+const PhotoUpload = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [publicId, setPublicId] = useState<string | null>(null);
 

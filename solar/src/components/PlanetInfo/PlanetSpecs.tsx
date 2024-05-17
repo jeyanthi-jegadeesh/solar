@@ -1,10 +1,9 @@
 'use client'
 
-import { Accordion, Box, Button, Table, TableCaption, TableContainer, Tag, Tbody, Td, Text, Tr } from '@chakra-ui/react';
+import { Box, Button, Table, TableCaption, TableContainer, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../app/store/store';
-import PlanetTitle from './PlanetTitle';
-import { allPlanetInfo } from '../../app/data/mock_planetInfo';
+import { RootState } from '@/app/store/store';
+import { allPlanetInfo } from '@/app/data/mock_planetInfo';
 import { updateSelectedPlanet } from '@/app/store/solarSystemSlice';
 
 function getPlanetInfo(planetName: string) {
@@ -100,7 +99,7 @@ function PlanetSpecsTable({planetName}:PlanetSpecsTableProps) {
 )
 }
 
-const PlanetSpecs: React.FC = () => {
+const PlanetSpecs = () => {
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);
 
   function handleMoonClick(planetName: string) {

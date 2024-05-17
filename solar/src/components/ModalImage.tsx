@@ -9,13 +9,14 @@ import {
   ModalHeader,
   Image,
 } from "@chakra-ui/react";
+
 import { ModalImageProps } from "../app/utils/types"; //importing modal type
 
-const ModalImage: React.FC<ModalImageProps> = ({
+const ModalImage = ({
   imageUrl,
   isOpen,
   onClose,
-}) => {
+}:ModalImageProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay

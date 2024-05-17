@@ -6,7 +6,7 @@ import { allPlanetInfo } from '../../app/data/mock_planetInfo';
 import "react-quill/dist/quill.snow.css"; 
 import DOMPurify from 'dompurify'; // purify input
 
-import { FiSave, FiUploadCloud, FiXCircle} from 'react-icons/fi';
+import { FiSave, FiXCircle} from 'react-icons/fi';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';

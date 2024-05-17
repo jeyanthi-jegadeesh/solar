@@ -1,5 +1,5 @@
 import { Vector3 } from "three";
-import { PlanetType } from "../../app/utils/types";
+import { PlanetType } from "@/app/utils/types";
 
 export default function getAllCelestialObjects():PlanetType[] {
   return planets;

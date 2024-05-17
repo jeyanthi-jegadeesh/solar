@@ -9,7 +9,7 @@ import Quiz from './Quiz';
 import Article from './Article/Article';
 // import Article from './Article';
 
-const OverlayDialog: React.FC = () => {
+const OverlayDialog = () => {
   const dispatch = useDispatch();
   const isVisible = useSelector((state: RootState) => state.overlay.dialogIsVisible);
   const selectedPlanet = useSelector((state: RootState) => state.solarSystem.selectedPlanet);

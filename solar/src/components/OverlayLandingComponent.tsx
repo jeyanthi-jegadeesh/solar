@@ -11,7 +11,7 @@ import { RootState } from '@/app/store/store';
 import CarouselComponent from './Carousel/Carousel';
 
 
-const OverlayLanding: React.FC = () => {
+const OverlayLanding = () => {
 
   const isOverlayVisible = useSelector((state : RootState) => state.overlay.landingIsVisible); // Get Redux state
 

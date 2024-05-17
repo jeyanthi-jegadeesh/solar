@@ -1,13 +1,13 @@
 'use client'
 
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 
 // 3D related libraries
 import * as THREE from 'three';
-import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
-import {  CameraControls,  Environment,  PerspectiveCamera, Stars, Trail } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { CameraControls,  Environment,  PerspectiveCamera, Stars, Trail } from "@react-three/drei";
 import { Leva, useControls } from "leva"; // CONTROLS
 
 // SOLAR SYSTEM related COMPONENTS

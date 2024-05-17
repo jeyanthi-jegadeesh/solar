@@ -1,7 +1,7 @@
 // NewsComponent.tsx
 
 import React from "react";
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { addFullNews } from "../../app/store/fullNewsSlice";
 import { NewsApiItem } from '../../app/store/newsApiSlice';
@@ -10,7 +10,7 @@ interface NewsProps {
   content: NewsApiItem;
 }
 
-const NewsComponent: React.FC<NewsProps> = ({ content }) => {
+const NewsComponent = ({ content }:NewsProps) => {
   const dispatch = useDispatch();
 
   const addFullNewsToStore = (content: NewsApiItem) => {

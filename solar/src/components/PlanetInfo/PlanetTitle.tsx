@@ -1,8 +1,7 @@
 'use client'
 
 import { Box, Heading, Text } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store/store';
+import DOMPurify from 'dompurify';
 
 function getPlanetSymbol(planetName: string): { symbol: string; name: string } {
     const planetSymbols : { [key: string]: string } = {
@@ -38,13 +37,13 @@ interface PlanetTitleProps {
     planetName:string;
 }
 
-const PlanetTitle: React.FC<PlanetTitleProps> = ({ planetName }) => {
+const PlanetTitle = ({ planetName }:PlanetTitleProps) => {
     const { symbol, name } = getPlanetSymbol(planetName);
   
     return (
       <Box>
         <Heading as="h2" size="lg" fontWeight="bold" marginBottom={'1.5rem'}>
-          <span dangerouslySetInnerHTML={{ __html: symbol }} /> {name}
+          <Text dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(symbol) }} /> {name}
         </Heading>
       </Box>
     );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
-import { Box, Flex, Link, Button, Spacer } from '@chakra-ui/react';
+import { FaStar, FaCog, FaMoon, FaSun, FaSignOutAlt } from 'react-icons/fa';
+import { Box, Flex, Link, Button } from '@chakra-ui/react';
 import './userStyles.css';
 
 import { GiEarthAmerica } from 'react-icons/gi';
@@ -10,7 +10,7 @@ import  { useSession } from 'next-auth/react';
 import {hideLogInOverlay } from '../../app/store/overlaySlice';
 import { useDispatch } from 'react-redux';
 
-const UserNavbar: React.FC = () => {
+const UserNavbar = () => {
     const [theme, setTheme] = useState('light');
     const { data: session } = useSession();
     const dispatch = useDispatch();

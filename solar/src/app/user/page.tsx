@@ -1,13 +1,17 @@
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
+import React from 'react';
+
 // import IUser from '../utils/types'; 
 import { nextauthOptions } from "../api/auth/[...nextauth]/nextauth-options";
 import { getServerSession } from "next-auth";
-import UserProfile from '../../components/user/UserProfile';
-import React from 'react';
+
+import UserProfile from '@/components/user/UserProfile';
+
 import { redirect } from 'next/navigation';
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Heading } from "@chakra-ui/react";
+
 
 const getUserData = async (email: string) =>{
   const url = `${process.env.URL}/api/userProfile?email=${email}`;
@@ -46,7 +50,9 @@ export default async function Page() {
       {userData ? (
         <UserProfile user={userData}/> // Pass userData to the UserProfile component
       ) : (
-        <h1>You have to login to view this page</h1>
+        <Heading as='h1'>
+          You have to login to view this page
+        </Heading>
 
       )} 
       </ChakraProvider>

@@ -8,7 +8,7 @@ export interface UserInfoProps {
     imageUrl?: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ name, email, imageUrl }) => {
+const UserInfo = ({ name, email, imageUrl }:UserInfoProps) => {
     const defaultImageUrl = '../images/UserImage.jpg';
 
     return (

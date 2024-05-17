@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { hideLandingOverlay, showLandingOverlay, showsLogInOverlay } from '../app/store/overlaySlice';
-import { Link, Flex, IconButton, Box, useColorMode } from '@chakra-ui/react';
-import { FaHome, FaSignOutAlt, FaUser, FaCompass, } from 'react-icons/fa';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { Link, Flex, Box } from '@chakra-ui/react';
+import { FaUser, FaCompass, } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { GiEarthAmerica } from 'react-icons/gi';
-const Navbar: React.FC = () => {
+
+
+const Navbar = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { data: session } = useSession();
