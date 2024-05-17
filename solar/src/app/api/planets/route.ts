@@ -1,5 +1,5 @@
-import connectDB from "@/lib/dbConnect";
-import Planet from "@/lib/models/planet.model";
+import connectDB from "@/../lib/dbConnect";
+import Planet from "@/../lib/models/planet.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {

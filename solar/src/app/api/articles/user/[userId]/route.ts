@@ -1,6 +1,6 @@
-import connectDB from "@/lib/dbConnect";
+import connectDB from "@/../lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
-import Article from "@/lib/models/article.model"
+import Article from "@/../lib/models/article.model"
 
 // import type { NextApiRequest, NextApiResponse } from 'next'
  

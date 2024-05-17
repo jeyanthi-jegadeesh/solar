@@ -2,7 +2,7 @@
 
 import { CldUploadButton } from 'next-cloudinary';
 import React, { useState } from 'react';
-import connectDB from '@/lib/dbConnect';
+import connectDB from '@/../lib/dbConnect';
 import mongoose from 'mongoose';
 import Image from 'next/image';
 

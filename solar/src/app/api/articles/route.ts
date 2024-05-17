@@ -1,5 +1,5 @@
-import connectDB from "../../../lib/dbConnect";
-import Article from "@/lib/models/article.model";
+import connectDB from "@/../lib/dbConnect";
+import Article from "@/../lib/models/article.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {

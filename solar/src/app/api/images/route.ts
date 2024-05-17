@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "../../../lib/dbConnect";
-import Image from "@/lib/models/image.model";
+import connectDB from "@/../lib/dbConnect";
+import Image from "@/../lib/models/image.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
