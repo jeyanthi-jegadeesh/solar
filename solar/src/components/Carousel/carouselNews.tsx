@@ -1,7 +1,7 @@
 // NewsComponent.tsx
 
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { addFullNews } from "../../app/store/fullNewsSlice";
 import { NewsApiItem } from '../../app/store/newsApiSlice';
@@ -20,7 +20,7 @@ const NewsComponent = ({ content }:NewsProps) => {
   return (
     <Box pb='25px'>
       <Text p="4">{content.title}</Text>
-      <button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</button>
+      <Button className='card_button' onClick={() => addFullNewsToStore(content)} >Read more</Button>
     </Box>
   );
 };
