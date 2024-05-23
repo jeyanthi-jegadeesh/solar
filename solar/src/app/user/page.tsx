@@ -14,7 +14,7 @@ import { ChakraProvider, Heading } from "@chakra-ui/react";
 
 
 const getUserData = async (email: string) =>{
-  const url = `/api/userProfile?email=${email}`;
+  const url = `${process.env.URL}/api/userProfile?email=${email}`;
   const res = await fetch(url, {
     method: "GET",
     headers: {
