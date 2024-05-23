@@ -1,0 +1,264 @@
+[
+  {
+    "name": "Sun",
+    "timeline": [
+      {
+        "date": "1610",
+        "event": "Galileo Galilei uses a telescope to observe sunspots",
+        "image": "/timeline/sun.svg"
+      },
+      {
+        "date": "2006",
+        "event": "STEREO mission launched to study the Sun's solar phenomena"
+      }
+    ]
+  },
+  {
+    "name": "Mercury",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Mercury",
+        "image": "/timeline/mercury.svg"
+      },
+      {
+        "date": "1974",
+        "event": "First exploration by Mariner 10",
+        "image": "/timeline/satellite.svg"
+      },
+      {
+        "date": "2011",
+        "event": "MESSENGER spacecraft enters Mercury's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Venus",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Venus"
+      },
+      {
+        "date": "1961",
+        "event": "First exploration by Venera 1",
+        "image": "/timeline/satellite.svg"
+      },
+      {
+        "date": "1975",
+        "event": "Venera 9 lands on Venus surface"
+      }
+    ]
+  },
+  {
+    "name": "Earth",
+    "timeline": [
+      {
+        "date": "4.54 billion years ago",
+        "event": "Formation of Earth",
+        "image": "/timeline/earth.svg"
+      },
+      {
+        "date": "1961",
+        "event": "First human spaceflight by Yuri Gagarin"
+      },
+      {
+        "date": "1969",
+        "event": "Apollo 11 lands on the Moon"
+      }
+    ]
+  },
+  {
+    "name": "Moon",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Recognition of the Moon as Earth's satellite",
+        "image": "/timeline/moon.svg"
+      },
+      {
+        "date": "1969",
+        "event": "Apollo 11 lands the first humans on the Moon",
+        "image": "/timeline/astronaut.svg"
+      },
+      {
+        "date": "2009",
+        "event": "LCROSS mission confirms water ice in Moon's craters"
+      }
+    ]
+  },
+  {
+    "name": "Mars",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Mars",
+        "image": "/timeline/mars.svg"
+      },
+      {
+        "date": "1965",
+        "event": "First flyby by Mariner 4",
+        "image": "/timeline/shuttle.svg"
+      },
+      {
+        "date": "1976",
+        "event": "Viking 1 and 2 land on Mars surface",
+        "image": "/timeline/lander.svg"
+      },
+      {
+        "date": "2012",
+        "event": "Curiosity rover lands on Mars",
+        "image": "/timeline/rover.svg"
+      }
+    ]
+  },
+  {
+    "name": "Jupiter",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Jupiter",
+        "image": "/timeline/jupiter.svg"
+      },
+      {
+        "date": "1973",
+        "event": "First flyby by Pioneer 10",
+        "image": "/timeline/satellite.svg"
+      },
+      {
+        "date": "1995",
+        "event": "Galileo spacecraft orbits Jupiter"
+      },
+      {
+        "date": "2016",
+        "event": "Juno spacecraft enters Jupiter's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Saturn",
+    "timeline": [
+      {
+        "date": "Ancient times",
+        "event": "Discovery of Saturn",
+        "image": "/timeline/saturn.svg"
+      },
+      {
+        "date": "1979",
+        "event": "Pioneer 11 flies by Saturn",
+        "image": "/timeline/satellite.svg"
+      },
+      {
+        "date": "2004",
+        "event": "Cassini-Huygens spacecraft enters Saturn's orbit"
+      }
+    ]
+  },
+  {
+    "name": "Uranus",
+    "timeline": [
+      {
+        "date": "1781",
+        "event": "Discovery of Uranus by William Herschel",
+        "image": "/timeline/uranus.svg"
+      },
+      {
+        "date": "1986",
+        "event": "Voyager 2 flies by Uranus"
+      }
+    ]
+  },
+  {
+    "name": "Neptune",
+    "timeline": [
+      {
+        "date": "1846",
+        "event": "Discovery of Neptune by Urbain Le Verrier",
+        "image": "/timeline/neptune.svg"
+      },
+      {
+        "date": "1989",
+        "event": "Voyager 2 flies by Neptune"
+      }
+    ]
+  },
+  {
+    "name": "Pluto",
+    "timeline": [
+      {
+        "date": "1930",
+        "event": "Discovery of Pluto by Clyde Tombaugh"
+      },
+      {
+        "date": "2006",
+        "event": "Pluto reclassified as a dwarf planet"
+      },
+      {
+        "date": "2015",
+        "event": "New Horizons spacecraft performs a flyby of Pluto"
+      }
+    ]
+  },
+  {
+    "name": "Ceres",
+    "timeline": [
+      {
+        "date": "1801",
+        "event": "Discovery of Ceres by Giuseppe Piazzi"
+      },
+      {
+        "date": "2015",
+        "event": "Dawn spacecraft enters orbit around Ceres"
+      }
+    ]
+  },
+  {
+    "name": "Pallas",
+    "timeline": [
+      {
+        "date": "1802",
+        "event": "Discovery of Pallas by Heinrich Wilhelm Olbers"
+      }
+    ]
+  },
+  {
+    "name": "Juno",
+    "timeline": [
+      {
+        "date": "1804",
+        "event": "Discovery of Juno by Karl Ludwig Harding"
+      }
+    ]
+  },
+  {
+    "name": "Vesta",
+    "timeline": [
+      {
+        "date": "1807",
+        "event": "Discovery of Vesta by Heinrich Wilhelm Olbers"
+      },
+      {
+        "date": "2011",
+        "event": "Dawn spacecraft enters orbit around Vesta"
+      }
+    ]
+  },
+  {
+    "name": "Chiron",
+    "timeline": [
+      {
+        "date": "1977",
+        "event": "Discovery of Chiron by Charles Kowal"
+      }
+    ]
+  },
+  {
+    "name": "Eris",
+    "timeline": [
+      {
+        "date": "2005",
+        "event": "Discovery of Eris by Mike Brown, Chad Trujillo, and David Rabinowitz"
+      }
+    ]
+  }
+]
