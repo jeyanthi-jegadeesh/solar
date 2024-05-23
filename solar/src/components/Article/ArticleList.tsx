@@ -27,12 +27,12 @@ const ArticleList = ({favList = false}:ArticleListProps) => {
   
 
   async function getArticlesByPlanet (planetName: string) {
-    const URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:3000";
+    // const URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:3000";
     
     if (!planetName) return [];
     
     try {
-        const response = await fetch(URL + '/api/articles/planet/' + planetName);
+        const response = await fetch('api/articles/planet/' + planetName);
         const articleRes = await response.json();
 
         return articleRes.data;

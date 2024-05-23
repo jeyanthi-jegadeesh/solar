@@ -27,10 +27,10 @@ async function createArticle(userId: number, isPrivate: boolean = true, title: s
       associatedPlanets: associatedPlanetsLower,
     }
 
-    const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+    // const URL = process.env.BASE_API_URL || "http://localhost:3000"
 
     try {
-      const response = await fetch(URL + '/api/articles', {
+      const response = await fetch(`api/articles`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
